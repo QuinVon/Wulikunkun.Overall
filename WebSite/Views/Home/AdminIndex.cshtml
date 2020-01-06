@@ -1,11 +1,10 @@
-@{
+﻿@{
     Layout = null;
 }
 
 <!DOCTYPE html>
-
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <title>Admin Page</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -26,256 +25,256 @@
 </head>
 
 <body>
-<div class="row d-flex justify-content-around h-100 bg-light">
-<div class="col-9 border-right mt-4">
-<div class="row">
-    <div class="col-6">
-        <div class="card  border-0 shadow-sm rounded-sm">
-            <div class="card-body">
-                <canvas id="chartTwo" class="w-100 h-100"></canvas>
-            </div>
-        </div>
-    </div>
-    <div class="col-6">
-        <div class="card border-0 shadow-sm rounded-sm">
-            <div class="card-body">
-                <canvas id="chartThree" class="w-100 h-100"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="row mt-3 mb-2">
-    <div class="col-12">
-        <div class="card border-0 shadow-sm rounded">
-            <div class="card-title text-right text-muted pr-4 py-3 m-0 rounded h6">
-                实时链级信息
-            </div>
-            <div class="card-body pt-0 pb-2 px-3">
-                <table class="table table-striped ">
-                    <thead>
-                    <tr>
-                        <th scope="col" class="text-muted text-center py-2 border-bottom-0 border-light"
-                            style="font-size: .95rem;">
-                            索引列名
-                        </th>
-                        <th scope="col" class="text-muted py-2 border-bottom-0 border-light"
-                            style="font-size:.95rem">
-                            链级地址
-                        </th>
-                        <th scope="col" class="text-muted text-center py-2 border-bottom-0 border-light"
-                            style="font-size: .95rem;">
-                            链级状态
-                        </th>
-                        <th scope="col" class="text-muted text-center py-2 border-bottom-0 border-light
-                                                        " style="font-size: .95rem;">
-                            链级的并发数
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">1</th>
-                        <td class="py-2 border-light">192.168.100.76:80000</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-success mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">11</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">2</th>
-                        <td class="py-2 border-light">192.168.100.76:80005</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-danger mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">21</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">1</th>
-                        <td class="py-2 border-light">192.168.100.76:80000</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-success mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">11</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">2</th>
-                        <td class="py-2 border-light">192.168.100.76:80005</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-success mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">21</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">1</th>
-                        <td class="py-2 border-light">192.168.100.76:80000</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-success mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">11</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">2</th>
-                        <td class="py-2 border-light">192.168.100.76:80005</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-danger mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">21</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">1</th>
-                        <td class="py-2 border-light">192.168.100.76:80000</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-success mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">11</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">2</th>
-                        <td class="py-2 border-light">192.168.100.76:80005</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-danger mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">21</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">1</th>
-                        <td class="py-2 border-light">192.168.100.76:80000</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-success mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">11</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">2</th>
-                        <td class="py-2 border-light">192.168.100.76:80005</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-danger mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">21</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">1</th>
-                        <td class="py-2 border-light">192.168.100.76:80000</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-success mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">11</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">2</th>
-                        <td class="py-2 border-light">192.168.100.76:80005</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-success mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">21</td>
-                    </tr>
-                    <tr>
-                        <th scope="row" class="py-2 border-light">1</th>
-                        <td class="py-2 border-light">192.168.100.76:80000</td>
-                        <td class="py-2 border-light">
-                            <div style="width:1rem;height:1rem;border-radius:.5rem"
-                                 class="bg-success mx-auto">
-                            </div>
-                        </td>
-                        <td class="text-center py-2 border-light">11</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <nav aria-label="Page navigation example">
-                    <ul class="pagination justify-content-left w-75 float-left">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">1</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">2</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">3</a>
-                        </li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                    <div class="float-right w-25 text-muted">
-                        <small class="d-block text-right pr-4">
-                            更新时间：2019-12-6
-                            13:19:07
-                        </small>
+    <div class="row d-flex justify-content-around h-100 bg-light">
+        <div class="col-9 border-right mt-4">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card  border-0 shadow-sm rounded-sm">
+                        <div class="card-body">
+                            <canvas id="chartTwo" class="w-100 h-100"></canvas>
+                        </div>
                     </div>
-                </nav>
+                </div>
+                <div class="col-6">
+                    <div class="card border-0 shadow-sm rounded-sm">
+                        <div class="card-body">
+                            <canvas id="chartThree" class="w-100 h-100"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3 mb-2">
+                <div class="col-12">
+                    <div class="card border-0 shadow-sm rounded">
+                        <div class="card-title text-right text-muted pr-4 py-3 m-0 rounded h6">
+                            实时链级信息
+                        </div>
+                        <div class="card-body pt-0 pb-2 px-3">
+                            <table class="table table-striped ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-muted text-center py-2 border-bottom-0 border-light"
+                                            style="font-size: .95rem;">
+                                            索引列名
+                                        </th>
+                                        <th scope="col" class="text-muted py-2 border-bottom-0 border-light"
+                                            style="font-size:.95rem">
+                                            链级地址
+                                        </th>
+                                        <th scope="col" class="text-muted text-center py-2 border-bottom-0 border-light"
+                                            style="font-size: .95rem;">
+                                            链级状态
+                                        </th>
+                                        <th scope="col" class="text-muted text-center py-2 border-bottom-0 border-light
+                                                        " style="font-size: .95rem;">
+                                            链级的并发数
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">1</th>
+                                        <td class="py-2 border-light">192.168.100.76:80000</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-success mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">11</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">2</th>
+                                        <td class="py-2 border-light">192.168.100.76:80005</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-danger mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">21</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">1</th>
+                                        <td class="py-2 border-light">192.168.100.76:80000</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-success mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">11</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">2</th>
+                                        <td class="py-2 border-light">192.168.100.76:80005</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-success mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">21</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">1</th>
+                                        <td class="py-2 border-light">192.168.100.76:80000</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-success mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">11</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">2</th>
+                                        <td class="py-2 border-light">192.168.100.76:80005</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-danger mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">21</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">1</th>
+                                        <td class="py-2 border-light">192.168.100.76:80000</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-success mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">11</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">2</th>
+                                        <td class="py-2 border-light">192.168.100.76:80005</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-danger mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">21</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">1</th>
+                                        <td class="py-2 border-light">192.168.100.76:80000</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-success mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">11</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">2</th>
+                                        <td class="py-2 border-light">192.168.100.76:80005</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-danger mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">21</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">1</th>
+                                        <td class="py-2 border-light">192.168.100.76:80000</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-success mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">11</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">2</th>
+                                        <td class="py-2 border-light">192.168.100.76:80005</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-success mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">21</td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row" class="py-2 border-light">1</th>
+                                        <td class="py-2 border-light">192.168.100.76:80000</td>
+                                        <td class="py-2 border-light">
+                                            <div style="width:1rem;height:1rem;border-radius:.5rem"
+                                                 class="bg-success mx-auto">
+                                            </div>
+                                        </td>
+                                        <td class="text-center py-2 border-light">11</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-left w-75 float-left">
+                                    <li class="page-item disabled">
+                                        <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">1</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">2</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">3</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="#">Next</a>
+                                    </li>
+                                </ul>
+                                <div class="float-right w-25 text-muted">
+                                    <small class="d-block text-right pr-4">
+                                        更新时间：2019-12-6
+                                        13:19:07
+                                    </small>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-3">
+            <div class="card rounded mt-4 border-top-0 border-right-0 rounded-0 border-light shadow-sm">
+                <div class="card-body pl-4 pr-5">
+                    <h5 class="card-title text-muted d-inline align-middle">
+                        正常链级数量<span class="display-inline-block float-right font-weight-bold text-success h1">30</span>
+                    </h5>
+                </div>
+            </div>
+            <div class="card rounded mt-3 border-top-0 border-right-0 rounded-0 border-light shadow-sm">
+                <div class="card-body pl-4 pr-5">
+                    <h5 class="card-title text-muted d-inline align-middle">
+                        异常链级数量<span class="display-inline-block float-right font-weight-bold text-danger h1">5</span>
+                    </h5>
+                </div>
+            </div>
+            <div class="card rounded mt-3 border-top-0 border-right-0 rounded-0 border-light shadow-sm">
+                <div class="card-body pl-4 pr-5">
+                    <h5 class="card-title text-muted d-inline align-middle">
+                        未启用链级数量<span class="display-inline-block float-right font-weight-bold text-primary h1">10</span>
+                    </h5>
+                </div>
+            </div>
+            <div class="card shadow-sm border-0 rounded-0 mt-3">
+                <div class="card-body">
+                    <canvas id="chartOne" class="w-100 h-100"></canvas>
+                </div>
             </div>
         </div>
     </div>
-</div>
-</div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+    <script src="~/lib/chart/Chart.min.js"></script>
 
-<div class="col-3">
-    <div class="card rounded mt-4 border-top-0 border-right-0 rounded-0 border-light shadow-sm">
-        <div class="card-body pl-4 pr-5">
-            <h5 class="card-title text-muted d-inline align-middle">
-                正常链级数量<span class="display-inline-block float-right font-weight-bold text-success h1">30</span>
-            </h5>
-        </div>
-    </div>
-    <div class="card rounded mt-3 border-top-0 border-right-0 rounded-0 border-light shadow-sm">
-        <div class="card-body pl-4 pr-5">
-            <h5 class="card-title text-muted d-inline align-middle">
-                异常链级数量<span class="display-inline-block float-right font-weight-bold text-danger h1">5</span>
-            </h5>
-        </div>
-    </div>
-    <div class="card rounded mt-3 border-top-0 border-right-0 rounded-0 border-light shadow-sm">
-        <div class="card-body pl-4 pr-5">
-            <h5 class="card-title text-muted d-inline align-middle">
-                未启用链级数量<span class="display-inline-block float-right font-weight-bold text-primary h1">10</span>
-            </h5>
-        </div>
-    </div>
-    <div class="card shadow-sm border-0 rounded-0 mt-3">
-        <div class="card-body">
-            <canvas id="chartOne" class="w-100 h-100"></canvas>
-        </div>
-    </div>
-</div>
-</div>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-<script src="~/lib/chart/Chart.min.js"></script>
-
-<script type="text/javascript">
+    <script type="text/javascript">
         var randomScalingFactor = function () {
             return Math.round(Math.random() * 100);
         };
@@ -318,7 +317,7 @@
         var ctxOne = document.getElementById('chartOne');
         var chartOne = new Chart(ctxOne, configOne)
     </script>
-<script>
+    <script>
         var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         var configTwo = {
             type: 'line',
@@ -403,7 +402,7 @@
         var chartTwo = new Chart(ctxTwo, configTwo)
     </script>
 
-<script>
+    <script>
         var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         var barChartData = {
             labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
