@@ -22,6 +22,7 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
             _logger = logger;
         }
 
+        #region 返回视图的Action
 
         public IActionResult Index()
         {
@@ -32,16 +33,23 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
         {
             return View();
         }
-        
+
         public IActionResult Admin()
         {
             return View();
         }
-        
+
         public IActionResult AdminIndex()
         {
             return View();
         }
+
+        public ViewResult PageDetail()
+        {
+            return View();
+        }
+
+        #endregion
 
         public JsonResult CreateUser(User user)
         {
