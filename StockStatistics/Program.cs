@@ -3,6 +3,7 @@ using System.Net;
 using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
+using Utility;
 
 namespace StockStatistics
 {
@@ -26,14 +27,10 @@ namespace StockStatistics
             Stream responseStream = response.GetResponseStream();
             StreamReader reader = new StreamReader(responseStream, Encoding.Default);
             string responseFromServer = reader.ReadToEnd();
-            string result = Unicode2String(responseFromServer);
+            string result = Decode.Unicode2String(responseFromServer);
             Console.WriteLine(responseFromServer);
         }
 
-        public static string Unicode2String(string source)
-        {
-            return new Regex(@"\\u([0-9A-F]{4})", RegexOptions.IgnoreCase | RegexOptions.Compiled).Replace(
-                         source, x => string.Empty + Convert.ToChar(Convert.ToUInt16(x.Result("$1"), 16)));
-        }
+
     }
 }
