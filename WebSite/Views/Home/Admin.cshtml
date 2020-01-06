@@ -1,0 +1,265 @@
+@{
+    Layout = null;
+    ViewBag.Title = "Home Page";
+}
+
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8"/>
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <style>
+        h5 {
+            font-size: 1rem;
+        }
+
+            h5 ~ p {
+                font-size: .9rem;
+            }
+    </style>
+</head>
+
+<body>
+
+<div class="container-fluid vh-100">
+    <div class="row">
+
+        <!-- 左侧导航栏 -->
+        <div class="col-1 vh-100 px-0 bg-light position-fixed position-relative" style="z-index:1000">
+            <div class="row">
+                <div class="col-9 pr-0">
+                    <div class="w-100 vh-100 bg-light">
+                        <div class="w-100 vh-100 px-0 float-left bg-primary"
+                             style="box-shadow: .2rem 0 .2rem .2rem lightgray;">
+
+                            <div class="text-center py-2">
+                                <i class="fa fa-bars text-white" aria-hidden="true" style="font-size:2rem;cursor:pointer"></i>
+                            </div>
+                            <h5 class="text-center py-3 text-white font-weight-bold">
+                                管理台
+                            </h5>
+                            <nav class="nav flex-column nav-pills text-left" id="v-pills-tab overflow-hidden"
+                                 role="tablist">
+
+                                <a class="nav-link rounded-0 text-white font-weight-normal mt-5 mb-0 py-2"
+                                   id="v-pills-home-tab" data-toggle="collapse" href="#hideContent" role="tab"
+                                   style="font-size:.9rem;">
+                                    概况
+                                    <i class="fa fa-angle-down d-inline-block float-right mt-1"></i>
+                                </a>
+                                <div class="collapse" id="hideContent"
+                                     style="background-color: rgb(5, 95, 230) !important;">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light h6 collapsed small mb-0 py-3"
+                                               href="#" data-url="@Url.Action("Contact", "Home")" data-tab="contact">
+                                                联系页面
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light h6 collapsed small mb-0 py-3" data-url="@Url.Action("About", "Home")" data-tab="关于页面"
+                                               href="#">
+                                                关于页面
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <a class="nav-link rounded-0 text-white font-weight-normal mb-0 py-2"
+                                   id="v-pills-profile-tab" data-toggle="collapse" href="#hideContent2" role="tab"
+                                   style="font-size: .9rem;">
+                                    主页
+                                    <i class="fa fa-angle-down d-inline-block float-right mt-1"></i>
+                                </a>
+                                <div class="collapse" id="hideContent2"
+                                     style="background-color: rgb(5, 95, 230) !important;">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light h6 collapsed small mb-0 py-3"
+                                               href="#" data-tab="主页子选项一">
+                                                子选项1
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light h6 collapsed small mb-0 py-3"
+                                               href="#" data-tab="主页子选项二">
+                                                子选项2
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light h6 collapsed small mb-0 py-3"
+                                               href="#" data-tab="主页子选项三">
+                                                子选项3
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
+                                <a class="nav-link rounded-0 text-white font-weight-normal mb-0 py-2"
+                                   style="font-size: .9rem;" id="v-pills-messages-tab" data-toggle="collapse"
+                                   href="#hideContent3" role="tab" aria-controls="v-pills-messages">
+                                    通讯录
+                                    <i class="fa fa-angle-down d-inline-block float-right mt-1"></i>
+                                </a>
+                                <div class="collapse" id="hideContent3"
+                                     style="background-color: rgb(5, 95, 230) !important;">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light h6 collapsed small mb-0 py-3"
+                                               href="#" data-tab="通讯录子选项一">
+                                                子选项1
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light h6 collapsed small mb-0 py-3"
+                                               href="#" data-tab="通讯录子选项二">
+                                                子选项2
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link text-light h6 collapsed small mb-0 py-3"
+                                               href="#" data-tab="通讯录子选项三">
+                                                子选项3
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <a class="nav-link rounded-0 text-white font-weight-normal mb-0 py-2"
+                                   style="font-size: .9rem;" id="v-pills-settings-tab" href="#v-pills-settings" role="tab">
+                                    设置
+                                </a>
+                            </nav>
+
+                            <div class="text-center py-2 position-absolute w-75" style="bottom:40px;left:18%">
+                                <i class="fa fa-power-off text-white" aria-hidden="true" style="font-size:1.5rem;cursor:pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 px-0 wk_left_none_nav">
+                    @*<div class="w-100 border-bottom text-center" style="height:2.45rem;background-color:transparent">
+                                &nbsp;
+                            </div>*@
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 右侧内容区域 -->
+        <div class="col-1 bg-light">
+            <!-- 不知道BS的样式是什么鬼，我当然知道fixed定位之后会脱离普通流，可是在右边的col-11设置右浮动和左侧偏移1单位都没有效果，所以在这里设置一个空的col-1元素占位 -->
+        </div>
+        <div class="col-11 px-0 bg-light">
+
+            <!-- 右侧顶部tab -->
+            <ul class="nav nav-tabs bg-light fixed-top col-11 pl-3 wk_top_tab" id="myTab" role="tablist" style="left:auto !important">
+                <li class="nav-item">
+                    <a class="nav-link active py-2" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                       aria-selected="true" style="font-size: .9rem;">
+                        &nbsp;&nbsp;主页&nbsp;&nbsp;
+                        </i>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="container-fluid mt-5 bg-light">
+                <div class="w-100 h-100 tab-content" data-framecontainer>
+                    <div class="tab-pane fade show active" role="tabpanel" id="home">
+                        <iframe src="@Url.Action("AdminIndex", "Home")" class="w-100 min-vh-100" frameborder="0" name="homeFrame"
+                                scrolling="no" onload="this.height=this.contentWindow.document.body.scrollHeight">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script>
+
+        $(function () {
+
+            // 页面中必须加上这段代码tooltip才可以正常显示
+            $('[data-toggle="tooltip"]').tooltip()
+
+            //控制箭头的上下指向
+            $("div.col-2.vh-100.px-0.bg-light.position-fixed.position-relative nav.flex-column.nav-pills.text-left>a.nav-link").on("click", function () {
+                $(this).find("i.fa").last().toggleClass("fa-angle-down fa-angle-up");
+            });
+
+            // 点击对应panel的关闭按钮时删除对应的tab和panel
+            $("ul.nav.nav-tabs.bg-light.fixed-top.col-10.pl-3").on("click", "i.close", function (e) {
+                e.stopPropagation();
+                var removePanelId = $(this).parents("a").first().attr("href");
+                var $prevTab = $(this).parents("li.nav-item").prev();
+                $(this).parents("li.nav-item").remove();
+                $("ul.nav.nav-sm.flex-column a[data-tab='" + removePanelId.substring(1) + "']").removeClass("disabled");
+                $("div" + removePanelId).remove();
+                var showId = $prevTab.children("a").attr("id");
+                if (showId == undefined) {
+                    $prevTab.children("a").click();
+                }
+                else {
+                    $prevTab.children("a").addClass("active");
+                }
+                $("div.w-100.h-100.tab-content>#" + showId).siblings().removeClass("show active");
+                $("div.w-100.h-100.tab-content>#" + showId).addClass("show active");
+            })
+
+            //点击不同的tab显示不同的panel
+            $("ul.nav.nav-tabs.bg-light.fixed-top.col-10.pl-3").on("click", "a.nav-link", function (e) {
+                e.stopPropagation();
+                var correspondPanelId = $(this).attr("href");
+                $(this).parent().siblings().children("a").removeClass("active");
+                $(this).addClass("active");
+                $("div.container-fluid.mt-5.bg-light").find("div" + correspondPanelId + "").siblings().removeClass("show active");
+                $("div.container-fluid.mt-5.bg-light").find("div" + correspondPanelId + "").addClass("show active");
+            })
+
+            //点击折叠按钮之后左侧导航栏的缩放效果
+            $("i.fa.fa-bars").click(function (e) {
+                e.stopPropagation();
+                $(this).parents("div.position-fixed.position-relative").toggleClass("col-1 col-2");
+                $(this).parents("div.position-fixed.position-relative").next().toggleClass("col-1 col-2");
+                $(this).parents("div.position-fixed.position-relative").next().next().toggleClass("col-11 col-10");
+                $(this).parents("div.position-fixed.position-relative").next().next().find("ul.nav.nav-tabs.fixed-top").toggleClass("col-11 col-10");
+            })
+
+            //点击左侧导航栏不同的链接时生成不同的iframe嵌套到页面中
+            $("nav.nav.flex-column.nav-pills.text-left .nav-link").not('[data-toggle]').click(function (e) {
+                e.stopPropagation();
+                $(this).addClass("disabled");
+                var targetUrl = $(this).data("url");
+                var tabName = $(this).data("tab");
+                var tabText = $(this).text();
+
+                var $tabTemplate = $('<li class="nav-item"><a class="nav-link py-2" id="' + tabName + '" data-toggle="tab" href="#' + tabName + '" role="tab"style="font-size: .9rem;"> ' + tabText + '&nbsp;<i class="close d-inline-block float-none" style = "font-size: 1rem !important;"><span class="text-muted align-top">&times;</span></i></a></li>');
+                var $panelTemplate = $('<div class="tab-pane fade show" role="tabpanel" id="' + tabName + '"><iframe src = "' + targetUrl + '" class="min-vh-100 w-100" frameborder = "0" name = "' + tabName + '" scrolling = "no" onload="this.height=this.contentWindow.document.body.scrollHeight"></iframe ></div>');
+                $("ul.nav.nav-tabs.bg-light.fixed-top.col-10.pl-3,ul.nav.nav-tabs.bg-light.fixed-top.pl-3.col-11").append($tabTemplate);
+                $("ul.nav.nav-tabs.bg-light.fixed-top.col-10.pl-3>li,ul.nav.nav-tabs.bg-light.fixed-top.pl-3.col-11>li").last().siblings().find("a").removeClass("active");
+                $("ul.nav.nav-tabs.bg-light.fixed-top.col-10.pl-3>li,ul.nav.nav-tabs.bg-light.fixed-top.pl-3.col-11>li").last().find("a").addClass("active");
+                var $targetIframe = $panelTemplate.find("iframe");
+
+                $("div.w-100.h-100.tab-content").append($panelTemplate);
+                $("div.w-100.h-100.tab-content>div").siblings().removeClass("active");
+                $("div.w-100.h-100.tab-content>div").last().addClass("active");
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - wulikunkun_dotnet_core_mvc</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+     <style>
+        body {
+            font-family: "Ink Free";
+        }
+    </style>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body class="mt-0">
+    <!-- 手机端顶部 -->
+    <div class="d-sm-none container-fluid text-primary bg-primary pt-5 border-bottom-0 position-relative mb-4 "
+        style="font-size: 1.5rem;height: 11rem; background: linear-gradient(to left, #00c6ff, #0072ff)">
+        <div class=" card rounded-lg mx-auto position-absolute border-bottom-0 border-left-0 border-right-0 border-top-0"
+            style="top:3.4rem;width: 92%;left:0;right: 0;">
+            <div class="card-body pb-2 bg-white">
+                <div class="row text-center">
+                    <div class="col-3 text-center">
+                        <div class="row">
+                            <i class="fas fa-book mx-auto"></i>
+                        </div>
+                        <div class="row">
+                            <small class="mx-auto" style="font-size: .8rem;"> Ebooks </small>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="row">
+                            <i class="fas fa-envelope mx-auto"></i>
+                        </div>
+                        <div class="row">
+                            <small class="mx-auto" style="font-size: .8rem;"> Messages </small>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="row">
+                            <i class="fas fa-map-marker mx-auto"></i>
+                        </div>
+                        <div class="row">
+                            <small class="mx-auto" style="font-size: .8rem;"> Location </small>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="row">
+                            <i class="fas fa-user-circle mx-auto"></i>
+                        </div>
+                        <div class="row">
+                            <small class="mx-auto" style="font-size: .8rem;"> Account </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center mt-3">
+                    <div class="col-3 text-center">
+                        <div class="row">
+                            <i class="fas fa-images mx-auto"></i>
+                        </div>
+                        <div class="row">
+                            <small class="mx-auto" style="font-size: .8rem;"> Images </small>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="row">
+                            <i class="fas fa-bell mx-auto"></i>
+                        </div>
+                        <div class="row">
+                            <small class="mx-auto" style="font-size: .8rem;"> Notification </small>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="row">
+                            <i class="fas fa-stamp mx-auto mx-auto"></i>
+                        </div>
+                        <div class="row">
+                            <small class="mx-auto" style="font-size: .8rem;"> Identify </small>
+                        </div>
+                    </div>
+                    <div class="col-3 text-center">
+                        <div class="row">
+                            <i class="fas fa-wallet mx-auto"></i>
+                        </div>
+                        <div class="row">
+                            <small class="mx-auto" style="font-size: .8rem;"> Wallet </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 大屏幕下的顶部 -->
+    <div class="d-none d-sm-block">
+        <header class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: #e3f2fd;">
+            <a class="navbar-brand" href="#">
+                <!-- <img src="./content/images/logo.jpg" height="40rem" width="40rem" class="mr-1" /> -->
+            </a>
+            <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <div class="dropdown-menu rounded-0" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-1" type="search" placeholder="What you want?" aria-label="Search">
+                    <button class="btn btn-sm  rounded-sm my-2 my-sm-0" type="submit">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </header>
+    </div>
+
+    <!--中间主要内容-->
+    <div class="container-fluid mt-3 px-sm-3 px-md-5">
+     @RenderBody()
+    </div>
+
+  <!--底部footer-->
+    <footer class="mt-md-4 mt-sm-2">
+        <div class="container-fluid py-1 bg-dark d-none d-md-block">
+            <ul class="nav w-75 mx-auto d-flex justify-content-center text-light">
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <small>
+                            Terms
+                        </small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <small>
+                            Privacy
+                        </small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <small>
+                            Security
+                        </small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <small>
+                            Help
+                        </small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <small>
+                            Contact
+                        </small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">
+                        <small>
+                            API
+                        </small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="http://beian.miitbeian.gov.cn" class="nav-link font-weight-light text-light" style="font-size:.8rem;font-family:微软雅黑">京ICP备19051782号
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="d-md-none text-center py-2 bg-dark text-white-50">
+            @@Copyright wulikunkun<br/>
+            <a href="http://beian.miitbeian.gov.cn" class="font-weight-light" style="font-size: .8rem;font-family: 微软雅黑">京ICP备19051782号
+            </a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+      <script>
+        $(function () {
+            $(".nav-item").click(function () {
+                $(this).siblings().children(".nav-link").removeClass("active");
+                $(this).children(".nav-link").addClass("active");
+            });
+
+            // 动态调整搜索框宽度
+            $(".form-control.mr-1").on("focus",
+                function () {
+                    $(this).animate({
+                        "width": "20rem"
+                    })
+                });
+
+            $(".form-control.mr-1").on("blur", function () {
+                $(this).animate({
+                    "width": "10rem"
+                })
+            });
+
+            // 在小屏幕下给列表卡添加背景
+            var documentWidth = $(window).width();
+            if (documentWidth <= 414) {
+                $(".container-fluid .card-body").addClass("bg-light mb-2 rounded");
+                $(".pagination").parent().addClass("mt-2");
+                $(".carousel-indicators").css("display", "none");
+            }
+            else {
+                $(".container-fluid .card-body").removeClass("bg-light mb-2 rounded");
+            }
+        })
+    </script>
+</body>
+</html>
