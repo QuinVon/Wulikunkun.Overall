@@ -12,7 +12,7 @@ namespace Wulikunkun.StockStatistic.Models
     [Table("stockbasicinfo")]
     public class StockBasicInfo
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
         [MaxLength(50)]
         public string Ts_Code { get; set; }
         [MaxLength(256)]

@@ -47,8 +47,24 @@ namespace Wulikunkun.StockStatistic
             string responseFromServer = reader.ReadToEnd();
             string result = Decode.Unicode2String(responseFromServer);
             RequestResult requestResult = JsonConvert.DeserializeObject<RequestResult>(result);
-            Console.WriteLine($"{result}");
-            Console.ReadLine();
+            using (StockContext context = new StockContext())
+            {
+                IList<StockBasicInfo> stockBasicInfos = new List<StockBasicInfo>();
+                foreach (List<string> list in requestResult.Data.Items)
+                {
+                    StockBasicInfo stockBasicInfo = new StockBasicInfo()
+                    {
+                        Ts_Code = list[0],
+                        Name = list[1],
+                        Area = list[2],
+                        Industry = list[3],
+                        List_Date = list[4]
+                    };
+                    stockBasicInfos.Add(stockBasicInfo);
+                }
+                context.StockBasicInfos.AddRange(stockBasicInfos);
+                context.SaveChanges();
+            }
         }
     }
 }
