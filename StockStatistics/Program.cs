@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
-using Wangkun.Utility;
+using Wulikunkun.Utility;
 using Newtonsoft.Json;
 using Wulikunkun.StockStatistic.Models;
 
@@ -14,15 +14,16 @@ namespace Wulikunkun.StockStatistic
     public class RequestResult
     {
         public string Request_Id { get; set; }
-        public int code { get; set; }
+        public int Code { get; set; }
         public string Msg { get; set; }
-
+        public DataResult Data { get; set; }
     }
 
     public class DataResult
     {
         public List<string> Fields { get; set; }
-        public List<StockBasicInfo> Items { get; set; }
+        public List<List<string>> Items { get; set; }
+        public bool Has_More { get; set; }
     }
 
     class Program
@@ -45,7 +46,7 @@ namespace Wulikunkun.StockStatistic
             StreamReader reader = new StreamReader(responseStream, Encoding.Default);
             string responseFromServer = reader.ReadToEnd();
             string result = Decode.Unicode2String(responseFromServer);
-            List<StockBasicInfo> stockBasicInfos = JsonConvert.DeserializeObject<List<StockBasicInfo>>(result);
+            RequestResult requestResult = JsonConvert.DeserializeObject<RequestResult>(result);
             Console.WriteLine($"{result}");
             Console.ReadLine();
         }

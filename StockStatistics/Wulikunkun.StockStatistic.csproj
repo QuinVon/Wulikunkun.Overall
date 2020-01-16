@@ -77,19 +77,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202001160508505_add.basis.stock.info.cs" />
-    <Compile Include="Migrations\202001160508505_add.basis.stock.info.Designer.cs">
-      <DependentUpon>202001160508505_add.basis.stock.info.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001160511371_update.datatype.of.basicstockinfo.cs" />
-    <Compile Include="Migrations\202001160511371_update.datatype.of.basicstockinfo.Designer.cs">
-      <DependentUpon>202001160511371_update.datatype.of.basicstockinfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001160514128_updatetscodelength.cs" />
-    <Compile Include="Migrations\202001160514128_updatetscodelength.Designer.cs">
-      <DependentUpon>202001160514128_updatetscodelength.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StockBasicInfo.cs" />
     <Compile Include="Models\StockContext.cs" />
     <Compile Include="Program.cs" />
@@ -100,21 +87,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utility\Wangkun.Utility.csproj">
+    <ProjectReference Include="..\Utility\Wulikunkun.Utility.csproj">
       <Project>{953c1a02-d2d7-4ec2-b933-4138ff5286b1}</Project>
-      <Name>Wangkun.Utility</Name>
+      <Name>Wulikunkun.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001160508505_add.basis.stock.info.resx">
-      <DependentUpon>202001160508505_add.basis.stock.info.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001160511371_update.datatype.of.basicstockinfo.resx">
-      <DependentUpon>202001160511371_update.datatype.of.basicstockinfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001160514128_updatetscodelength.resx">
-      <DependentUpon>202001160514128_updatetscodelength.cs</DependentUpon>
-    </EmbeddedResource>
+    <Folder Include="Migrations\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

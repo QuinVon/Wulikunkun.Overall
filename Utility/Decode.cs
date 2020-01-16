@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-namespace Wangkun.Utility
+namespace Wulikunkun.Utility
 {
     /// <summary>
     /// 
