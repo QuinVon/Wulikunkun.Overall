@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Wangkun.Utility
+namespace Wulikunkun.Utility.Utility
 {
     /// <summary>
     /// 对字符串按照不同的格式进行解码

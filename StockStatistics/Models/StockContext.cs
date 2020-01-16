@@ -1,7 +1,7 @@
 ﻿using MySql.Data.Entity;
 using System.Data.Entity;
 
-namespace Wangkun.StockStatistic.Models
+namespace Wulikunkun.StockStatistic.Models
 {
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     class StockContext : DbContext

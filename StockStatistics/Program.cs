@@ -7,9 +7,9 @@ using System.Net;
 using System.IO;
 using Wangkun.Utility;
 using Newtonsoft.Json;
-using Wangkun.StockStatistic.Models;
+using Wulikunkun.StockStatistic.Models;
 
-namespace Wangkun.StockStatistic
+namespace Wulikunkun.StockStatistic
 {
     public class RequestResult
     {
