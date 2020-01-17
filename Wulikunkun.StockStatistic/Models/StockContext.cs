@@ -19,5 +19,6 @@ namespace Wulikunkun.StockStatistic.Models
         }
         public virtual DbSet<StockBasicInfo> StockBasicInfos { get; set; }
         public virtual DbSet<ExchangeCalendar> ExchangeCalendars { get; set; }
+        public virtual DbSet<PriceDaily> PriceDailys { get; set; }
     }
 }

@@ -30,7 +30,7 @@ namespace Wulikunkun.StockStatistic
     {
         static void Main(string[] args)
         {
-            SyncNews();
+            SyncDailyPrice("603222.SH");
         }
 
         public static RequestResult RequestData(string requestParams)
@@ -56,6 +56,12 @@ namespace Wulikunkun.StockStatistic
         public static void SyncNews()
         {
             string requestParams = "{\"api_name\": \"major_news\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"start_date\":\"2020-01-17 00:00:00\",\"end_date\":\"2020-01-18 00:00:00\"},\"fields\": \"title,content,pub_time,src\"}";
+            RequestResult requestResult = RequestData(requestParams);
+        }
+
+        public static void SyncDailyPrice(string ts_code)
+        {
+            string requestParams = "{\"api_name\": \"daily\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"ts_code\":\"" + ts_code + "\",\"start_date\":\"20200101\",\"end_date\":\"20200117\"}}";
             RequestResult requestResult = RequestData(requestParams);
         }
 
