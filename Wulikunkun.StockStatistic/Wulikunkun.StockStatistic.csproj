@@ -77,9 +77,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202001170616480_init.cs" />
-    <Compile Include="Migrations\202001170616480_init.Designer.cs">
-      <DependentUpon>202001170616480_init.cs</DependentUpon>
+    <Compile Include="Migrations\202001170704129_init.cs" />
+    <Compile Include="Migrations\202001170704129_init.Designer.cs">
+      <DependentUpon>202001170704129_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ExchangeCalendar.cs" />
@@ -99,8 +99,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001170616480_init.resx">
-      <DependentUpon>202001170616480_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001170704129_init.resx">
+      <DependentUpon>202001170704129_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

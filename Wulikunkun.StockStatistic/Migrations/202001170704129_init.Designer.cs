@@ -13,7 +13,7 @@ namespace StockStatistics.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202001170616480_init"; }
+            get { return "202001170704129_init"; }
         }
         
         string IMigrationMetadata.Source

@@ -30,39 +30,17 @@ namespace Wulikunkun.StockStatistic
     {
         static void Main(string[] args)
         {
-            SyncTradeCalendar();
+            SyncNews();
         }
 
-        public static void SyncTradeCalendar()
+        public static RequestResult RequestData(string requestParams)
         {
             string url = "http://api.waditu.com";
-            string requestParams = "{\"api_name\": \"trade_cal\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"exchange\":\"\",\"start_date\":\"20200101\",\"end_date\":\"20201231\"}}";
             byte[] requestParamsBytes = Encoding.UTF8.GetBytes(requestParams);
             WebRequest request = WebRequest.Create(url);
             request.Method = "post";
             request.ContentType = "application/x-www-form-urlencoded";
             request.ContentLength = requestParamsBytes.Length;
-
-            Stream requestParamsStream = request.GetRequestStream();
-            requestParamsStream.Write(requestParamsBytes, 0, requestParamsBytes.Length);
-            requestParamsStream.Close();
-            WebResponse response = request.GetResponse();
-            Stream responseStream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(responseStream, Encoding.Default);
-            string responseFromServer = reader.ReadToEnd();
-            string result = Decode.Unicode2String(responseFromServer);
-        }
-
-        public static void SyncStockList()
-        {
-            string url = "http://api.waditu.com";
-            string requestParams = "{\"api_name\": \"stock_basic\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"list_stauts\":\"L\"}, \"fields\": \"ts_code,name,area,industry,list_date\"}";
-            byte[] requestParamsBytes = Encoding.UTF8.GetBytes(requestParams);
-            WebRequest request = WebRequest.Create(url);
-            request.Method = "post";
-            request.ContentType = "application/x-www-form-urlencoded";
-            request.ContentLength = requestParamsBytes.Length;
-
             Stream requestParamsStream = request.GetRequestStream();
             requestParamsStream.Write(requestParamsBytes, 0, requestParamsBytes.Length);
             requestParamsStream.Close();
@@ -72,6 +50,41 @@ namespace Wulikunkun.StockStatistic
             string responseFromServer = reader.ReadToEnd();
             string result = Decode.Unicode2String(responseFromServer);
             RequestResult requestResult = JsonConvert.DeserializeObject<RequestResult>(result);
+            return requestResult;
+        }
+
+        public static void SyncNews()
+        {
+            string requestParams = "{\"api_name\": \"major_news\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"start_date\":\"2020-01-17 00:00:00\",\"end_date\":\"2020-01-18 00:00:00\"},\"fields\": \"title,content,pub_time,src\"}";
+            RequestResult requestResult = RequestData(requestParams);
+        }
+
+        public static void SyncTradeCalendar()
+        {
+            string requestParams = "{\"api_name\": \"trade_cal\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"exchange\":\"\",\"start_date\":\"20200101\",\"end_date\":\"20201231\"}}";
+            RequestResult requestResult = RequestData(requestParams);
+            using (StockContext context = new StockContext())
+            {
+                IList<ExchangeCalendar> exchangeCalendars = new List<ExchangeCalendar>();
+                foreach (List<string> list in requestResult.Data.Items)
+                {
+                    ExchangeCalendar exchangeCalendar = new ExchangeCalendar()
+                    {
+                        Exchange = list[0],
+                        Cal_Date = list[1],
+                        Is_Open = list[2].Equals("1") ? true : false
+                    };
+                    exchangeCalendars.Add(exchangeCalendar);
+                }
+                context.ExchangeCalendars.AddRange(exchangeCalendars);
+                context.SaveChanges();
+            }
+        }
+
+        public static void SyncStockList()
+        {
+            string requestParams = "{\"api_name\": \"stock_basic\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"list_stauts\":\"L\"}, \"fields\": \"ts_code,name,area,industry,list_date\"}";
+            RequestResult requestResult = RequestData(requestParams);
             using (StockContext context = new StockContext())
             {
                 IList<StockBasicInfo> stockBasicInfos = new List<StockBasicInfo>();

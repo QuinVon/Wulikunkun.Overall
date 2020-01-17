@@ -8,6 +8,17 @@ namespace StockStatistics.Migrations
         public override void Up()
         {
             CreateTable(
+                "dbo.exchangecalendar",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        Exchange = c.String(maxLength: 256, storeType: "nvarchar"),
+                        Cal_Date = c.String(unicode: false),
+                        Is_Open = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
                 "dbo.stockbasicinfo",
                 c => new
                     {
@@ -25,6 +36,7 @@ namespace StockStatistics.Migrations
         public override void Down()
         {
             DropTable("dbo.stockbasicinfo");
+            DropTable("dbo.exchangecalendar");
         }
     }
 }

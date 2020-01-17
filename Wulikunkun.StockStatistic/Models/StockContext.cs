@@ -15,8 +15,9 @@ namespace Wulikunkun.StockStatistic.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<StockBasicInfo>().ToTable("stockbasicinfo", "dbo");
+            modelBuilder.Entity<ExchangeCalendar>().ToTable("exchangecalendar", "dbo");
         }
         public virtual DbSet<StockBasicInfo> StockBasicInfos { get; set; }
-
+        public virtual DbSet<ExchangeCalendar> ExchangeCalendars { get; set; }
     }
 }
