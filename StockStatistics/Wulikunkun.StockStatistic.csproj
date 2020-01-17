@@ -77,13 +77,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202001160949491_InitialCreate.cs" />
-    <Compile Include="Migrations\202001160949491_InitialCreate.Designer.cs">
-      <DependentUpon>202001160949491_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001162359235_update.stockbasicinfo.cs" />
-    <Compile Include="Migrations\202001162359235_update.stockbasicinfo.Designer.cs">
-      <DependentUpon>202001162359235_update.stockbasicinfo.cs</DependentUpon>
+    <Compile Include="Migrations\202001170106586_init.cs" />
+    <Compile Include="Migrations\202001170106586_init.Designer.cs">
+      <DependentUpon>202001170106586_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\StockBasicInfo.cs" />
@@ -102,11 +98,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202001160949491_InitialCreate.resx">
-      <DependentUpon>202001160949491_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001162359235_update.stockbasicinfo.resx">
-      <DependentUpon>202001162359235_update.stockbasicinfo.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202001170106586_init.resx">
+      <DependentUpon>202001170106586_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
