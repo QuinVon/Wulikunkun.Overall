@@ -21,22 +21,8 @@ namespace Wulikunkun.StockStatistic.Models
         public string Area { get; set; }
         [MaxLength(256)]
         public string Industry { get; set; }
-        [MaxLength(256)]
-        public string FullName { get; set; }
-        [MaxLength(256)]
-        public string EnName { get; set; }
-        [MaxLength(256)]
-        public string Market { get; set; }
-        [MaxLength(256)]
-        public string Exchange { get; set; }
-        [MaxLength(256)]
-        public string Curr_Type { get; set; }
-        [MaxLength(256)]
-        public string List_Status { get; set; }
+
         [MaxLength(256)]
         public string List_Date { get; set; }
-        [MaxLength(256)]
-        public string Delist_Date { get; set; }
-        public bool Is_Hs { get; set; }
     }
 }
