@@ -77,6 +77,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\202001170704129_init.cs" />
+    <Compile Include="Migrations\202001170704129_init.Designer.cs">
+      <DependentUpon>202001170704129_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001170853522_add.pricedaily.model.cs" />
+    <Compile Include="Migrations\202001170853522_add.pricedaily.model.Designer.cs">
+      <DependentUpon>202001170853522_add.pricedaily.model.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ExchangeCalendar.cs" />
+    <Compile Include="Models\PriceDaily.cs" />
     <Compile Include="Models\StockBasicInfo.cs" />
     <Compile Include="Models\StockContext.cs" />
     <Compile Include="Program.cs" />
@@ -87,13 +98,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Utility\Wulikunkun.Utility.csproj">
-      <Project>{953c1a02-d2d7-4ec2-b933-4138ff5286b1}</Project>
+    <ProjectReference Include="..\Wulikunkun.Utility\Wulikunkun.Utility.csproj">
+      <Project>{8d8c0ec8-d2be-4943-ae0a-0d0b44f9c167}</Project>
       <Name>Wulikunkun.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <EmbeddedResource Include="Migrations\202001170704129_init.resx">
+      <DependentUpon>202001170704129_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001170853522_add.pricedaily.model.resx">
+      <DependentUpon>202001170853522_add.pricedaily.model.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
