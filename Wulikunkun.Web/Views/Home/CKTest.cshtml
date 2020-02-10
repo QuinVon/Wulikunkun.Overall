@@ -3,17 +3,69 @@
     ViewData["Title"] = "CKTest";
     Layout = null;
 }
-<script src="~/js/ckeditor/ckeditor.js" type="text/javascript"></script>
 
-<form>
-    <textarea name="editor1" id="editor1" rows="10" cols="80">
-        This is my textarea to be replaced with CKEditor.
-    </textarea>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document Editor</title>
+    <script src="~/js/ckeditor/ckeditor.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+
+<body class="m-0">
+    <div class="container-fluid p-0">
+        <form>
+            <textarea id="editor1">
+		&lt;h2 style="text-align: center;"&gt;请输入文章标题&lt;/h2&gt;
+		&lt;p style="text-align: center;"&gt;&lt;span style="color: #007ac9;"&gt;&lt;strong&gt;请输入文章副标题&lt;/strong&gt;&lt;/span&gt;&lt;/p&gt;
+		&lt;p&gt;一级标题&lt;/p&gt;
+		&lt;p&gt;We are delighted to welcome you to the annual &lt;em&gt;Flavorful Tuscany Meetup&lt;/em&gt; and hope you will enjoy the programme as well as your stay at the Bilancino Hotel.&lt;/p&gt;
+		&lt;p&gt;Please find below the full schedule of the event.&lt;/p&gt;
+		&lt;table class="schedule" cellpadding="15" cellspacing="0" style="border-collapse:collapse;width:100%;"&gt;
+			&lt;thead&gt;
+				&lt;tr&gt;
+					&lt;th colspan="2" scope="col" style="background-color: #F2F9FF; text-align: center; font-size: 21px;"&gt;&lt;span&gt;Saturday, July 14&lt;/span&gt;&lt;/th&gt;
+				&lt;/tr&gt;
+			&lt;/thead&gt;
+			&lt;tbody&gt;
+				&lt;tr&gt;
+					&lt;td style="white-space:nowrap;"&gt;&lt;span&gt;9:30 AM - 11:30 AM&lt;/span&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;span&gt;Americano vs. Brewed - “know your coffee” session with &lt;strong&gt;Stefano Garau&lt;/strong&gt;&lt;/span&gt;&lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;td style="white-space:nowrap;"&gt;&lt;span&gt;1:00 PM - 3:00 PM&lt;/span&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;span&gt;Pappardelle al pomodoro - live cooking session with &lt;strong&gt;Rita Fresco&lt;/strong&gt;&lt;/span&gt;&lt;/td&gt;
+				&lt;/tr&gt;
+				&lt;tr&gt;
+					&lt;td style="white-space:nowrap;"&gt;&lt;span&gt;5:00 PM - 8:00 PM&lt;/span&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;span&gt;Tuscan vineyards at a glance - wine-tasting session with &lt;strong&gt;Frederico Riscoli&lt;/strong&gt;&lt;/span&gt;&lt;/td&gt;
+				&lt;/tr&gt;
+			&lt;/tbody&gt;
+		&lt;/table&gt;
+		&lt;blockquote&gt;
+			&lt;p&gt;The annual Flavorful Tuscany meetups are always a culinary discovery. You get the best of Tuscan flavors during an intense one-day stay at one of the top hotels of the region. All the sessions are lead by top chefs passionate about their profession. I would certainly recommend to save the date in your calendar for this one!&lt;/p&gt;
+			&lt;p&gt;Angelina Calvino, food journalist&lt;/p&gt;
+		&lt;/blockquote&gt;
+		&lt;p&gt;Please arrive at the Bilancino Hotel reception desk at least &lt;strong&gt;half an hour earlier&lt;/strong&gt; to make sure that the registration process goes as smoothly as possible.&lt;/p&gt;
+		&lt;p&gt;We look forward to welcoming you to the event.&lt;/p&gt;
+		&lt;p&gt;&lt;/p&gt;
+		&lt;p&gt;&lt;strong&gt;Victoria Valc&lt;/strong&gt;&lt;/p&gt;
+		&lt;p&gt;&lt;strong&gt;Event Manager&lt;/strong&gt;&lt;/p&gt;
+		&lt;p&gt;&lt;strong&gt;Bilancino Hotel&lt;/strong&gt;&lt;/p&gt;
+	</textarea>
+            <button class="btn btn-primary btn-sm mt-4 ml-2" type="submit">Submit</button>
+        </form>
+
+    </div>
     <script>
         CKEDITOR.replace('editor1', {
             // Define the toolbar: https://ckeditor.com/docs/ckeditor4/latest/features/toolbar.html
-            // The full preset from CDN which we used as a base provides more features than we need.
-            // Also by default it comes with a 3-line toolbar. Here we put all buttons in a single row.
+
+            //这里是控制顶部显示哪些功能按钮
             toolbar: [
                 { name: 'document', items: ['Print'] },
                 { name: 'clipboard', items: ['Undo', 'Redo'] },
@@ -38,8 +90,9 @@
             //  - About Advanced Content Filter: https://ckeditor.com/docs/ckeditor4/latest/guide/dev_advanced_content_filter.html
             //  - About Disallowed Content: https://ckeditor.com/docs/ckeditor4/latest/guide/dev_disallowed_content.html
             //  - About Allowed Content: https://ckeditor.com/docs/ckeditor4/latest/guide/dev_allowed_content_rules.html
-            disallowedContent: 'img{width, height, float}',
+            disallowedContent: 'img{width,height,float}',
             extraAllowedContent: 'img[width,height,align]',
+
             // Enabling extra plugins, available in the full-all preset: https://ckeditor.com/cke4/presets-all
             extraPlugins: 'tableresize,uploadimage,uploadfile',
 
@@ -53,18 +106,18 @@
             // filebrowserUploadUrl: 'http://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
             /*********************** File management support ***********************/
 
-            // Make the editing area bigger than default.
             height: 800,
 
             // An array of stylesheets to style the WYSIWYG area.
             // Note: it is recommended to keep your own styles in a separate file in order to make future updates painless.
-            contentsCss: ['https://cdn.ckeditor.com/4.8.0/full-all/contents.css', 'mystyles.css'],
+            //生成的ck组件是位于一个iframe中的，因此只能通过这里进行配置自定义样式表
+            contentsCss: ['@Url.Content("~/css/wulikunkun.ckeditor.css")'],
 
             // This is optional, but will let us define multiple different styles for multiple editors using the same CSS file.
             bodyClass: 'document-editor',
 
-            // Reduce the list of block elements listed in the Format dropdown to the most commonly used.
-            format_tags: 'p;h1;h2;h3;pre',
+            //这里可是进行类似于大纲级别那样的设置，我删掉了一个pre，注意最后一定不能以分号结尾
+            format_tags: 'p;h1;h2;h3',
 
             // Simplify the Image and Link dialog windows. The "Advanced" tab is not needed in most cases.
             removeDialogTabs: 'image:advanced;link:advanced',
@@ -109,4 +162,5 @@
             ]
         });
     </script>
-</form>
+</body>
+</html>
