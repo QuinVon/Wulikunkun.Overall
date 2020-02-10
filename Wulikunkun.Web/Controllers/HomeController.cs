@@ -49,6 +49,11 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
             return View();
         }
 
+        public ViewResult CKTest()
+        {
+            return View();
+        }
+
         #endregion
 
         public JsonResult CreateUser(User user)
