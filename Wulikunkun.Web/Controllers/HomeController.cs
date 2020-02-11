@@ -49,7 +49,7 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
             return View();
         }
 
-        public ViewResult CKTest()
+        public ViewResult Editor()
         {
             return View();
         }
