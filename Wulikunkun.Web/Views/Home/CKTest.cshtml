@@ -17,7 +17,7 @@
 </head>
 
 <body class="m-0">
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-2">
         <form>
             <textarea id="editor1">
 		&lt;h2 style="text-align: center;"&gt;请输入文章标题&lt;/h2&gt;
@@ -57,11 +57,12 @@
 		&lt;p&gt;&lt;strong&gt;Event Manager&lt;/strong&gt;&lt;/p&gt;
 		&lt;p&gt;&lt;strong&gt;Bilancino Hotel&lt;/strong&gt;&lt;/p&gt;
 	</textarea>
-            <button class="btn btn-primary btn-sm mt-4 ml-2" type="submit">Submit</button>
+            @*<button class="btn btn-primary btn-sm mt-4 ml-2" type="submit">Submit</button>*@
         </form>
 
     </div>
     <script>
+
         CKEDITOR.replace('editor1', {
             // Define the toolbar: https://ckeditor.com/docs/ckeditor4/latest/features/toolbar.html
 
@@ -106,12 +107,13 @@
             // filebrowserUploadUrl: 'http://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
             /*********************** File management support ***********************/
 
-            height: 800,
+            height: '800px',
+            //uiColor: "#B9E1F7",
 
             // An array of stylesheets to style the WYSIWYG area.
             // Note: it is recommended to keep your own styles in a separate file in order to make future updates painless.
             //生成的ck组件是位于一个iframe中的，因此只能通过这里进行配置自定义样式表
-            contentsCss: ['@Url.Content("~/css/wulikunkun.ckeditor.css")'],
+            contentsCss: ['https://cdn.ckeditor.com/4.8.0/full-all/contents.css','@Url.Content("~/css/wulikunkun.ckeditor.css")'],
 
             // This is optional, but will let us define multiple different styles for multiple editors using the same CSS file.
             bodyClass: 'document-editor',
