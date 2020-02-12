@@ -22,7 +22,6 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
             _logger = logger;
         }
 
-        #region 返回视图的Action
 
         public IActionResult Index()
         {
@@ -54,7 +53,11 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
             return View();
         }
 
-        #endregion
+        public void Edit(string editContent)
+        {
+
+        }
+
 
         public JsonResult CreateUser(User user)
         {
@@ -97,6 +100,7 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
             return jsonResult;
         }
 
+        #region 框架自带代码
         public IActionResult Privacy()
         {
             return View();
@@ -107,6 +111,7 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        #endregion
 
         #region Swagger测试部分
 
