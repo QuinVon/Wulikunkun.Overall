@@ -96,6 +96,8 @@
 
             // Enabling extra plugins, available in the full-all preset: https://ckeditor.com/cke4/presets-all
             extraPlugins: 'tableresize,uploadimage,uploadfile',
+            //在启用uploadFile插件之后一定要配置这里的uploadUrl，否则页面控制台会报异常
+            uploadUrl:'@Url.Action("Upload")',
 
             /*********************** File management support ***********************/
             // In order to turn on support for file uploads, CKEditor has to be configured to use some server side
@@ -107,7 +109,7 @@
             // filebrowserUploadUrl: 'http://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
             /*********************** File management support ***********************/
 
-            height: '800px',
+            height: '900px',
             //uiColor: "#B9E1F7",
 
             // An array of stylesheets to style the WYSIWYG area.
