@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using Wulikunkun.Web.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Wulikunkun.Web.Controllers
 {
@@ -30,7 +31,16 @@ namespace Wulikunkun.Web.Controllers
                 result = new
                 {
                     Message = "该邮箱已经注册！",
-                    StateCode = 0.2
+                    StateCode = 2
+                };
+                return Json(result);
+            }
+            if (dbContext.Users.Any(item => item.Phone.Equals(user.Phone)))
+            {
+                result = new
+                {
+                    Message = "该手机已经注册！",
+                    StateCode = 3
                 };
                 return Json(result);
             }
@@ -49,6 +59,7 @@ namespace Wulikunkun.Web.Controllers
                 Message = "注册成功！",
                 StateCode = 1
             };
+            HttpContext.Session.SetString("login","logged");
             JsonResult jsonResult = Json(result);
             return jsonResult;
         }
