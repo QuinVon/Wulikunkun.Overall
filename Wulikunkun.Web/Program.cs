@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace wulikunkun_dotnet_core_mvc
+namespace Wulikunkun.Web
 {
     public class Program
     {

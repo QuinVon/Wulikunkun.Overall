@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using wulikunkun_dotnet_core_mvc.Models;
+using Wulikunkun.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
-namespace wulikunkun_dotnet_core_mvc
+namespace Wulikunkun.Web
 {
     public class Startup
     {

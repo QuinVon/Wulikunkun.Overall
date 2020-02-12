@@ -1,6 +1,6 @@
 using System;
 
-namespace wulikunkun_dotnet_core_mvc.Models
+namespace Wulikunkun.Web.Models
 {
     public class ErrorViewModel
     {

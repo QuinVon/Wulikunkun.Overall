@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using wulikunkun_dotnet_core_mvc.Models;
-using Newtonsoft.Json;
+using System.Diagnostics;
+using Wulikunkun.Web.Models;
 
-namespace wulikunkun_dotnet_core_mvc.Controllers
+namespace Wulikunkun.Web.Controllers
 {
 
     public class HomeController : Controller
@@ -56,48 +51,6 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
         public void Edit(string editContent)
         {
 
-        }
-
-
-        public JsonResult CreateUser(User user)
-        {
-            object result = null;
-            if (dbContext.Users.Any(item => item.UserName == user.UserName))
-            {
-                result = new
-                {
-                    Message = "已经存在相同的用户名！",
-                    StateCode = 0.1
-                };
-                return Json(result);
-            }
-
-            if (dbContext.Users.Any(item => item.Email == user.Email))
-            {
-                result = new
-                {
-                    Message = "该邮箱已经注册！",
-                    StateCode = 0.2
-                };
-                return Json(result);
-            }
-            string salt = Guid.NewGuid().ToString();
-            byte[] passwordAndSaltBytes = System.Text.Encoding.UTF8.GetBytes(user.Password + salt);
-            byte[] hashBytes = new System.Security.Cryptography.SHA256Managed().ComputeHash(passwordAndSaltBytes);
-            string hashString = Convert.ToBase64String(hashBytes);
-            user.Password = hashString;
-            user.RegisterTime = DateTime.Now;
-            user.Salt = salt;
-            user.UserRole = Role.User;
-            dbContext.Users.Add(user);
-            dbContext.SaveChanges();
-            result = new
-            {
-                Message = "注册成功！",
-                StateCode = 1
-            };
-            JsonResult jsonResult = Json(result);
-            return jsonResult;
         }
 
         #region 框架自带代码
