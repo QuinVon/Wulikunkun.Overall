@@ -59,7 +59,7 @@ namespace Wulikunkun.Web.Controllers
                 Message = "注册成功！",
                 StateCode = 1
             };
-            HttpContext.Session.SetString("login", "logged");
+            HttpContext.Session.SetString("username", user.Email);
             JsonResult jsonResult = Json(result);
             return jsonResult;
         }

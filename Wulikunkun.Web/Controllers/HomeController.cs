@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using Wulikunkun.Web.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Wulikunkun.Web.Controllers
 {
@@ -20,6 +21,14 @@ namespace Wulikunkun.Web.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.IsAvailable)
+            {
+                string username = HttpContext.Session.GetString("username");
+                if (username != null)
+                {
+                    ViewBag.UserName = username;
+                }
+            }
             return View();
         }
 
