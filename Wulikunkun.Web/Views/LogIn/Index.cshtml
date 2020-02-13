@@ -1,6 +1,6 @@
 ﻿@{
-    Layout = null;
-    ViewData["Title"] = "LogIn Page";
+Layout = null;
+ViewData["Title"] = "LogIn Page";
 }
 
 <!DOCTYPE html>
@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         body {
             font-family: "Ink Free";
@@ -24,7 +24,26 @@
 <body>
     <div class="container vh-100">
         <div class="row h-100">
-            <div class="col-md-6 col-sm-10 mx-auto my-auto px-5 pb-2 pt-4 border" style="border-color:#d2dbe4 !important">
+            <div class="col-md-6 col-sm-10 mx-auto my-auto px-5 pb-2 pt-4 border"
+                style="border-color:#d2dbe4 !important">
+
+                <!-- Modal -->
+                <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content border-light rounded-sm pb-3 pt-0">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title" id="exampleModalLabel">提示</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <form>
                     <div class="form-row">
                         <h2 class="text-secondary mx-auto">Welcome!</h2>
@@ -33,24 +52,27 @@
                     <div class="form-row mt-3">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Email<span class="text-danger">&nbsp;*</span></label>
-                            <input type="email" name="Email" class="form-control" id="inputEmail4" placeholder="Email" required="required">
+                            <input type="email" name="Email" class="form-control" id="inputEmail4" placeholder="Email"
+                                required="required">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="user_phone">Phone<span class="text-danger">&nbsp;*</span></label>
                             <input type="text" class="form-control" id="user_phone" name="Phone"
-                                   placeholder="Enter your phone number" required="required">
+                                placeholder="Enter your phone number" required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="user_password">Password<span class="text-danger">&nbsp;*</span></label>
-                        <input type="password" class="form-control" name="password" placeholder="Enter your password" required="required" />
+                        <input type="password" class="form-control" name="password" placeholder="Enter your password"
+                            required="required" />
                     </div>
 
                     <div class="form_group">
-                        <label for="confirm_user_password">Confirm Password<span class="text-danger">&nbsp;*</span></label>
+                        <label for="confirm_user_password">Confirm Password<span
+                                class="text-danger">&nbsp;*</span></label>
                         <input type="password" class="form-control" name="passwordAgain"
-                               placeholder="Enter your password again" required="required" />
+                            placeholder="Enter your password again" required="required" />
                     </div>
 
                     <div class="form-group">
@@ -61,7 +83,7 @@
                     <div class="form-group">
                         <label for="inputAddress2">Address 2</label>
                         <input type="text" class="form-control" id="inputAddress2"
-                               placeholder="Apartment, studio, or floor">
+                            placeholder="Apartment, studio, or floor">
                     </div>
 
                     <div class="form-row">
@@ -94,11 +116,13 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary w-50 mx-auto w-100">Sign in</button>
+                                <button type="submit" class="btn btn-primary w-50 mx-auto w-100"
+                                    onclick="return false">Sign in</button>
                             </div>
                         </div>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
@@ -106,8 +130,8 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-            crossorigin="anonymous"></script>
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
 
     <script>
         $(function () {
@@ -119,47 +143,52 @@
                     return false;
                 }
                 else {
-                   return true;
+                    return true;
                 }
             }
 
             $("input[name='passwordAgain']").bind('input propertychange', function () {
-              var checkResult=CheckPassword();
-              if(!checkResult)
-                    $("button").attr("disabled","disabled");
-              else
+                var checkResult = CheckPassword();
+                if (!checkResult)
+                    $("button").attr("disabled", "disabled");
+                else
                     $("button").removeAttr("disabled");
             })
 
-            @* 在这里点击时既会触发按钮的点击事件，又会触发input元素的blur事件，经过测试二者会先触发blur事件 *@
+            // 在这里点击时既会触发按钮的点击事件，又会触发input元素的blur事件，经过测试二者会先触发blur事件
             $("button").on("click", function () {
-                var formData=$("form").serializeArray();
-                var params=new Object();
-                $.each(formData,function(){
-                    params[this.name]=this.value;
+                var formData = $("form").serializeArray();
+                var params = new Object();
+                $.each(formData, function () {
+                    params[this.name] = this.value;
                 });
 
                 CheckPassword();
                 $.ajax({
                     url: '@Url.Action("CreateUser", "LogIn")',
                     type: 'POST',
-                    async: true,
+                    async: false,
                     data: params,
                     timeout: 5000,
-                    dataType: 'json', 
+                    dataType: 'json',
                     success: function (data, textStatus, jqXHR) {
-                        debugger;
-                        if(data.stateCode===1)
-                        {
-                            "注册成功!"
+                        if (data.stateCode === 1) {
+                            $("input").val("");
+                            $("#alertModal").find(".modal-body").text("");
+                            $("#alertModal").find(".modal-body").text("注册成功，正在跳转...");
+                            $('#alertModal').modal('show');
                         }
-                        else if(data.stateCode===2)
-                        {
-                            "邮箱已注册";
+                        else if (data.stateCode === 2) {
+                            $("#alertModal").find(".modal-body").text("");
+                            $("#alertModal").find(".modal-body").text("该邮箱已经注册！");
+                            $('#alertModal').modal('show');
                         }
-                        else if(data.stateCode===3)
-                            "手机已注册";
+                        else if (data.stateCode === 3) {
+                            $("#alertModal").find(".modal-body").text("");
+                            $("#alertModal").find(".modal-body").text("该手机号码已经注册");
+                            $('#alertModal').modal('show');
                         }
+                    }
                 });
             });
         });
