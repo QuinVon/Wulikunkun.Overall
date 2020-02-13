@@ -33,7 +33,9 @@ ViewData["Title"] = "LogIn Page";
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content border-light rounded-sm pb-3 pt-0">
                             <div class="modal-header border-0">
-                                <h5 class="modal-title" id="exampleModalLabel">提示</h5>
+                                <h5 class="modal-title text-secondary" id="exampleModalLabel"
+                                    style="font-size: .95rem;">提示
+                                </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -147,6 +149,10 @@ ViewData["Title"] = "LogIn Page";
                 }
             }
 
+            function Redirect() {
+                window.location.href = "@Url.Action("Index","Home")";
+            }
+
             $("input[name='passwordAgain']").bind('input propertychange', function () {
                 var checkResult = CheckPassword();
                 if (!checkResult)
@@ -177,6 +183,10 @@ ViewData["Title"] = "LogIn Page";
                             $("#alertModal").find(".modal-body").text("");
                             $("#alertModal").find(".modal-body").text("注册成功，正在跳转...");
                             $('#alertModal').modal('show');
+                            // 错误的写法，这种写法表示立即执行
+                            // setTimeout(Redirect(), 2000);
+                            // 正确的写法
+                            setTimeout(Redirect, 2000);
                         }
                         else if (data.stateCode === 2) {
                             $("#alertModal").find(".modal-body").text("");
