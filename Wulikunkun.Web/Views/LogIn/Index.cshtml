@@ -30,8 +30,8 @@ ViewData["Title"] = "LogIn Page";
                 <!-- Modal -->
                 <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                     aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content border-light rounded-sm pb-3 pt-0">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content border-0 rounded-sm pb-3 pt-0">
                             <div class="modal-header border-0">
                                 <h5 class="modal-title text-secondary" id="exampleModalLabel"
                                     style="font-size: .95rem;">提示
@@ -65,44 +65,46 @@ ViewData["Title"] = "LogIn Page";
                     </div>
 
                     <div class="form-group">
+                        <label for="inputAddress">Username<span class="text-danger">&nbsp;*</span></label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="set your user name"
+                            name="Username" required="required">
+                    </div>
+
+                    <div class="form-group">
                         <label for="user_password">Password<span class="text-danger">&nbsp;*</span></label>
                         <input type="password" class="form-control" name="password" placeholder="Enter your password"
-                            required="required" />
+                            required="required" minlength="10" />
                     </div>
 
                     <div class="form_group">
                         <label for="confirm_user_password">Confirm Password<span
                                 class="text-danger">&nbsp;*</span></label>
                         <input type="password" class="form-control" name="passwordAgain"
-                            placeholder="Enter your password again" required="required" />
+                            placeholder="Enter your password again" required="required" minlength="10" />
                     </div>
 
                     <div class="form-group">
-                        <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="inputAddress2">Address 2</label>
-                        <input type="text" class="form-control" id="inputAddress2"
+                        <label for="inputAddress2">Address</label>
+                        <input type="text" class="form-control" id="inputAddress2" name="Address"
                             placeholder="Apartment, studio, or floor">
                     </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity">
+                            <label for="inputCity">Age</label>
+                            <input type="text" class="form-control" id="inputCity" name="Age">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <select id="inputState" class="form-control">
+                            <label for="inputState">Gender</label>
+                            <select id="inputState" class="form-control" name="Gender">
                                 <option selected>Choose...</option>
-                                <option>...</option>
+                                <option value="Man">Man</option>
+                                <option value="Women">Women</option>
                             </select>
                         </div>
                         <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
+                            <input type="text" class="form-control" id="inputZip" name="Zip">
                         </div>
                     </div>
 
@@ -190,12 +192,12 @@ ViewData["Title"] = "LogIn Page";
                         }
                         else if (data.stateCode === 2) {
                             $("#alertModal").find(".modal-body").text("");
-                            $("#alertModal").find(".modal-body").text("该邮箱已经注册！");
+                            $("#alertModal").find(".modal-body").text("该邮箱已经注册，请更换邮箱重新注册！");
                             $('#alertModal').modal('show');
                         }
                         else if (data.stateCode === 3) {
                             $("#alertModal").find(".modal-body").text("");
-                            $("#alertModal").find(".modal-body").text("该手机号码已经注册");
+                            $("#alertModal").find(".modal-body").text("该手机号码已经注册，请更换号码重新注册！");
                             $('#alertModal').modal('show');
                         }
                     }
