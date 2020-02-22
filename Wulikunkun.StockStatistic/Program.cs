@@ -30,7 +30,7 @@ namespace Wulikunkun.StockStatistic
     {
         static void Main(string[] args)
         {
-            SyncDailyPrice("603222.SH");
+            SyncStockList();
         }
 
         public static RequestResult RequestData(string requestParams)
@@ -55,19 +55,23 @@ namespace Wulikunkun.StockStatistic
 
         public static void SyncNews()
         {
-            string requestParams = "{\"api_name\": \"major_news\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"start_date\":\"2020-01-17 00:00:00\",\"end_date\":\"2020-01-18 00:00:00\"},\"fields\": \"title,content,pub_time,src\"}";
+            string requestParams =
+                "{\"api_name\": \"major_news\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"start_date\":\"2020-01-17 00:00:00\",\"end_date\":\"2020-01-18 00:00:00\"},\"fields\": \"title,content,pub_time,src\"}";
             RequestResult requestResult = RequestData(requestParams);
         }
 
         public static void SyncDailyPrice(string ts_code)
         {
-            string requestParams = "{\"api_name\": \"daily\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"ts_code\":\"" + ts_code + "\",\"start_date\":\"20200101\",\"end_date\":\"20200117\"}}";
+            string requestParams =
+                "{\"api_name\": \"daily\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"ts_code\":\"" +
+                ts_code + "\",\"start_date\":\"20200101\",\"end_date\":\"20200117\"}}";
             RequestResult requestResult = RequestData(requestParams);
         }
 
         public static void SyncTradeCalendar()
         {
-            string requestParams = "{\"api_name\": \"trade_cal\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"exchange\":\"\",\"start_date\":\"20200101\",\"end_date\":\"20201231\"}}";
+            string requestParams =
+                "{\"api_name\": \"trade_cal\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"exchange\":\"\",\"start_date\":\"20200101\",\"end_date\":\"20201231\"}}";
             RequestResult requestResult = RequestData(requestParams);
             using (StockContext context = new StockContext())
             {
@@ -82,6 +86,7 @@ namespace Wulikunkun.StockStatistic
                     };
                     exchangeCalendars.Add(exchangeCalendar);
                 }
+
                 context.ExchangeCalendars.AddRange(exchangeCalendars);
                 context.SaveChanges();
             }
@@ -89,7 +94,8 @@ namespace Wulikunkun.StockStatistic
 
         public static void SyncStockList()
         {
-            string requestParams = "{\"api_name\": \"stock_basic\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"list_stauts\":\"L\"}, \"fields\": \"ts_code,name,area,industry,list_date\"}";
+            string requestParams =
+                "{\"api_name\": \"stock_basic\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"list_stauts\":\"L\"}, \"fields\": \"ts_code,name,area,industry,list_date\"}";
             RequestResult requestResult = RequestData(requestParams);
             using (StockContext context = new StockContext())
             {
@@ -106,6 +112,7 @@ namespace Wulikunkun.StockStatistic
                     };
                     stockBasicInfos.Add(stockBasicInfo);
                 }
+
                 context.StockBasicInfos.AddRange(stockBasicInfos);
                 context.SaveChanges();
             }
