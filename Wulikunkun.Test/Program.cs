@@ -66,6 +66,7 @@ namespace Wulikunkun.Test
         }
     }
 
+<<<<<<< HEAD
     // 为什么非要设计这样一个接口
     public interface IServiceProvider
     {
@@ -74,6 +75,10 @@ namespace Wulikunkun.Test
 
     public class Container : IDisposable, IServiceProvider
     {
+=======
+    public class Container : IDisposable
+    {
+>>>>>>> 8ab738565912dae343471e1424b19ab482b77463
         // _root指向容器自身
         private Container _root;
         // 保存该容器内服务类型与注册条目映射关系的并发字典，一个类型对应一条注册条目
@@ -102,6 +107,10 @@ namespace Wulikunkun.Test
             // 这里为什么没有获取父容器中已经创建的服务实例？
             Services = new ConcurrentDictionary<ServiceRegistry, object>();
             _disposables = new ConcurrentBag<IDisposable>();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8ab738565912dae343471e1424b19ab482b77463
         }
 
         # region 比较这两种写法的异同
@@ -129,6 +138,7 @@ namespace Wulikunkun.Test
 
         public object GetService(ServiceRegistry registry, Type[] arguments)
         {
+<<<<<<< HEAD
             switch (registry.LifeTime)
             {
                 // 如果需要的服务实例类型被注册为Singleton模式，则从根容器中获取或者创建服务实例
@@ -144,6 +154,12 @@ namespace Wulikunkun.Test
 
             // 这里的arguments对应的就是一个服务类型构造函数的参数列表
             object GetOrCreate(ServiceRegistry registry, Type[] arguments)
+=======
+            var registryType = registry.ServiceType;
+
+            // 这里的arguments对应的就是一个服务类型构造函数的参数列表
+            object GetServiceCore(Type type, Type[] arguments)
+>>>>>>> 8ab738565912dae343471e1424b19ab482b77463
             {
 
             }
@@ -170,6 +186,7 @@ namespace Wulikunkun.Test
     public static class ContainerExtension
     {
         // 注册必须同时提供以下三个条件，服务类型，生命周期，服务实例的创建委托
+<<<<<<< HEAD
         public static void Register(this Container container, Type fromType, Type toType, LifeTime lifeTime)
         {
             // 我好奇这个委托是如何被消费的？
@@ -179,6 +196,14 @@ namespace Wulikunkun.Test
         }
 
         public static void Register<FromType, ToType>(this Container container, LifeTime lifeTime)
+=======
+        
+        public static bool HasRegistry<T>(this Container container) => container.Registries.ContainsKey(typeof(T));
+        public static bool HasRegistry(this Container container, Type type) => container.Registries.ContainsKey(type);
+
+        // 根据服务的类型找到其对应的注册条目(Registry)，再由其对应的注册条目创建该服务类型对应的服务实例
+        public static object CreateInstance<T>(this Container container)
+>>>>>>> 8ab738565912dae343471e1424b19ab482b77463
         {
             container.Register(typeof(FromType), typeof(ToType), lifeTime);
         }
@@ -229,6 +254,7 @@ namespace Wulikunkun.Test
         }
     }
 
+<<<<<<< HEAD
     // 注册条目封装了注册(服务)类型，服务生命周期，以及服务实例的创建方式
     public class ServiceRegistry
     {
@@ -240,6 +266,18 @@ namespace Wulikunkun.Test
         public Func<Type, Type[], object> ServiceFactory { get; }
 
         public ServiceRegistry(Type serviceType, LifeTime lifeTime, Func<Type, Type[], object> func)
+=======
+    public class ServiceRegistry
+    {
+        // 对应注册服务的类型
+        public Type ServiceType { get; set; }
+        // 对应服务实例的生命周期
+        public LifeTime LifeTime { get; }
+        // 创建服务实例的工厂
+        public Func<Type[], object> ServiceFactory { get; }
+
+        public ServiceRegistry(Type serviceType, LifeTime lifeTime, Func<Type[], object> func)
+>>>>>>> 8ab738565912dae343471e1424b19ab482b77463
         {
             // 这里的意思难道是说只读访问器在类的外部是只读的，在类的内部依然可以被写？
             this.ServiceType = serviceType;
