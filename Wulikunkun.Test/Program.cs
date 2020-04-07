@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Threading;
 
 namespace Wulikunkun.Test
@@ -14,11 +15,88 @@ namespace Wulikunkun.Test
         // 设计理念，注册就是将一个被注册类型(Type)绑定一个注册条目(Registry)
         static void Main(string[] args)
         {
-            Container container = new Container();
+            PersonNew personOne = new PersonNew("wangkun", 24);
+            PersonNew personTwo = new PersonNew("wangzhen", 24);
+            Console.WriteLine($"{personOne.Equals(personTwo)}");
+
+            Dictionary<object, object> dic = new Dictionary<object, object>
+            {
+                [personOne] = "man",
+            };
+
+            Console.WriteLine($"{dic[personTwo]}");
+            Console.WriteLine(personTwo == personOne);
             // 保留一个疑问，在.NET Core框架中服务的实例是何时被请求的？
-            object obj = container.GetOrCreate<Person>();
+            // object obj = container.GetOrCreate<Person>();
             Console.Read();
         }
+    }
+
+
+    class PersonNew
+    {
+        public string Name { get; }
+        public int Id { get; }
+
+        public PersonNew(string name, int id)
+        {
+            Name = name;
+            Id = id;
+            Console.WriteLine($"{this.GetType().Name}的实例已经创建");
+        }
+
+        public void Dispose()
+        {
+            Console.WriteLine($"{this.GetType().Name}的实例已经释放");
+        }
+
+        public bool Equals(PersonNew otherPerson)
+        {
+            if (otherPerson == null)
+                return false;
+            else if (this.Id == otherPerson.Id)
+                return true;
+            else return false;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+                return false;
+            if (obj is PersonNew personNew)
+                return Equals(personNew);
+            else return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+
+        public static int operator +(PersonNew personOne, PersonNew personTwo)
+        {
+            return personOne.Id + personTwo.Id;
+        }
+
+        public static bool operator ==(PersonNew personOne, PersonNew personTwo)
+        {
+            return personOne.Equals(personTwo);
+        }
+
+        public static bool operator !=(PersonNew personOne, PersonNew personTwo)
+        {
+            return !personOne.Equals(personTwo);
+        }
+    }
+
+    public interface Test<TFrom>
+    {
+
+    }
+
+    public interface Test<TFrom, TTo>
+    {
+
     }
 
     [AttributeUsage(AttributeTargets.Constructor)]
@@ -66,7 +144,6 @@ namespace Wulikunkun.Test
         }
     }
 
-<<<<<<< HEAD
     // 为什么非要设计这样一个接口
     public interface IServiceProvider
     {
@@ -75,15 +152,11 @@ namespace Wulikunkun.Test
 
     public class Container : IDisposable, IServiceProvider
     {
-=======
-    public class Container : IDisposable
-    {
->>>>>>> 8ab738565912dae343471e1424b19ab482b77463
         // _root指向容器自身
         private Container _root;
         // 保存该容器内服务类型与注册条目映射关系的并发字典，一个类型对应一条注册条目
         public ConcurrentDictionary<Type, ServiceRegistry> Registries { get; }
-        // 保存该容器内已经创建的服务实例
+        // 保存该容器内已经创建的服务实例（一个注册条目对应一个服务实例）
         public ConcurrentDictionary<ServiceRegistry, object> Services { get; }
         // 保存容器内等待释放的服务实例
         private ConcurrentBag<IDisposable> _disposables;
@@ -107,13 +180,9 @@ namespace Wulikunkun.Test
             // 这里为什么没有获取父容器中已经创建的服务实例？
             Services = new ConcurrentDictionary<ServiceRegistry, object>();
             _disposables = new ConcurrentBag<IDisposable>();
-<<<<<<< HEAD
-=======
-
->>>>>>> 8ab738565912dae343471e1424b19ab482b77463
         }
 
-        # region 比较这两种写法的异同
+        #region 比较这两种写法的异同
         // public ConcurrentDictionary<Type, ServiceRegistry> _registries = new ConcurrentDictionary<Type, ServiceRegistry>();
         // 通过注册类型的条目获取改类型的服务实例
         // private ConcurrentDictionary<ServiceRegistry, object> _services;
@@ -138,30 +207,36 @@ namespace Wulikunkun.Test
 
         public object GetService(ServiceRegistry registry, Type[] arguments)
         {
-<<<<<<< HEAD
             switch (registry.LifeTime)
             {
                 // 如果需要的服务实例类型被注册为Singleton模式，则从根容器中获取或者创建服务实例
                 case LifeTime.Singleton:
-                    break;
+                    return GetOrCreate(registry, arguments);
                 case LifeTime.Scope:
-                    break;
-                case LifeTime.Transient:
-                    var service = registry.factory
-                    _disposables.Add(service);
-                    break;
+                    return GetOrCreate(registry, arguments);
+                default:
+                    var transientServiceInstance = registry.ServiceFactory(registry.ServiceType, arguments);
+                    if (transientServiceInstance is IDisposable disposable)
+                    {
+                        this._disposables.Add(disposable);
+                    }
+                    return transientServiceInstance;
             }
 
-            // 这里的arguments对应的就是一个服务类型构造函数的参数列表
+            // 这里的arguments对应的就是一个服务类型构造函数的参数列表，如果当前容器中已经存在该注册条目对应的服务实例，则返回该服务实例，否则，创建该注册条目对应的服务实例
             object GetOrCreate(ServiceRegistry registry, Type[] arguments)
-=======
-            var registryType = registry.ServiceType;
-
-            // 这里的arguments对应的就是一个服务类型构造函数的参数列表
-            object GetServiceCore(Type type, Type[] arguments)
->>>>>>> 8ab738565912dae343471e1424b19ab482b77463
             {
-
+                if (this.Services.ContainsKey(registry))
+                    return Services[registry];
+                else
+                {
+                    var serviceInstance = registry.ServiceFactory(registry.ServiceType, arguments);
+                    if (serviceInstance is IDisposable disposable)
+                    {
+                        this._disposables.Add(disposable);
+                    }
+                    return serviceInstance;
+                }
             }
         }
 
@@ -186,7 +261,6 @@ namespace Wulikunkun.Test
     public static class ContainerExtension
     {
         // 注册必须同时提供以下三个条件，服务类型，生命周期，服务实例的创建委托
-<<<<<<< HEAD
         public static void Register(this Container container, Type fromType, Type toType, LifeTime lifeTime)
         {
             // 我好奇这个委托是如何被消费的？
@@ -196,14 +270,6 @@ namespace Wulikunkun.Test
         }
 
         public static void Register<FromType, ToType>(this Container container, LifeTime lifeTime)
-=======
-        
-        public static bool HasRegistry<T>(this Container container) => container.Registries.ContainsKey(typeof(T));
-        public static bool HasRegistry(this Container container, Type type) => container.Registries.ContainsKey(type);
-
-        // 根据服务的类型找到其对应的注册条目(Registry)，再由其对应的注册条目创建该服务类型对应的服务实例
-        public static object CreateInstance<T>(this Container container)
->>>>>>> 8ab738565912dae343471e1424b19ab482b77463
         {
             container.Register(typeof(FromType), typeof(ToType), lifeTime);
         }
@@ -254,7 +320,6 @@ namespace Wulikunkun.Test
         }
     }
 
-<<<<<<< HEAD
     // 注册条目封装了注册(服务)类型，服务生命周期，以及服务实例的创建方式
     public class ServiceRegistry
     {
@@ -266,18 +331,6 @@ namespace Wulikunkun.Test
         public Func<Type, Type[], object> ServiceFactory { get; }
 
         public ServiceRegistry(Type serviceType, LifeTime lifeTime, Func<Type, Type[], object> func)
-=======
-    public class ServiceRegistry
-    {
-        // 对应注册服务的类型
-        public Type ServiceType { get; set; }
-        // 对应服务实例的生命周期
-        public LifeTime LifeTime { get; }
-        // 创建服务实例的工厂
-        public Func<Type[], object> ServiceFactory { get; }
-
-        public ServiceRegistry(Type serviceType, LifeTime lifeTime, Func<Type[], object> func)
->>>>>>> 8ab738565912dae343471e1424b19ab482b77463
         {
             // 这里的意思难道是说只读访问器在类的外部是只读的，在类的内部依然可以被写？
             this.ServiceType = serviceType;
