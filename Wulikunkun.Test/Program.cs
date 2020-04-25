@@ -8,8 +8,16 @@ namespace Wulikunkun.Test
 {
     internal class Program
     {
-        // 设计理念，注册就是将一个被注册类型(Type)绑定一个注册条目(Registry)
         private static void Main(string[] args)
+        {
+            Node rootNode = new Node(34);
+            rootNode.AddNode(2);
+            rootNode.AddNode(1);
+            rootNode.AddNode(6);
+            Console.Read();
+        }
+
+        public void LoadRegisterServices()
         {
             Assembly currentAssembly = Assembly.GetExecutingAssembly();
             var registeredTypes = from type in currentAssembly.GetExportedTypes()
@@ -27,10 +35,51 @@ namespace Wulikunkun.Test
             var serviceTwo = container.GetService(typeof(ITest));
             // 保留一个疑问，在.NET Core框架中服务的实例是何时被请求的？
             // object obj = container.GetOrCreate<Person>();
-            Console.Read();
         }
     }
 
+    #region 二叉树的研究
+    public class Node
+    {
+        private int _val;
+        public Node LeftNode { get; set; }
+        public Node RightNode { get; set; }
+        public int Val
+        {
+            get
+            {
+                //Console.WriteLine($"当前节点有被访问到，该节点的值是：{_val}");
+                return _val; ;
+            }
+            set
+            {
+                this._val = value;
+            }
+        }
+        public Node(int val)
+        {
+            _val = val;
+        }
+        public void AddNode(int val)
+        {
+            if (this._val < val && this.RightNode == null)
+            {
+                Node newNode = new Node(val);
+                RightNode = newNode;
+            }
+            else if (this._val < val && this.RightNode != null) this.RightNode.AddNode(val);
+            else if (this._val > val && this.LeftNode == null)
+            {
+                Node newNode = new Node(val);
+                LeftNode = newNode;
+            }
+            else if (this._val > val && this.LeftNode != null) this.LeftNode.AddNode(val);
+            else throw new InvalidOperationException("当前元素已存在于二叉树中");
+        }
+    }
+    #endregion
+
+    #region 依赖注入框架设计
     public interface ITest
     {
         void WriteTypeName();
@@ -195,7 +244,7 @@ namespace Wulikunkun.Test
 
     public static class ContainerExtension
     {
-        // 注册必须同时提供以下三个条件，服务类型，生命周期，服务实例的创建委托
+        // 注册必须同时提供以下三个条件，服务类型，生命周期，服务实例的创建委托，注册就是将一个被注册类型(Type)绑定一个注册条目(Registry)
         public static void Register(this Container container, Type fromType, Type toType, LifeTime lifeTime)
         {
             // 我好奇这个委托是如何被消费的？
@@ -225,7 +274,7 @@ namespace Wulikunkun.Test
             if (arguments.Length > 0)
                 // 这里的MakeGenericType也没看懂是干什么用的
                 type = type.MakeGenericType(arguments);
-
+            Type type1 = typeof(Test);
             var constructors = type.GetConstructors();
             if (constructors.Length == 0)
                 throw new InvalidOperationException($"当前类{type}并没有构造函数！");
@@ -300,6 +349,7 @@ namespace Wulikunkun.Test
             else return selfRegistry.Equals(otherRegistry);
         }
     }
+    #endregion
 }
 
 
