@@ -98,9 +98,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Wulikunkun.Utility\Wulikunkun.Utility.csproj">
+    <ProjectReference Include="..\Wulikunkun.Utility\Utility.csproj">
       <Project>{8d8c0ec8-d2be-4943-ae0a-0d0b44f9c167}</Project>
-      <Name>Wulikunkun.Utility</Name>
+      <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
