@@ -52,6 +52,14 @@ namespace Wulikunkun.Test
 
     }
 
+    #region 获取环境变量方法
+    //private static void Main(string[] args)
+    //{
+    //    string sqlConnString = Environment.GetEnvironmentVariable("SqlConnectionString", EnvironmentVariableTarget.User);
+    //    Console.Read();
+    //}
+    #endregion
+
     #region 对Func的研究
     //private static void Main(string[] args)
     //{
