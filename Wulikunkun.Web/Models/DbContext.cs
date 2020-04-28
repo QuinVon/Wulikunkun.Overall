@@ -11,7 +11,6 @@ namespace Wulikunkun.Web.Models
 
         public WangKunDbContext(DbContextOptions<WangKunDbContext> options) : base(options)
         {
-
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
