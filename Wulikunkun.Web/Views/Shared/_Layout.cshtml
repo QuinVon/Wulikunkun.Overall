@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
     <style>
         body {
             font-family: 'Noto Serif SC', serif;
@@ -17,8 +16,7 @@
         }
     </style>
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link href="~/lib/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet" />
 </head>
 
 <body class="mt-0">
@@ -261,6 +259,32 @@
                     </ul>
                 </div>
                 <div class="col-1"></div>
+            </div>
+
+            <div class="row">
+                <!-- 内联元素和内联块级元素的水平居中使用text-align：center -->
+                <div class="col-10 mx-auto border-bottom border-top py-3 border-secondary text-center">
+                    <div class="mx-auto d-inline-block">
+                        <ul class="nav mx-auto">
+                            <li class="nav-item px-4">
+                                <a class="nav-link text-light"
+                                   href="https://github.com/wulikunkun?tab=repositories">
+                                    <i class="fab fa-github h2"></i>&nbsp;&nbsp;Github
+                                </a>
+                            </li>
+                            <li class="nav-item px-4">
+                                <a class="nav-link text-light" href="https://twitter.com/wulikunkun">
+                                    <i class="fab fa-weixin h2"></i>&nbsp;&nbsp;Wechat
+                                </a>
+                            </li>
+                            <li class="nav-item px-4">
+                                <a class="nav-link text-light my-auto" href="https://weibo.com/u/2732396011/">
+                                    <i class="fab fa-weibo h2"></i>&nbsp;&nbsp;Weibo
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <div class="row" style="font-size: .8rem;">
