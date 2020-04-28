@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wulikunkun.Utility", "Wulik
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wulikunkun.Web", "Wulikunkun.Web\Wulikunkun.Web.csproj", "{52D1EBEE-9AA6-4E3D-8396-92C2EC9A2494}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wulikunkun.Test", "Wulikunkun.Test\Wulikunkun.Test.csproj", "{B1FCEAC4-47E1-450D-AAA6-90B5343ABFB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console", "Wulikunkun.Test\Console.csproj", "{B1FCEAC4-47E1-450D-AAA6-90B5343ABFB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
