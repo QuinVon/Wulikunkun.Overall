@@ -487,7 +487,7 @@ a.cke_button_disabled .cke_button_icon, a.cke_button_disabled .cke_button_arrow 
     position: absolute;
     height: 18px;
     width: 0;
-    border-right: 1px solid #bcbcbc;
+    border-right: 1px solid #dcdcdc;
     margin-top: 4px;
     top: 0;
     right: -3px
@@ -609,7 +609,7 @@ a.cke_button_disabled .cke_button_icon, a.cke_button_disabled .cke_button_arrow 
 
 .cke_toolbar_separator {
     float: left;
-    background-color: #bcbcbc;
+    background-color: #dcdcdc;
     margin: 4px 2px 0 2px;
     height: 18px;
     width: 1px
@@ -826,7 +826,7 @@ a.cke_toolbox_collapser {
     position: absolute;
     height: 18px;
     width: 0;
-    border-right: 1px solid #bcbcbc;
+    border-right: 1px solid #dcdcdc;
     margin-top: 5px;
     top: 0;
     right: 0
