@@ -55,7 +55,7 @@
 		&lt;p&gt;&lt;strong&gt;Event Manager&lt;/strong&gt;&lt;/p&gt;
 		&lt;p&gt;&lt;strong&gt;Bilancino Hotel&lt;/strong&gt;&lt;/p&gt;
 	</textarea>
-            <button class="btn btn-primary btn-sm mt-4 ml-2" type="submit">Submit</button>
+            @*<button class="btn btn-primary btn-sm mt-4 ml-2" type="submit">Submit</button>*@
         }
 
     </div>
@@ -93,7 +93,7 @@
             extraAllowedContent: 'img[width,height,align]',
 
             // Enabling extra plugins, available in the full-all preset: https://ckeditor.com/cke4/presets-all
-            extraPlugins: 'tableresize,uploadimage,uploadfile',
+            extraPlugins: 'tableresize,uploadimage,uploadfile,submitbutton',
             //在启用uploadFile插件之后一定要配置这里的uploadUrl，否则页面控制台会报异常
             uploadUrl:'@Url.Action("Upload")',
 
