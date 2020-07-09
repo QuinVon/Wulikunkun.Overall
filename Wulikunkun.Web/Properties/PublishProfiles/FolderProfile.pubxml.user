@@ -6,6 +6,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
-    <_PublishTargetUrl>C:\Users\wulikunkun\source\repos\OverallSolution\WebSite\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <_PublishTargetUrl>C:\Users\wulikunkun\PycharmProjects\test\Wulikunkun.Overall\Wulikunkun.Web\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAfyEw8O+GpEGSZOoe/3R2YAAAAAACAAAAAAAQZgAAAAEAACAAAAAc3otwkLAsLg65qXmHZUAn+Za+YVDOKpjNTvh0GnSddQAAAAAOgAAAAAIAACAAAAAo+yGkiymuvqwfJ5ItbV/TrhT8j/szDHnJcNa5jpy0aCAAAADHmVUj6tdJ0QDQpudrLGlb/fGX9l/xWEii/4g+OUoga0AAAAAuCDo1yehG4lxGboAbdpH2pJlcwHGTB6AuW6lEDNQB5kD+AEhG4C8xBME0AIMEkio3P6Ucb4QBFwP+u+TiymkS</EncryptedPassword>
   </PropertyGroup>
 </Project>

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using wulikunkun_dotnet_core_mvc.Models;
-using Newtonsoft.Json;
+using System.Diagnostics;
+using Wulikunkun.Web.Models;
+using Microsoft.AspNetCore.Http;
 
-namespace wulikunkun_dotnet_core_mvc.Controllers
+namespace Wulikunkun.Web.Controllers
 {
 
     public class HomeController : Controller
@@ -22,10 +18,17 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
             _logger = logger;
         }
 
-        #region 返回视图的Action
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.IsAvailable)
+            {
+                string username = HttpContext.Session.GetString("username");
+                if (username != null)
+                {
+                    ViewBag.UserName = username;
+                }
+            }
             return View();
         }
 
@@ -49,49 +52,17 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
             return View();
         }
 
-        #endregion
-
-        public JsonResult CreateUser(User user)
+        public ViewResult Editor()
         {
-            object result = null;
-            if (dbContext.Users.Any(item => item.UserName == user.UserName))
-            {
-                result = new
-                {
-                    Message = "已经存在相同的用户名！",
-                    StateCode = 0.1
-                };
-                return Json(result);
-            }
-
-            if (dbContext.Users.Any(item => item.Email == user.Email))
-            {
-                result = new
-                {
-                    Message = "该邮箱已经注册！",
-                    StateCode = 0.2
-                };
-                return Json(result);
-            }
-            string salt = Guid.NewGuid().ToString();
-            byte[] passwordAndSaltBytes = System.Text.Encoding.UTF8.GetBytes(user.Password + salt);
-            byte[] hashBytes = new System.Security.Cryptography.SHA256Managed().ComputeHash(passwordAndSaltBytes);
-            string hashString = Convert.ToBase64String(hashBytes);
-            user.Password = hashString;
-            user.RegisterTime = DateTime.Now;
-            user.Salt = salt;
-            user.UserRole = Role.User;
-            dbContext.Users.Add(user);
-            dbContext.SaveChanges();
-            result = new
-            {
-                Message = "注册成功！",
-                StateCode = 1
-            };
-            JsonResult jsonResult = Json(result);
-            return jsonResult;
+            return View();
         }
 
+        public void Edit(string editContent)
+        {
+
+        }
+
+        #region 框架自带代码
         public IActionResult Privacy()
         {
             return View();
@@ -102,6 +73,7 @@ namespace wulikunkun_dotnet_core_mvc.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        #endregion
 
         #region Swagger测试部分
 

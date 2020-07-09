@@ -4,6 +4,7 @@
     Layout = null;
 }
 
+
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
@@ -12,6 +13,7 @@
     <meta charset="utf-8" />
     <!-- 要想BS的样式在手机端自动收缩，下行代码必须 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>首页</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -27,12 +29,12 @@
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-3 col-xl-3 vh-100 overflow-auto px-0 shadow-sm" style="background-color: #333;">
+            <div class="col-3 vh-100 overflow-auto position-relative px-0 shadow-sm" style="background-color: #333;">
                 <div class="w-100 px-4 text-white py-3 border-bottom border-dark">
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <a class="float-right text-light font-weight-bold" href="#">返 回</a>
                 </div>
-                <img src="./content/images/smaller.png" class="w-50 d-block p-2 mx-auto my-2" />
+                <img src="~/imgs/smaller.png" class="w-50 d-block p-2 mx-auto my-2" />
                 <div class="w-100 border-top border-dark overflow-hidden">
                     <nav class="nav-bar">
                         <a class="nav-link d-inline-block text-white-50 w-75 px-0 float-left text-center font-weight-bold">目录</a>
@@ -67,54 +69,65 @@
                 </nav>
             </div>
             <!-- 想让溢出的部分显示为滚动条，必须给母元素设置设置一个高度 -->
-            <div class="col-lg-9 col-xl-8 bg-light vh-100 overflow-auto position-relative">
-                <div class="card w-75 min-vh-100 mx-auto my-5 mx-5 rounded-0 p-5">
-                    <div class="card-body" style="letter-spacing: .05rem;">
-                        <div class="btn-group btn-group-sm w-25 bg-white" role="group">
-                            <button type="button" class="btn btn-light border">Left</button>
-                            <button type="button" class="btn btn-light border">Middle</button>
-                            <button type="button" class="btn btn-light border">Right</button>
-                        </div>
-                        <h3 class="card-title text-left mb-0 pb-3 text-dark">
-                            基于三维物体的影像装置艺术的叙事表达研究
+            <div class="col-9 bg-light vh-100 overflow-auto position-relative px-5">
+                <div class="card w-75 min-vh-100 my-5 rounded-0 p-4 border-0 shadow-sm mx-auto">
+                    <div class="btn-group w-25 bg-white" role="group">
+                        <button type="button"
+                                class="btn btn-light border text-secondary font-weight-light">
+                            Left
+                        </button>
+                        <button type="button"
+                                class="btn btn-light border text-secondary font-weight-light">
+                            Middle
+                        </button>
+                        <button type="button"
+                                class="btn btn-light border text-secondary font-weight-light">
+                            Right
+                        </button>
+                    </div>
+                    <div class="card-body" style="letter-spacing: .04rem;font-family: '宋体';">
+                        <h3 class="card-title text-center font-weight-bold mb-0 pb-4">
+                            基于装置艺术的叙事表达研究
                         </h3>
-                        <h4 class="card-title mb-0 py-3 text-primary">诚信声明</h4>
-                        <p class="card-text py-1 text-dark">
+                        <h4 class="card-title mb-0 py-3 text-primary font-weight-bold">诚信声明</h4>
+                        <p class="card-text py-1">
                             本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <p class="card-text pb-4 border-bottom text-dark">
-                            本人郑重声明：所呈交的论文《基于三维物体的影像装置艺术的叙事表达研究》是本人在中央美术学院工作和学习期间在导师指导下为教学和科研需要而创作的作品。
+                        <p class="card-text pb-2">
+                            本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <h4 class="card-title mb-0 py-3 text-primary">授权说明</h4>
-                        <p class="card-text pb-4 border-bottom text-dark">
-                            本人完全了解中央美术学院有关保留、使用学位论文及毕业创作/设计的规定，即：学校有权保留送交论文印刷本及毕业创作/设计作品的电子版图片资料，允许论文被查阅和借阅；允许毕业创作/设计作品以画册形式出版。学校可以公布论文/毕业创作（设计）作品的全部或部分内容，可以采用影印、缩印或其他复制手段保存论文和毕业创作（设计）作品。
+                        <h4 class="card-title mb-0 py-3 text-primary font-weight-bold">授权说明</h4>
+                        <p class="card-text pb-2">
+                            本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <h4 class="card-title mb-0 py-3 text-primary">引言</h4>
-                        <p class="card-text py-1 text-dark">
-                            影像的缘起是由于摄像技术的发展，随着社会文化的推动和科技的发展，影像艺术家的创作从一开始对于时间的阐述逐渐对别的社会议题以及个人情感进行表达，技术带来的变革使得表现形式也变得更加多元化，外部空间的构建与影像内容共同协作，加强作品观念表达的力度。
+                        <h4 class="card-title mb-0 py-3 text-primary font-weight-bold">引言</h4>
+                        <p class="card-text py-1">
+                            本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <p class="card-text py-1 text-dark">
-                            影像装置艺术与其他任何一种艺术形式一样，本质上都是思维与观念的体现。而在作品表达的过程中，影像和装置的相互配合至关重要，如果艺术家在两者间没有一个相互制衡的选择，偏向任何一方都不足以完整表达观念。叙事表达是影像艺术中重要的一环节，影像通过图像与时间的配合产生叙事作用，而三维物体也是有叙事的存在的吗？两者之间的叙事表达有什么联系，之间的叙事手段又会产生什么样的效果呢？笔者围绕影像装置艺术在三维物体中的叙事表达展开讨论，试图分析影像装置艺术中叙事的特征与内涵。
+                        <p class="card-text py-1">
+                            本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <p class="card-text pb-4 border-bottom text-dark">
-                            在进行艺术创作时，对于内容与形式的判断是每一位创作者必须认真勘别的过程，而这个过程在对于影像这样依赖技术发展的学科来说应该更为强调，希望在研究的过程中，能剥离流于表面的迷雾，能挖掘出深层次的内容与形式间的平衡，展现出当代影像装置的无限可能以及为未来的影像创作提供明确的动力。
+                        <p class="card-text pb-2">
+                            本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <h4 class="card-title mb-0 py-3 text-primary">正文</h4>
-                        <p class="card-text py-1 text-dark">
-                            影像的内容本身足以构成内部空间即影像本身的叙事与形式的空间关系，当影像本身不足以完整表达观念时，艺术家通过加入三维物体的参与，使外部环境与内部环境之间相互作用产生出反应。杜尚于上世纪二十年代的作品《旋转的玻璃》展出时，他邀请观众站在与作品保持特定的距离，触发图像的运转。以及六十年代这是相对较早呈现方式上强调观众的参与性的作品之一，归功于早期对于装置与图像间的探索，使其成为内容提升以及作品完整表达的重要手段。
+                        <h4 class="card-title mb-0 py-3 text-primary font-weight-bold">正文</h4>
+                        <p class="card-text py-1">
+                            本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <p class="card-text py-1 text-dark">
-                            自杜尚直接用现成品作为艺术创作，极大限度地模糊了人们当时对于艺术与生活之间的界限，人们开始思考什么才是真正的艺术，刺激了艺术家运用影像作为一种新媒介的运用以及表达内容的批判。在发展初期，艺术家选择影像进行创作以作为一种充满戏谑、无政府主义的地下艺术存在。先锋派在影像史初期定下了影像艺术的发展基调：对于社会资本力量的批判与斗争，之后影像装置艺术的话题逃不开对于社会批判性的表达。再到安迪·沃霍尔的作品《睡眠》与《帝国大厦》对于影像的加深奠基，将先前对于电影的观赏行为解读为一种阅读行为，影像的形式变成了内容，对于处于边缘地位的影像艺术转化为哲学范畴，这样的行动启发了之后利用影像创作的艺术家们。
+                        <p class="card-text py-1">
+                            本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <p class="card-text pb-4 border-bottom text-dark">
-                            到了上世纪九十年代投影技术的发展，有利于艺术家对于空间的构建，使得空间和影像之间发生了更密切的连接与相互作用。现代艺术的创作话题从来逃不开对于社会经济文化的质疑与批判，通过装置参与到影像表达中，装置艺术的时间、在地特定属性是拒绝美术馆机制的有力手段。此时艺术家更偏好于创作数字艺术作品，同时结合声音、戏剧、行为、装置等多种艺术形式对于社会不同的质疑作出多元化的探索。影像本身能作出感性的表达，通过外部空间的介入加强了对于观念本身的强调。
+                        <p class="card-text pb-2">
+                            本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
 </body>
 
 </html>
-

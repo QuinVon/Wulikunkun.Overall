@@ -8,11 +8,12 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using wulikunkun_dotnet_core_mvc.Models;
+using Wulikunkun.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Mvc;
 
-namespace wulikunkun_dotnet_core_mvc
+namespace Wulikunkun.Web
 {
     public class Startup
     {
@@ -26,10 +27,20 @@ namespace wulikunkun_dotnet_core_mvc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                // Make the session cookie essential
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddControllersWithViews();
 
-            services.AddDbContext<WangKunDbContext>(options =>
-         options.UseSqlServer(Configuration.GetConnectionString("WangKunDatabase")));
+            services.AddDbContext<WangKunDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WangKunDatabase")));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -53,6 +64,9 @@ namespace wulikunkun_dotnet_core_mvc
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseSession();
+
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),

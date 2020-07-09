@@ -1,0 +1,210 @@
+﻿@{
+Layout = null;
+ViewData["Title"] = "LogIn Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: "Ink Free";
+            background: #dae8fa;
+            box-shadow: inset 0 0 10px 3px lavender;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container vh-100">
+        <div class="row h-100">
+            <div class="col-md-6 col-sm-10 mx-auto my-auto px-5 pb-2 pt-4 border"
+                style="border-color:#d2dbe4 !important">
+
+                <!-- Modal -->
+                <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content border-0 rounded-sm pb-3 pt-0">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title text-secondary" id="exampleModalLabel"
+                                    style="font-size: .95rem;">提示
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <form>
+                    <div class="form-row">
+                        <h2 class="text-secondary mx-auto">Welcome!</h2>
+                    </div>
+
+                    <div class="form-row mt-3">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail4">Email<span class="text-danger">&nbsp;*</span></label>
+                            <input type="email" name="Email" class="form-control" id="inputEmail4" placeholder="Email"
+                                required="required">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="user_phone">Phone<span class="text-danger">&nbsp;*</span></label>
+                            <input type="text" class="form-control" id="user_phone" name="Phone"
+                                placeholder="Enter your phone number" required="required">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAddress">Username<span class="text-danger">&nbsp;*</span></label>
+                        <input type="text" class="form-control" id="inputAddress" placeholder="set your user name"
+                            name="Username" required="required">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_password">Password<span class="text-danger">&nbsp;*</span></label>
+                        <input type="password" class="form-control" name="password" placeholder="Enter your password"
+                            required="required" minlength="10" />
+                    </div>
+
+                    <div class="form_group">
+                        <label for="confirm_user_password">Confirm Password<span
+                                class="text-danger">&nbsp;*</span></label>
+                        <input type="password" class="form-control" name="passwordAgain"
+                            placeholder="Enter your password again" required="required" minlength="10" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputAddress2">Address</label>
+                        <input type="text" class="form-control" id="inputAddress2" name="Address"
+                            placeholder="Apartment, studio, or floor">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputCity">Age</label>
+                            <input type="text" class="form-control" id="inputCity" name="Age">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState">Gender</label>
+                            <select id="inputState" class="form-control" name="Gender">
+                                <option selected>Choose...</option>
+                                <option value="Man">Man</option>
+                                <option value="Women">Women</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Zip</label>
+                            <input type="text" class="form-control" id="inputZip" name="Zip">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                            <label class="form-check-label" for="gridCheck">
+                                Check me out
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-50 mx-auto w-100"
+                                    onclick="return false">Sign in</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script>
+        $(function () {
+
+            function CheckPassword() {
+                var passwordOne = $("input[name='password']").val().trim();
+                var passwordTwo = $("input[name='passwordAgain']").val().trim();
+                if (passwordOne !== passwordTwo) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+
+            function Redirect() {
+                window.location.href = "@Url.Action("Index","Home")";
+            }
+
+            $("input[name='passwordAgain']").bind('input propertychange', function () {
+                var checkResult = CheckPassword();
+                if (!checkResult)
+                    $("button").attr("disabled", "disabled");
+                else
+                    $("button").removeAttr("disabled");
+            })
+
+            // 在这里点击时既会触发按钮的点击事件，又会触发input元素的blur事件，经过测试二者会先触发blur事件
+            $("button").on("click", function () {
+                var formData = $("form").serializeArray();
+                var params = new Object();
+                $.each(formData, function () {
+                    params[this.name] = this.value;
+                });
+
+                CheckPassword();
+                $.ajax({
+                    url: '@Url.Action("CreateUser", "LogIn")',
+                    type: 'POST',
+                    async: false,
+                    data: params,
+                    timeout: 5000,
+                    dataType: 'json',
+                    success: function (data, textStatus, jqXHR) {
+                        if (data.stateCode === 1) {
+                            $("input").val("");
+                            $("#alertModal").find(".modal-body").text("");
+                            $("#alertModal").find(".modal-body").text("注册成功，正在跳转...");
+                            $('#alertModal').modal('show');
+                            // 错误的写法，这种写法表示立即执行
+                            // setTimeout(Redirect(), 2000);
+                            // 正确的写法
+                            setTimeout(Redirect, 2000);
+                        }
+                        else if (data.stateCode === 2) {
+                            $("#alertModal").find(".modal-body").text("");
+                            $("#alertModal").find(".modal-body").text("该邮箱已经注册，请更换邮箱重新注册！");
+                            $('#alertModal').modal('show');
+                        }
+                        else if (data.stateCode === 3) {
+                            $("#alertModal").find(".modal-body").text("");
+                            $("#alertModal").find(".modal-body").text("该手机号码已经注册，请更换号码重新注册！");
+                            $('#alertModal').modal('show');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
