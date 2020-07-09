@@ -63,6 +63,22 @@ namespace Wulikunkun.StockStatistic
         {
             string requestParams = "{\"api_name\": \"daily\", \"token\": \"e1bcce57a2b55596f167e114d298e8ebc6e95d2f5385937fd00f09d9\", \"params\": {\"ts_code\":\"" + ts_code + "\",\"start_date\":\"20200101\",\"end_date\":\"20200117\"}}";
             RequestResult requestResult = RequestData(requestParams);
+            using (StockContext context = new StockContext())
+            {
+                IList<ExchangeCalendar> exchangeCalendars = new List<ExchangeCalendar>();
+                foreach (List<string> list in requestResult.Data.Items)
+                {
+                    ExchangeCalendar exchangeCalendar = new ExchangeCalendar()
+                    {
+                        Exchange = list[0],
+                        Cal_Date = list[1],
+                        Is_Open = list[2].Equals("1") ? true : false
+                    };
+                    exchangeCalendars.Add(exchangeCalendar);
+                }
+                context.ExchangeCalendars.AddRange(exchangeCalendars);
+                context.SaveChanges();
+            }
         }
 
         public static void SyncTradeCalendar()
