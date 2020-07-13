@@ -1,6 +1,6 @@
 ﻿@{
-Layout = null;
-ViewData["Title"] = "LogIn Page";
+    Layout = null;
+    ViewData["Title"] = "LogIn Page";
 }
 
 <!DOCTYPE html>
@@ -11,11 +11,11 @@ ViewData["Title"] = "LogIn Page";
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
         body {
             font-family: "Ink Free";
-            background: #dae8fa;
+            background: linear-gradient(45deg, #ddf6ff 50%, transparent 50%);
             box-shadow: inset 0 0 10px 3px lavender;
         }
     </style>
@@ -24,17 +24,17 @@ ViewData["Title"] = "LogIn Page";
 <body>
     <div class="container vh-100">
         <div class="row h-100">
-            <div class="col-md-6 col-sm-10 mx-auto my-auto px-5 pb-2 pt-4 border"
-                style="border-color:#d2dbe4 !important">
+            <div class="col-md-6 col-sm-10 mx-auto my-auto px-5 pb-2 pt-4 rounded-sm shadow-sm">
 
                 <!-- Modal -->
                 <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                    aria-hidden="true">
+                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content border-0 rounded-sm pb-3 pt-0">
                             <div class="modal-header border-0">
                                 <h5 class="modal-title text-secondary" id="exampleModalLabel"
-                                    style="font-size: .95rem;">提示
+                                    style="font-size: .95rem;">
+                                    提示
                                 </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
@@ -55,60 +55,36 @@ ViewData["Title"] = "LogIn Page";
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">Email<span class="text-danger">&nbsp;*</span></label>
                             <input type="email" name="Email" class="form-control" id="inputEmail4" placeholder="Email"
-                                required="required">
+                                   required="required">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="user_phone">Phone<span class="text-danger">&nbsp;*</span></label>
                             <input type="text" class="form-control" id="user_phone" name="Phone"
-                                placeholder="Enter your phone number" required="required">
+                                   placeholder="Enter your phone number" required="required">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputAddress">Username<span class="text-danger">&nbsp;*</span></label>
                         <input type="text" class="form-control" id="inputAddress" placeholder="set your user name"
-                            name="Username" required="required">
+                               name="Username" required="required">
                     </div>
 
                     <div class="form-group">
                         <label for="user_password">Password<span class="text-danger">&nbsp;*</span></label>
                         <input type="password" class="form-control" name="password" placeholder="Enter your password"
-                            required="required" minlength="10" />
+                               required="required" minlength="10" />
                     </div>
 
                     <div class="form_group">
-                        <label for="confirm_user_password">Confirm Password<span
-                                class="text-danger">&nbsp;*</span></label>
+                        <label for="confirm_user_password">
+                            Confirm Password<span class="text-danger">&nbsp;*</span>
+                        </label>
                         <input type="password" class="form-control" name="passwordAgain"
-                            placeholder="Enter your password again" required="required" minlength="10" />
+                               placeholder="Enter your password again" required="required" minlength="10" />
                     </div>
 
-                    <div class="form-group">
-                        <label for="inputAddress2">Address</label>
-                        <input type="text" class="form-control" id="inputAddress2" name="Address"
-                            placeholder="Apartment, studio, or floor">
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputCity">Age</label>
-                            <input type="text" class="form-control" id="inputCity" name="Age">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputState">Gender</label>
-                            <select id="inputState" class="form-control" name="Gender">
-                                <option selected>Choose...</option>
-                                <option value="Man">Man</option>
-                                <option value="Women">Women</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" name="Zip">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
+                    <div class="form-group mt-2">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="gridCheck">
                             <label class="form-check-label" for="gridCheck">
@@ -121,7 +97,9 @@ ViewData["Title"] = "LogIn Page";
                         <div class="row">
                             <div class="col-12">
                                 <button type="submit" class="btn btn-primary w-50 mx-auto w-100"
-                                    onclick="return false">Sign in</button>
+                                        onclick="return false">
+                                    Sign in
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -134,8 +112,8 @@ ViewData["Title"] = "LogIn Page";
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
 
     <script>
         $(function () {
