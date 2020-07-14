@@ -21,7 +21,15 @@
             crossorigin="anonymous"></script>
 
     <link href="~/lib/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet" />
+    <style>
+        .card-title {
+            font-size: 1rem;
+        }
 
+        .card-text {
+            font-size: 13.5px;
+        }
+    </style>
 </head>
 
 <body>
@@ -68,8 +76,8 @@
             </div>
             <!-- 想让溢出的部分显示为滚动条，必须给母元素设置设置一个高度 -->
             <div class="col-9 bg-light vh-100 overflow-auto position-relative px-5">
-                <div class="card w-75 min-vh-100 my-5 rounded-0 p-4 border-0 shadow-sm mx-auto">
-                    <div class="btn-group w-25 bg-white" role="group">
+                <div class="card min-vh-100 my-5 rounded-0 p-4 border-0 shadow-sm mx-auto" style="width:210mm;min-width:210mm">
+                    <div class="btn-group btn-group-sm w-25 bg-white" role="group">
                         <button type="button"
                                 class="btn btn-light border text-secondary font-weight-light">
                             Left
@@ -83,39 +91,39 @@
                             Right
                         </button>
                     </div>
-                    <div class="card-body" style="letter-spacing: .04rem;font-family: '宋体';">
+                    <div class="card-body" style="font-family: '宋体';">
                         <h3 class="card-title text-center font-weight-bold mb-0 pb-4">
                             基于装置艺术的叙事表达研究
                         </h3>
-                        <h4 class="card-title mb-0 py-3 text-primary font-weight-bold">诚信声明</h4>
-                        <p class="card-text py-1">
+                        <h5 class="card-title mb-0 py-3 text-primary font-weight-bold">诚信声明</h5>
+                        <p class="card-text py-1 text-muted">
                             本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <p class="card-text pb-2">
+                        <p class="card-text pb-2 text-muted">
                             本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <h4 class="card-title mb-0 py-3 text-primary font-weight-bold">授权说明</h4>
-                        <p class="card-text pb-2">
+                        <h5 class="card-title mb-0 py-3 text-primary font-weight-bold">授权说明</h5>
+                        <p class="card-text pb-2 text-muted">
                             本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <h4 class="card-title mb-0 py-3 text-primary font-weight-bold">引言</h4>
-                        <p class="card-text py-1">
+                        <h5 class="card-title mb-0 py-3 text-primary font-weight-bold">引言</h5>
+                        <p class="card-text py-1 text-muted">
                             本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <p class="card-text py-1">
+                        <p class="card-text py-1 text-muted">
                             本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <p class="card-text pb-2">
+                        <p class="card-text pb-2 text-muted">
                             本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <h4 class="card-title mb-0 py-3 text-primary font-weight-bold">正文</h4>
-                        <p class="card-text py-1">
+                        <h5 class="card-title mb-0 py-3 text-primary font-weight-bold">正文</h5>
+                        <p class="card-text py-1 text-muted">
                             本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <p class="card-text py-1">
+                        <p class="card-text py-1 text-muted">
                             本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
-                        <p class="card-text pb-2">
+                        <p class="card-text pb-2 text-muted">
                             本人系本作品的唯一作者（第一作者），即著作权人。论文中除了特别加以标注引用和致谢的部分外，不包含其他人已经发表或撰写的研究成果，不包含他人为获得中央美术学院及其他教育机构学位所撰写的研究成果。与我一同工作的同学对本研究所做的任何贡献均已在论文中作了明确的说明并表示了谢意。
                         </p>
                     </div>
