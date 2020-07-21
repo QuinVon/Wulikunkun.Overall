@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "CKTest";
+    ViewData["Title"] = "编辑页面";
     Layout = null;
 }
 
@@ -14,8 +14,7 @@
 
 <body class="m-0">
     <div class="container-fluid p-2">
-        @using (Html.BeginForm("Edit", "Home"))
-        {
+   
             <textarea id="editor1" name="editContent">
 		&lt;p&gt;We are delighted to welcome you to the annual &lt;em&gt;Flavorful Tuscany Meetup&lt;/em&gt; and hope you will enjoy the programme as well as your stay at the Bilancino Hotel.&lt;/p&gt;
 		&lt;p&gt;Please find below the full schedule of the event.&lt;/p&gt;
@@ -51,8 +50,6 @@
 		&lt;p&gt;&lt;strong&gt;Event Manager&lt;/strong&gt;&lt;/p&gt;
 		&lt;p&gt;&lt;strong&gt;Bilancino Hotel&lt;/strong&gt;&lt;/p&gt;
 	</textarea>
-            <button class="btn btn-primary btn-sm mt-4 ml-2" type="submit">Submit</button>
-        }
 
     </div>
     <script>
@@ -72,7 +69,7 @@
                 { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
                 { name: 'insert', items: ['Image', 'Table'] },
                 { name: 'tools', items: ['Maximize'] },
-                { name: 'editing', items: ['Scayt'] }
+                { name: 'editing', items: ['submitbutton','Scayt'] }
             ],
 
             // Since we define all configuration options here, let's instruct CKEditor to not load config.js which it does by default.
