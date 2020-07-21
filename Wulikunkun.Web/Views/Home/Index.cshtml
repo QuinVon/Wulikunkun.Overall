@@ -1,7 +1,11 @@
 ﻿@{
     ViewData["Title"] = "主页";
 }
-
+<style>
+    input::-webkit-input-placeholder {
+        font-size: .5rem;
+    }
+</style>
 <!-- 中间图片滚动区域 -->
 <div id="carouselExampleIndicators" class="carousel slide pb-3" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -259,7 +263,7 @@
                     <form class="text-muted">
                         <div class="form-group">
                             <label for="email_input" style="font-size: .88rem;">账户邮箱:</label>
-                            <input type="email" class="form-control" placeholder="邮箱 / 密码 / 手机号码" id="email_input" style="font-size:.88rem" />
+                            <input type="email" class="form-control small" placeholder="邮箱 / 密码 / 手机号码" id="email_input" style="font-size:.88rem" />
                         </div>
                         <div class="form-group">
                             <label for="password_input" style="font-size:.88rem">

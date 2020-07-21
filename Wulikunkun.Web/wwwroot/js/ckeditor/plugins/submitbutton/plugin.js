@@ -2,7 +2,6 @@
     icons: 'submitbutton',
     init: function (editor) {
         $("input[type='submit']").hide();
-
         editor.addCommand('insertTimestamp', {
             exec: function (editor) {
                 $("input[type='submit']").click();

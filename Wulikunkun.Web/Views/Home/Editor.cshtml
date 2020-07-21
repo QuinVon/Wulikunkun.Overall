@@ -59,13 +59,13 @@ to make sure that the registration process goes as smoothly as possible.&lt;/p&g
 &lt;p&gt;&lt;strong&gt;Event Manager&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Bilancino Hotel&lt;/strong&gt;&lt;/p&gt;
 	        </textarea>
-            <input type="submit"  />
+            <input type="submit" />
         }
     </div>
 
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script>
-
+        var windowHeight = $(window).height()-90;
         CKEDITOR.replace('editor1', {
             // Define the toolbar: https://ckeditor.com/docs/ckeditor4/latest/features/toolbar.html
 
@@ -81,7 +81,7 @@ to make sure that the registration process goes as smoothly as possible.&lt;/p&g
                 { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
                 { name: 'insert', items: ['Image', 'Table'] },
                 { name: 'tools', items: ['Maximize'] },
-                { name: 'editing', items: ['submitbutton','Scayt'] }
+                { name: 'editing', items: ['Scayt','submitbutton'] }
             ],
 
             // Since we define all configuration options here, let's instruct CKEditor to not load config.js which it does by default.
@@ -112,7 +112,7 @@ to make sure that the registration process goes as smoothly as possible.&lt;/p&g
             // filebrowserUploadUrl: 'http://example.com/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
             /*********************** File management support ***********************/
 
-            height: '989',
+            height: windowHeight,
             //uiColor: "#B9E1F7",
 
             // An array of stylesheets to style the WYSIWYG area.
@@ -168,6 +168,12 @@ to make sure that the registration process goes as smoothly as possible.&lt;/p&g
                 { name: 'Square Bulleted List', element: 'ul', styles: { 'list-style-type': 'square' } }
             ]
         });
+
+        window.onresize = function () {
+            var onTimeHeight = $(window).height() - 90;
+            debugger;
+            CKEDITOR.config.height = onTimeHeight;
+        };
     </script>
 </body>
 </html>
