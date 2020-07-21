@@ -38,7 +38,7 @@ namespace Wulikunkun.Web
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddDbContext<WangKunDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WangKunDatabase")));
 
