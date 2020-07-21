@@ -1,15 +1,16 @@
 ﻿CKEDITOR.plugins.add('submitbutton', {
     icons: 'submitbutton',
     init: function (editor) {
-        debugger;
+        $("input[type='submit']").hide();
+
         editor.addCommand('insertTimestamp', {
             exec: function (editor) {
-                var now = new Date();
-                editor.insertHtml('The current date and time is: <em>' + now.toString() + '</em>');
+                $("input[type='submit']").click();
             }
         });
+
         editor.ui.addButton('submitbutton', {
-            label: 'Insert Timestamp',
+            label: '点击我进行提交',
             command: 'insertTimestamp',
             toolbar: 'editing',
             icon: this.path + 'icons/submitbutton.png'  // icon file (PNG)
