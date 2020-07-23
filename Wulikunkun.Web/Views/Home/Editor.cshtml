@@ -81,7 +81,7 @@ to make sure that the registration process goes as smoothly as possible.&lt;/p&g
                 { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote'] },
                 { name: 'insert', items: ['Image', 'Table'] },
                 { name: 'tools', items: ['Maximize'] },
-                { name: 'editing', items: ['Scayt','submitbutton'] }
+                { name: 'editing', items: ['Scayt','submitbutton','markdown'] }
             ],
 
             // Since we define all configuration options here, let's instruct CKEditor to not load config.js which it does by default.
@@ -98,7 +98,7 @@ to make sure that the registration process goes as smoothly as possible.&lt;/p&g
             extraAllowedContent: 'img[width,height,align]',
 
             // Enabling extra plugins, available in the full-all preset: https://ckeditor.com/cke4/presets-all
-            extraPlugins: 'tableresize,uploadimage,uploadfile,submitbutton',
+            extraPlugins: 'tableresize,uploadimage,uploadfile,submitbutton,markdown',
             //在启用uploadFile插件之后一定要配置这里的uploadUrl，否则页面控制台会报异常
             uploadUrl:'@Url.Action("Upload")',
 
@@ -171,7 +171,6 @@ to make sure that the registration process goes as smoothly as possible.&lt;/p&g
 
         window.onresize = function () {
             var onTimeHeight = $(window).height() - 90;
-            debugger;
             CKEDITOR.config.height = onTimeHeight;
         };
     </script>
