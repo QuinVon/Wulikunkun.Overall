@@ -119,7 +119,7 @@
 
 .editormd-menu {
   margin: 0;
-  padding: 0;
+  padding-left: 10px;
   list-style: none;
 }
 .editormd-menu > li {
