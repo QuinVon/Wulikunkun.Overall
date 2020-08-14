@@ -5,30 +5,38 @@
 }
 
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
     @*要想让CkEditor在手机端自适应下面这样代码必须*@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>Document Editor</title>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/home/editor.md/css/editormd.css" rel="stylesheet" />
+ 
 </head>
 
-<body class="m-0">
-    <div class="container-fluid p-2">
+<body class="m-0 min-vh-100">
+
+    <div class="container-fluid p-2 min-vh-100">
         <div id="editor">
-            <textarea></textarea>
+            <textarea style="display:none"></textarea>
         </div>
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/home/editor.md/src/editormd.js"></script>
     <script>
         $(function () {
             var editor = editormd("editor", {
+                height: "1000px",
                 path: "editor.md/lib/"
             })
         });
     </script>
 </body>
+
 </html>
