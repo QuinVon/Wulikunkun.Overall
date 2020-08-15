@@ -3353,8 +3353,8 @@
 }
 
 .markdown-body code {
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  font-size: 12px;
+  font-family: Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace !important;
+  font-size: 12.5px !important;
 }
 
 .markdown-body pre {
@@ -3912,28 +3912,28 @@
 /*! Pretty printing styles. Used with prettify.js. */
 /* SPAN elements with the classes below are added by prettyprint. */
 .pln {
-  color: #000;
+  color: #cac7c7;
 }
 
 /* plain text */
 @media screen {
   .str {
-    color: #080;
+    color: #b87ec6;
   }
 
   /* string content */
   .kwd {
-    color: #008;
+    color: #cc99cd;
   }
 
   /* a keyword */
   .com {
-    color: #800;
+    color: #008857;
   }
 
   /* a comment */
   .typ {
-    color: #606;
+    color: #75d4f9;
   }
 
   /* a type name */
@@ -4045,7 +4045,7 @@ li.L3,
 li.L5,
 li.L7,
 li.L9 {
-    background: #f6f6f6;
+    background: #2d2d2d;
 }
 
 .editormd-preview-container pre.prettyprint, .editormd-html-preview pre.prettyprint {
@@ -4053,6 +4053,7 @@ li.L9 {
     border: 1px solid #f5efef;
     white-space: pre-wrap;
     word-wrap: break-word;
+    background-color: #2d2d2d;
 }
 .editormd-preview-container ol.linenums, .editormd-html-preview ol.linenums {
   color: #999;
