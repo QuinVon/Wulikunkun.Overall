@@ -3,9 +3,7 @@
     var $ = jQuery; // if using module loader(Require.js/Sea.js).
     exports.postbutton = function () {};
     exports.fn.postbutton = function () {
-      debugger;
       $("i.fa.fa-paper-plane").click(function () {
-        debugger;
         $("form").submit();
       });
     };
