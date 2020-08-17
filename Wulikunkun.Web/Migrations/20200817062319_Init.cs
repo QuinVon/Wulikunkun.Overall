@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using MySql.Data.EntityFrameworkCore.Metadata;
 
-namespace Wulikunkun.Web.Migrations
+namespace Web.Migrations
 {
-    public partial class initiate : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +13,7 @@ namespace Wulikunkun.Web.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
                     Email = table.Column<string>(maxLength: 256, nullable: false),
                     Age = table.Column<string>(nullable: true),
                     Password = table.Column<string>(maxLength: 256, nullable: false),

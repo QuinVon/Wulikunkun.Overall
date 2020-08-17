@@ -40,7 +40,7 @@ namespace Wulikunkun.Web
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            services.AddDbContext<WangKunDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("WangKunDatabase")));
+            services.AddDbContext<WangKunDbContext>(options => options.UseMySQL(Configuration.GetConnectionString("WangKunDatabase")));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
