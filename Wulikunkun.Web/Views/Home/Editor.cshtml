@@ -25,8 +25,9 @@
     <div class="container-fluid p-2 min-vh-100" style="background-color:#f0f8ff">
         @using(Html.BeginForm("Edit","Home"))
         {
-        <div id="editor">
-            <textarea name="editContent"></textarea>
+        <div class="editormd" id="editor">
+            <textarea class="editormd-markdown-textarea" name="markdownDoc"></textarea>
+            <textarea class="editormd-html-textarea" name="htmlCode"></textarea>
         </div>
         }
     </div>
@@ -40,6 +41,7 @@
                 toolbarIcons:function(){
                     return editormd.toolbarModes.full.concat(['postbutton']);
                 },
+                saveHTMLToTextarea : true,
                 toolbarIconsClass:{
                     postbutton:"fa-paper-plane"
                 },

@@ -57,7 +57,7 @@ namespace Wulikunkun.Web.Controllers
             return View();
         }
 
-        public void Edit(string editContent)
+        public void Edit(string markdownDoc, string htmlCode)
         {
 
         }
