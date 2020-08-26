@@ -682,7 +682,7 @@
 .editormd .CodeMirror {
     z-index: 10;
     float: left;
-    border-right: .5px solid #efebeb;
+    border-right: .5px dotted #d9d8d8;
     font-size: 14px;
     font-family: "YaHei Consolas Hybrid", Consolas, "微软雅黑", "Meiryo UI", "Malgun Gothic", "Segoe UI", "Trebuchet MS", Helvetica, "Monaco", courier, monospace;
     line-height: 1.6;
