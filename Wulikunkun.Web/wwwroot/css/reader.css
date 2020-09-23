@@ -52,3 +52,13 @@ a:hover {
 .custom-gray-border {
   border-top: 1px solid gray;
 }
+
+/* 倒角 */
+.custom-large-radius {
+  border-radius: 50%;
+}
+
+/* 宽度 */
+.custom-w-40 {
+  width: 40%;
+}

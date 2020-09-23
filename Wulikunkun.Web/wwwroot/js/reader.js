@@ -20,14 +20,14 @@
         '<div class="col-3 vh-100 overflow-auto position-relative px-2 left-panel custom-scroll custom-font"></div>'
       ),
       $leftPanelTopBar: $(
-        '<div class="w-100 px-2 text-muted py-2 border-bottom border-light"><i class="fa fa-angle-left text-black-50" aria-hidden="true"></i><a class="float-right text-black-50 small" href="#">返 回</a></div>'
+        '<div class="w-100 px-2 text-muted py-3 border-bottom border-light"><i class="fa fa-angle-left text-black-50" aria-hidden="true"></i><a class="float-right text-black-50 small" href="#">返 回</a></div>'
       ),
       $leftPanelCover: $(
-        '<img src="' +
+        '<div class="mt-5"><img src="' +
           this.settings.coverUrl +
-          '" class="w-50 d-block p-2 mx-auto my-2" />'
+          '" class="d-block p-2 mx-auto my-2 custom-large-radius custom-w-40"/></div>'
       ),
-      $leftPanelNavContainer: $('<nav class="nav-bar px-3"></nav>'),
+      $leftPanelNavContainer: $('<nav class="nav-bar px-3 mt-5"></nav>'),
       $rightPanel: $(
         '<div class="col-9 custom-light-panel-bg vh-100 overflow-auto position-relative px-5 rounded-lg custom-font"><div class="min-vh-100 my-5 p-5 border-0 shadow-sm mx-auto rounded-sm bg-white" style="width:210mm;min-width:210mm"><div class="overflow-hidden"><span class="border-bottom border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-bottom float-right" style="width:1.5rem;height:1.5rem"></span></div><div class="card px-4 py-4 border-0"></div></div></div>'
       ),
@@ -42,9 +42,7 @@
       this.initEvents();
     },
     initStyle: function () {
-      
       /* 倒序加载DOM */
-      debugger;
       var $hTagDoms =
         this.$domData.filter("h1,h2,h3,h4,h5,h6").length == 0
           ? this.$domData.find("h1,h2,h3,h4,h5,h6")
