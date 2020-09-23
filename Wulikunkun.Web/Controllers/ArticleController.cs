@@ -8,5 +8,10 @@ namespace Wulikunkun.Web.Controllers
         {
             return View();
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
 }
