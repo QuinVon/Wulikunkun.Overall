@@ -4,13 +4,17 @@
 <style>
 
     /*覆盖bootstrap默认的样式*/
-    .nav-link {
-        color: #495057;
+    .col-9.border-left .nav-link {
+        color: rgba(0,0,0,.5) !important;
     }
 
-        .nav-link.active {
+        .col-9.border-left .nav-link.active {
             color: #007bff !important;
         }
+
+    .table td, .table th {
+        border: 0 !important;
+    }
 </style>
 
 <div class="row my-4">
@@ -31,33 +35,46 @@
                         <table class="table table-striped mt-2">
                             <thead>
                                 <tr>
-                                    <th scope="col" class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">编号</th>
+                                    <th scope="col" class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">编号</th>
                                     <th scope="col" class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">文章名称</th>
-                                    <th scope="col" class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">浏览量</th>
+                                    <th scope="col" class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">浏览量</th>
                                     <th scope="col" class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">发布时间</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <th scope="row" class="text-secondary font-weight-light custom-table-font-size">1</th>
+                                    <th scope="row" class="text-secondary font-weight-light text-center custom-table-font-size">1</th>
                                     <td class="text-secondary font-weight-lighter custom-table-font-size">为什么不能作弊</td>
-                                    <td class="text-secondary font-weight-light custom-table-font-size">Otto</td>
+                                    <td class="text-secondary font-weight-light text-center custom-table-font-size">24</td>
                                     <td class="text-secondary font-weight-light custom-table-font-size">mdo</td>
                                 </tr>
                                 <tr>
-                                    <th class="text-secondary font-weight-lighter custom-table-font-size" scope="row">2</th>
+                                    <th class="text-secondary font-weight-lighter  text-center custom-table-font-size" scope="row">2</th>
                                     <td class="text-secondary font-weight-lighter custom-table-font-size">Jacob</td>
-                                    <td class="text-secondary font-weight-lighter custom-table-font-size">Thornton</td>
+                                    <td class="text-secondary font-weight-lighter text-center custom-table-font-size">8</td>
                                     <td class="text-secondary font-weight-lighter custom-table-font-size">fat</td>
                                 </tr>
                                 <tr>
-                                    <th scope="row" class="text-secondary font-weight-lighter custom-table-font-size">3</th>
+                                    <th scope="row" class="text-secondary font-weight-lighter text-center custom-table-font-size">3</th>
                                     <td class="text-secondary font-weight-lighter custom-table-font-size">Larry</td>
-                                    <td class="text-secondary font-weight-lighter custom-table-font-size">the Bird</td>
+                                    <td class="text-secondary font-weight-lighter text-center custom-table-font-size">92</td>
                                     <td class="text-secondary font-weight-lighter custom-table-font-size">twitter</td>
                                 </tr>
                             </tbody>
                         </table>
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
                     <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
