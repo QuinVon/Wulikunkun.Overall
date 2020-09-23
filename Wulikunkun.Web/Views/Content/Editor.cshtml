@@ -16,14 +16,14 @@
     <title>Document Editor</title>
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/home/editor.md/css/editormd.css" rel="stylesheet" />
+    <link href="~/content/editor.md/css/editormd.css" rel="stylesheet" />
  
 </head>
 
 <body class="m-0 min-vh-100">
 
     <div class="container-fluid p-2 min-vh-100" style="background-color:#f0f8ff">
-        @using(Html.BeginForm("Edit","Home"))
+        @using(Html.BeginForm("Edit","Content"))
         {
         <div class="editormd" id="editor">
             <textarea class="editormd-markdown-textarea" name="markdownDoc"></textarea>
@@ -32,7 +32,7 @@
         }
     </div>
 
-    <script src="~/home/editor.md/src/editormd.js"></script>
+    <script src="~/content/editor.md/src/editormd.js"></script>
     <script>
         $(function () {
             var editor = editormd("editor", {
