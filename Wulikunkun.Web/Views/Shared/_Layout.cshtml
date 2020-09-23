@@ -17,9 +17,10 @@
     </style>
     <link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
     <link href="~/lib/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet" />
+    <link href="~/css/custom.css" rel="stylesheet" />
 </head>
 
-<body class="mt-0">
+<body class="mt-0 min-vh-100">
     <!-- 手机端顶部 -->
     <div class="d-sm-none container-fluid text-primary bg-primary pt-5 border-bottom-0 position-relative mb-4 "
          style="font-size: 1.5rem;height: 11rem; background: linear-gradient(to left, #00c6ff, #0072ff)">
@@ -113,7 +114,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">主页 <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="@Url.ActionLink("Index","Home")">主页 <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">连接占位</a>
