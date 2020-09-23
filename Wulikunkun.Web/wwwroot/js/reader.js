@@ -14,7 +14,7 @@
 
     this.components = {
       $container: $(
-        "<div class='container-fluid'><div class='row' id='container'></div></div>"
+        "<div class='container-fluid'><div class='row p-1' id='container'></div></div>"
       ),
       $leftPanel: $(
         '<div class="col-3 vh-100 overflow-auto position-relative px-2 left-panel custom-scroll custom-font"></div>'

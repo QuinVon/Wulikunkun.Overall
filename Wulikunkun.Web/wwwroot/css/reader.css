@@ -62,3 +62,7 @@ a:hover {
 .custom-w-40 {
   width: 40%;
 }
+
+body::-webkit-scrollbar {
+  display: none;
+}
