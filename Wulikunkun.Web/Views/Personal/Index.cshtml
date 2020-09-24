@@ -20,7 +20,7 @@
 <div class="row my-4" data-name="middle-content">
     <div class="col-3">
         <div class="px-5 text-center">
-            <img src="/imgs/Profile.JPG" class="custom-large-radius custom-w-40"/>
+            <img src="/imgs/Profile.JPG" class="custom-large-radius custom-w-40" />
         </div>
         <div class="text-center mt-3">
             <label class="small text-muted">我很拽</label>
@@ -119,13 +119,13 @@
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
     /* 动态设置个人首页的高度，使其能够撑起页面 */
-    function SetHeight(){
-$("div[data-name='middle-content']").css("min-height",$(window).height()-400);
-
+    function SetHeight() {
+        $("div[data-name='middle-content']").css("min-height", $(window).height() - 400);
     }
-    $(function(){
+
+    $(function () {
         SetHeight();
-        $(window).on("resize",function(){
+        $(window).on("resize", function () {
             SetHeight();
         })
     });

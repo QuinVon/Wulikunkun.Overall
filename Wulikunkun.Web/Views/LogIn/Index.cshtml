@@ -45,7 +45,7 @@
                     </div>
                 </div>
 
-                <form>
+                <form id="submitForm">
                     <div class="form-row">
                         <h4 class="text-secondary">欢迎注册!</h4>
                     </div>
@@ -53,20 +53,18 @@
                     <div class="form-row mt-3">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">邮箱<span class="text-danger">&nbsp;*</span></label>
-                            <input type="email" name="email" class="form-control border-light" id="inputEmail4" placeholder="邮箱"
-                                   required="required">
+                            <input type="email" name="email" class="form-control border-light" id="inputEmail4" placeholder="邮箱">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="user_phone">手机<span class="text-danger">&nbsp;*</span></label>
                             <input type="text" class="form-control border-light" id="user_phone" name="phone"
-                                   placeholder="手机" required="required">
+                                   placeholder="手机">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputAddress">用户名<span class="text-danger">&nbsp;*</span></label>
-                        <input type="text" class="form-control border-light" id="inputAddress" placeholder="输入您的用户名"
-                               name="username" required="required">
+                        <input type="text" class="form-control border-light" id="inputAddress" placeholder="输入您的用户名"                               name="username">
                     </div>
 
                     <div class="form-group">
@@ -95,8 +93,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary w-50 mx-auto w-100"
-                                        onclick="return false">
+                                <button type="submit" class="btn btn-primary w-50 mx-auto w-100">
                                     Sign in
                                 </button>
                             </div>
@@ -141,7 +138,7 @@
             })
 
             // 在这里点击时既会触发按钮的点击事件，又会触发input元素的blur事件，经过测试二者会先触发blur事件
-            $("button").on("click", function () {
+            $("#submitForm").on("submit", function () {
                 var formData = $("form").serializeArray();
                 var params = new Object();
                 $.each(formData, function () {
@@ -152,7 +149,6 @@
                 $.ajax({
                     url: '@Url.Action("CreateUser", "LogIn")',
                     type: 'POST',
-                    async: false,
                     data: params,
                     timeout: 5000,
                     dataType: 'json',

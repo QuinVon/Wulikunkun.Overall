@@ -8,7 +8,8 @@ namespace Wulikunkun.Web.Models
         public int Id { get; set; }
         [MaxLength(256)]
         public string Title { get; set; }
-        public string Content { get; set; }
+        public string MarkContent { get; set; }
+        public string HtmlContent { get; set; }
         public DateTime PublishTime { get; set; }
         public byte Tag { get; set; }
 

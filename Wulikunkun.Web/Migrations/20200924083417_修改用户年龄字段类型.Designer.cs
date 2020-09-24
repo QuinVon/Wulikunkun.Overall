@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wulikunkun.Web.Models;
 
 namespace Web.Migrations
 {
     [DbContext(typeof(WangKunDbContext))]
-    partial class WangKunDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200924083417_修改用户年龄字段类型")]
+    partial class 修改用户年龄字段类型
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

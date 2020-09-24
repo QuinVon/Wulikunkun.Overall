@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wulikunkun.Web.Models;
 
 namespace Web.Migrations
 {
     [DbContext(typeof(WangKunDbContext))]
-    partial class WangKunDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200924081423_add_markcontent_to_article")]
+    partial class add_markcontent_to_article
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,7 +96,7 @@ namespace Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<sbyte?>("Age")
+                    b.Property<sbyte>("Age")
                         .HasColumnType("smallint");
 
                     b.Property<string>("Email")

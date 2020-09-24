@@ -18,12 +18,13 @@ namespace Wulikunkun.Web.Models
 
     public class User
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
         [MaxLength(256)]
         public string Email { get; set; }
-        public sbyte Age { get; set; }
+        public sbyte? Age { get; set; }
 
         [Required]
         [MaxLength(256)]
