@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Title</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/custom.css" />
     <style>
         body {
             font-family: "宋体";
@@ -53,32 +54,32 @@
                     <div class="form-row mt-3">
                         <div class="form-group col-md-6">
                             <label for="inputEmail4">邮箱<span class="text-danger">&nbsp;*</span></label>
-                            <input type="email" name="email" class="form-control border-light" id="inputEmail4" placeholder="邮箱">
+                            <input type="email" name="email" class="form-control border-light custom-tab-font-size" id="inputEmail4" placeholder="邮箱">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="user_phone">手机<span class="text-danger">&nbsp;*</span></label>
-                            <input type="text" class="form-control border-light" id="user_phone" name="phone"
+                            <input type="text" class="form-control border-light custom-tab-font-size" id="user_phone" name="phone"
                                    placeholder="手机">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="inputAddress">用户名<span class="text-danger">&nbsp;*</span></label>
-                        <input type="text" class="form-control border-light" id="inputAddress" placeholder="输入您的用户名"                               name="username">
+                        <input type="text" class="form-control border-light custom-tab-font-size" id="inputAddress" placeholder="输入您的用户名" name="username">
                     </div>
 
                     <div class="form-group">
                         <label for="user_password">密码<span class="text-danger">&nbsp;*</span></label>
-                        <input type="password" class="form-control border-light" name="password" placeholder="输入您的密码"
-                               required="required" minlength="10" />
+                        <input type="password" class="form-control border-light custom-tab-font-size" name="password" placeholder="输入您的密码"
+                               minlength="10" />
                     </div>
 
                     <div class="form_group">
                         <label for="confirm_user_password">
                             确认密码<span class="text-danger">&nbsp;*</span>
                         </label>
-                        <input type="password" class="form-control border-light" name="passwordAgain"
-                               placeholder="请再次输入您的密码" required="required" minlength="10" />
+                        <input type="password" class="form-control border-light custom-tab-font-size" name="passwordAgain"
+                               placeholder="请再次输入您的密码" minlength="10" />
                     </div>
 
                     <div class="form-group mt-2">
@@ -93,7 +94,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary w-50 mx-auto w-100">
+                                <button type="button" class="btn btn-primary w-50 mx-auto w-100">
                                     Sign in
                                 </button>
                             </div>
@@ -138,7 +139,14 @@
             })
 
             // 在这里点击时既会触发按钮的点击事件，又会触发input元素的blur事件，经过测试二者会先触发blur事件
-            $("#submitForm").on("submit", function () {
+            $("button[type='button']").on("click", function () {
+                $("input").each(function(index,item){
+                    var $target=$(this);
+                    if($target.val().trim()===""){
+$target.attr("placeholder","*请填写该字段");
+return false;
+                    }
+                });
                 var formData = $("form").serializeArray();
                 var params = new Object();
                 $.each(formData, function () {
