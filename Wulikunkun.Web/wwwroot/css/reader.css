@@ -13,6 +13,12 @@ a:hover {
   font-family: "Noto Serif SC", serif;
 }
 
+.custom-p-font {
+  font-size: 0.88rem;
+  line-height: 1.5rem;
+  text-indent: 2rem;
+}
+
 /*自定义滚动条  */
 .custom-scroll::-webkit-scrollbar {
   width: 5px;

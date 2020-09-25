@@ -29,7 +29,7 @@
       ),
       $leftPanelNavContainer: $('<nav class="nav-bar px-3 mt-5"></nav>'),
       $rightPanel: $(
-        '<div class="col-9 custom-light-panel-bg vh-100 overflow-auto position-relative px-5 rounded-lg custom-font"><div class="min-vh-100 my-5 p-5 border-0 shadow-sm mx-auto rounded-sm bg-white" style="width:210mm;min-width:210mm"><div class="overflow-hidden"><span class="border-bottom border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-bottom float-right" style="width:1.5rem;height:1.5rem"></span></div><div class="card px-4 py-4 border-0"></div></div></div>'
+        '<div class="col-9 custom-light-panel-bg vh-100 overflow-auto position-relative px-5 rounded-lg"><div class="min-vh-100 my-5 p-5 border-0 shadow-sm mx-auto rounded-sm bg-white" style="width:210mm;min-width:210mm"><div class="overflow-hidden"><span class="border-bottom border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-bottom float-right" style="width:1.5rem;height:1.5rem"></span></div><div class="card px-4 py-4 border-0"></div></div></div>'
       ),
     };
 
