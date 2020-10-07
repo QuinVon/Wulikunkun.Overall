@@ -7,11 +7,11 @@ namespace Wulikunkun.Utility
     {
         public static void Send(string address, string title, string content)
         {
-            string sendAccount = "wulikunkun@outlook.com";
+            string sendAccount = "QuinVon@outlook.com";
             string authorizeCode = "wangkun8899!";
             string receiver = address;
             MailMessage message = new MailMessage();
-            MailAddress sendAddress = new MailAddress("wulikunkun@outlook.com");
+            MailAddress sendAddress = new MailAddress("QuinVon@outlook.com");
             message.From = sendAddress;
             message.To.Add(receiver);
             message.Subject = title;

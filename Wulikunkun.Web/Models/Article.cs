@@ -12,7 +12,7 @@ namespace Wulikunkun.Web.Models
         public string HtmlContent { get; set; }
         public DateTime PublishTime { get; set; }
         public byte Tag { get; set; }
-
+        public int ViewTimes { get; set; }
         public virtual int UserId { get; set; }
         public virtual User User { get; set; }
 

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wulikunkun.Web.Models;
 
 namespace Web.Migrations
 {
     [DbContext(typeof(WangKunDbContext))]
-    partial class WangKunDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201007075739_添加文章查看次数词字段")]
+    partial class 添加文章查看次数词字段
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
