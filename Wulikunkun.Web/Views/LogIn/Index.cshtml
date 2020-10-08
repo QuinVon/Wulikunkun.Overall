@@ -58,13 +58,13 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputAddress">用户名<span class="text-danger">&nbsp;*</span></label>
-                        <input type="text" class="form-control border-light custom-tab-font-size" id="inputAddress" placeholder="用户名" name="username" data-container="body" data-toggle="popover" data-placement="right" data-content="仅支持数字，中英文字符及下划线，最小长度6位，最大长度12位">
+                        <input type="text" class="form-control border-light custom-tab-font-size" id="inputAddress" placeholder="用户名" name="username" maxlength="12" data-container="body" data-toggle="popover" data-placement="right" data-content="仅支持数字，中英文字符及下划线，最小长度6位，最大长度12位">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="user_password">密码<span class="text-danger">&nbsp;*</span></label>
-                    <input type="password" class="form-control border-light custom-tab-font-size" name="password" placeholder="密码" data-container="body" data-toggle="popover" data-placement="right" data-content="英文字符，数字，特殊符号的组合，长度不少于8位" minlength="8"/>
+                    <input type="password" class="form-control border-light custom-tab-font-size" name="password" placeholder="密码" minlength="16" data-container="body" data-toggle="popover" data-placement="right" data-content="英文字符，数字，特殊符号的组合，长度不少于8位，不多于16位" />
                 </div>
 
                 <div class="form_group">
@@ -106,8 +106,7 @@
         $(function () {
 
             $('[data-toggle="popover"]').popover({
-trigger:"focus",
-offset:10
+trigger:"focus"
             });
              
             function CheckPassword() {
