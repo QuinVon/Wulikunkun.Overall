@@ -58,14 +58,13 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputAddress">用户名<span class="text-danger">&nbsp;*</span></label>
-                        <input type="text" class="form-control border-light custom-tab-font-size" id="inputAddress" placeholder="支持中英文字符，数字及下划线，长度不超过12位" name="username">
+                        <input type="text" class="form-control border-light custom-tab-font-size" id="inputAddress" placeholder="用户名" name="username" data-container="body" data-toggle="popover" data-placement="right" data-content="仅支持数字，中英文字符及下划线，最小长度6位，最大长度12位">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="user_password">密码<span class="text-danger">&nbsp;*</span></label>
-                    <input type="password" class="form-control border-light custom-tab-font-size" name="password" placeholder="英文字符，数字，特殊符号的组合，长度不少于8位"
-                           minlength="10"/>
+                    <input type="password" class="form-control border-light custom-tab-font-size" name="password" placeholder="密码" data-container="body" data-toggle="popover" data-placement="right" data-content="英文字符，数字，特殊符号的组合，长度不少于8位" minlength="8"/>
                 </div>
 
                 <div class="form_group">
@@ -100,15 +99,17 @@
     </div>
 </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
-
+<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script>
         $(function () {
 
+            $('[data-toggle="popover"]').popover({
+trigger:"focus",
+offset:10
+            });
+             
             function CheckPassword() {
                 var passwordOne = $("input[name='password']").val().trim();
                 var passwordTwo = $("input[name='passwordAgain']").val().trim();
@@ -137,8 +138,8 @@
                 $("input").each(function(index,item){
                     var $target=$(this);
                     if($target.val().trim()===""){
-$target.attr("placeholder","*请填写该字段");
-return false;
+                        $target.attr("placeholder","*请填写该字段");
+                        return false;
                     }
                 });
                 var formData = $("form").serializeArray();
@@ -179,7 +180,7 @@ return false;
                 });
             });
         });
-    </script>
+ </script>
 </body>
 
 </html>

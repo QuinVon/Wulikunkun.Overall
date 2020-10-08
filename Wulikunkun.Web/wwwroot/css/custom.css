@@ -1,22 +1,26 @@
 ﻿/*字体*/
 .custom-input-font-size {
-  font-size: 0.7rem;
+    font-size: 0.7rem;
+}
+
+.custom-input-font-size-sm {
+    font-size: 0.7rem;
 }
 
 .custom-table-font-size {
-  font-size: 0.8rem;
+    font-size: 0.8rem;
 }
 
 .custom-tab-font-size {
-  font-size: 0.85rem;
+    font-size: 0.85rem;
 }
 
 /* 自定义宽度 */
 .custom-w-40 {
-  width: 40%;
+    width: 40%;
 }
 
 /* 倒角 */
 .custom-large-radius {
-  border-radius: 50%;
+    border-radius: 50%;
 }
