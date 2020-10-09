@@ -1,20 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using System;
 using System.Linq;
-using Wulikunkun.Web.Models;
+using System.Security.Cryptography;
+using System.Text;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Wulikunkun.Web.Models;
 
 namespace Wulikunkun.Web.Controllers
 {
     public class LogInController : Controller
     {
-        private readonly WangKunDbContext dbContext;
         private readonly ILogger<LogInController> _logger;
+        private readonly WangKunDbContext dbContext;
 
         public LogInController(ILogger<LogInController> logger, WangKunDbContext wangKunDbContext)
         {
-            this.dbContext = wangKunDbContext;
+            dbContext = wangKunDbContext;
             _logger = logger;
         }
 
@@ -22,6 +24,7 @@ namespace Wulikunkun.Web.Controllers
         {
             return View();
         }
+
         public JsonResult CreateUser(User user)
         {
             object result = null;
@@ -35,6 +38,7 @@ namespace Wulikunkun.Web.Controllers
                 };
                 return Json(result);
             }
+
             if (dbContext.Users.Any(item => item.Phone.Equals(user.Phone)))
             {
                 result = new
@@ -44,10 +48,11 @@ namespace Wulikunkun.Web.Controllers
                 };
                 return Json(result);
             }
-            string salt = Guid.NewGuid().ToString();
-            byte[] passwordAndSaltBytes = System.Text.Encoding.UTF8.GetBytes(user.Password + salt);
-            byte[] hashBytes = new System.Security.Cryptography.SHA256Managed().ComputeHash(passwordAndSaltBytes);
-            string hashString = Convert.ToBase64String(hashBytes);
+
+            var salt = Guid.NewGuid().ToString();
+            var passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + salt);
+            var hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
+            var hashString = Convert.ToBase64String(hashBytes);
             user.Password = hashString;
             user.RegisterTime = DateTime.Now;
             user.Salt = salt;
@@ -60,9 +65,8 @@ namespace Wulikunkun.Web.Controllers
                 StateCode = 1
             };
             HttpContext.Session.SetString("username", user.Email);
-            JsonResult jsonResult = Json(result);
+            var jsonResult = Json(result);
             return jsonResult;
         }
-
     }
 }
