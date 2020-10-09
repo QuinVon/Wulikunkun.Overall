@@ -24,7 +24,7 @@
 <body>
 <div class="container vh-100">
     <div class="row h-100">
-        <div class="col-md-6 col-sm-10 mx-auto my-auto px-5 pb-2 pt-5 rounded-sm" style="border:1px solid lightcyan">
+        <div class="col-md-6 col-sm-10 mx-auto my-auto px-5 pb-2 pt-5 rounded-sm" style="border: 1px solid lightcyan">
 
             <!-- Modal -->
             <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -103,28 +103,28 @@
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
-        $(function () {
+    $(function() {
 
-            $('[data-toggle="popover"]').popover({
-                trigger: "focus"
-            });
+        $('[data-toggle="popover"]').popover({
+            trigger: "focus"
+        });
 
-            function CheckPassword() {
-                var passwordOne = $("input[name='password']").val().trim();
-                var passwordTwo = $("input[name='passwordAgain']").val().trim();
-                if (passwordOne !== passwordTwo) {
-                    return false;
-                }
-                else {
-                    return true;
-                }
+        function CheckPassword() {
+            var passwordOne = $("input[name='password']").val().trim();
+            var passwordTwo = $("input[name='passwordAgain']").val().trim();
+            if (passwordOne !== passwordTwo) {
+                return false;
+            } else {
+                return true;
             }
+        }
 
-            function Redirect() {
-                window.location.href = "/Home/Index";
-            }
+        function Redirect() {
+            window.location.href = "/Home/Index";
+        }
 
-            $("input[name='passwordAgain']").bind('input propertychange', function () {
+        $("input[name='passwordAgain']").bind('input propertychange',
+            function() {
                 var checkResult = CheckPassword();
                 if (!checkResult)
                     $("button").attr("disabled", "disabled");
@@ -132,49 +132,49 @@
                     $("button").removeAttr("disabled");
             })
 
-            // 在这里点击时既会触发按钮的点击事件，又会触发input元素的blur事件，经过测试二者会先触发blur事件
-            $("button[type='button']").on("click", function () {
-                $("input").each(function (index, item) {
+        // 在这里点击时既会触发按钮的点击事件，又会触发input元素的blur事件，经过测试二者会先触发blur事件
+        $("button[type='button']").on("click",
+            function() {
+                $("input").each(function(index, item) {
                     var $target = $(this);
-                    // debugger;
-                    // if ($target.val().trim() === "") {
-                    //     $target.attr("placeholder", "*请填写该字段");
-                    //     return false;
-                    // }
                     debugger;
-                                        var inputName = $target.attr("name"),value=$target.val();
-                    
-var emailReg = /^\w+([-+.]\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ig;
-                var nameReg = /^[a-zA-Z1-9_]{6,12}$/ig;
-                var passwordReg = /^.*(?=.{8,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@@#$%^&*? ]).*$/ig;
-                
+                    if ($target.val().trim() === "") {
+                        $target.attr("placeholder", "*请填写该字段");
+                        return false;
+                    }
+                    debugger;
+                    var inputName = $target.attr("name"), value = $target.val();
+
+                    var emailReg = /^\w+([-+.]\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ig;
+                    var nameReg = /^[a-zA-Z1-9_]{6,12}$/ig;
+                    var passwordReg = /^.*(?=.{8,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@@#$%^&*? ]).*$/ig;
+
                     switch (inputName) {
-                        case "email":
-                            if (!emailReg.test(value)){
-                                $target.popover("show");
-                                }
-                            break;
-                            case "username":
-                                if (!nameReg.test(value)){
-                                    $target.popover("show");
-                                    }
-                                break;
-                                case "password":
-                                    if (!passwordReg.test(value)){
-                                        $target.popover("show");
-                                        }
-                                    break;
+                    case "email":
+                        if (!emailReg.test(value)) {
+                            $target.popover("show");
+                        }
+                        break;
+                    case "username":
+                        if (!nameReg.test(value)) {
+                            $target.popover("show");
+                        }
+                        break;
+                    case "password":
+                        if (!passwordReg.test(value)) {
+                            $target.popover("show");
+                        }
+                        break;
                     }
                 });
-
-                
 
 
                 var formData = $("form").serializeArray();
                 var params = {};
-                $.each(formData, function () {
-                    params[this.name] = this.value;
-                });
+                $.each(formData,
+                    function() {
+                        params[this.name] = this.value;
+                    });
 
                 CheckPassword();
                 $.ajax({
@@ -183,7 +183,7 @@ var emailReg = /^\w+([-+.]\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ig;
                     data: params,
                     timeout: 5000,
                     dataType: 'json',
-                    success: function (data, textStatus, jqXHR) {
+                    success: function(data, textStatus, jqXHR) {
                         if (data.stateCode === 1) {
                             $("input").val("");
                             $("#alertModal").find(".modal-body").text("");
@@ -193,13 +193,11 @@ var emailReg = /^\w+([-+.]\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ig;
                             // setTimeout(Redirect(), 2000);
                             // 正确的写法
                             setTimeout(Redirect, 2000);
-                        }
-                        else if (data.stateCode === 2) {
+                        } else if (data.stateCode === 2) {
                             $("#alertModal").find(".modal-body").text("");
                             $("#alertModal").find(".modal-body").text("该邮箱已经注册，请更换邮箱重新注册！");
                             $('#alertModal').modal('show');
-                        }
-                        else if (data.stateCode === 3) {
+                        } else if (data.stateCode === 3) {
                             $("#alertModal").find(".modal-body").text("");
                             $("#alertModal").find(".modal-body").text("该手机号码已经注册，请更换号码重新注册！");
                             $('#alertModal').modal('show');
@@ -207,8 +205,8 @@ var emailReg = /^\w+([-+.]\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ig;
                     }
                 });
             });
-        });
-    </script>
+    });
+</script>
 </body>
 
 </html>
