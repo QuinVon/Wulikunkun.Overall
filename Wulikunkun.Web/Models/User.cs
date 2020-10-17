@@ -24,11 +24,11 @@ namespace Wulikunkun.Web.Models
         public sbyte? Age { get; set; }
         [Required] [MaxLength(256)] public string Password { get; set; }
         [Required] [MaxLength(256)] public string Salt { get; set; }
-        [Required] public int Phone { get; set; }
+        public int Phone { get; set; }
         [MaxLength(256)] public string Province { get; set; }
         [MaxLength(256)] public string School { get; set; }
         [Required] public DateTime RegisterTime { get; set; }
-        [Required] public int ActiveCode { get; set; }
+        public int ActiveCode { get; set; }
         [Required] public bool IsActive { get; set; }
         [Required] public Role UserRole { get; set; }
         public IEnumerable<Article> Articles { get; set; }

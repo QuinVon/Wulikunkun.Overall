@@ -52,6 +52,7 @@ namespace Wulikunkun.Web.Controllers
             user.RegisterTime = DateTime.Now;
             user.Salt = salt;
             user.UserRole = Role.CommonUser;
+            user.IsActive = false;
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
             result = new
