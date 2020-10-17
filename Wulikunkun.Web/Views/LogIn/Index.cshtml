@@ -161,7 +161,6 @@
 
         $("input").on("blur",
             function(e) {
-                debugger;
                 CheckFormData(e);
             });
 
@@ -170,13 +169,10 @@
             function() {
                 $("input").each(function(index, item) {
                     var $target = $(this);
-                    debugger;
                     if ($target.val().trim() === "") {
                         $target.attr("placeholder", "*请填写该字段");
                         return false;
                     }
-                    debugger;
-
                 });
 
                 var formData = $("form").serializeArray();
