@@ -72,7 +72,7 @@
                         确认密码<span class="text-danger">&nbsp;*</span>
                     </label>
                     <input type="password" class="form-control border-light custom-tab-font-size" name="passwordAgain"
-                           placeholder="请再次输入您的密码" minlength="10" autocomplete="off"/>
+                           placeholder="请再次输入您的密码" minlength="10" autocomplete="off" data-container="body" data-placement="right" data-content="两次输入的密码不一致"/>
                 </div>
 
                 <div class="form-group mt-2">
@@ -99,7 +99,7 @@
     </div>
 </div>
 
-<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script type="text/javascript">
@@ -144,16 +144,19 @@
             case "email":
                 if (!emailReg.test(value)) {
                     $target.popover("show");
+                    return false;
                 }
                 break;
             case "username":
                 if (!nameReg.test(value)) {
                     $target.popover("show");
+                    return false;
                 }
                 break;
             case "password":
                 if (!passwordReg.test(value)) {
                     $target.popover("show");
+                    return false;
                 }
                 break;
             }
@@ -183,8 +186,9 @@
                     });
 
                 CheckPassword();
-                $.ajax({
-                    url: "/LogIn/CreateUser",
+                debugger;
+                $.post({
+                    url: '@Url.Action("CreateUser","LogIn")',
                     type: 'POST',
                     data: params,
                     timeout: 5000,
@@ -205,9 +209,14 @@
                             $('#alertModal').modal('show');
                         } else if (data.stateCode === 3) {
                             $("#alertModal").find(".modal-body").text("");
-                            $("#alertModal").find(".modal-body").text("该手机号码已经注册，请更换号码重新注册！");
+                            $("#alertModal").find(".modal-body").text("当前用户名已经注册，请更换用户名重新注册！");
                             $('#alertModal').modal('show');
                         }
+                    },
+                    error: function (xhr, textStatus) {
+                        console.log('错误', xhr.responseText);
+                        console.log(xhr);
+                        console.log(textStatus);
                     }
                 });
             });

@@ -39,17 +39,10 @@ namespace Wulikunkun.Web.Controllers
                 };
                 return Json(result);
             }
-
-            if (dbContext.Users.Any(item => item.Phone.Equals(user.Phone)))
+            else if (dbContext.Users.Any(item => item.Name == user.Name))
             {
-                result = new
-                {
-                    Message = "该手机已经注册！",
-                    StateCode = 3
-                };
-                return Json(result);
+                return Json(new {StatusCode = 3});
             }
-
 
             var salt = Guid.NewGuid().ToString();
             var passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + salt);

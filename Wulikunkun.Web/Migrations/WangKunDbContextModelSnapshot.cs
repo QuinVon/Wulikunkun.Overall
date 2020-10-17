@@ -111,6 +111,11 @@ namespace Web.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("varchar(32)")
+                        .HasMaxLength(32);
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("varchar(256)")
