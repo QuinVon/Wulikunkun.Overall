@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.AspNetCore.Http;
@@ -48,6 +49,7 @@ namespace Wulikunkun.Web.Controllers
                 };
                 return Json(result);
             }
+
 
             var salt = Guid.NewGuid().ToString();
             var passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + salt);

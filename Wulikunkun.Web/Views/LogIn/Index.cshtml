@@ -72,7 +72,7 @@
                         确认密码<span class="text-danger">&nbsp;*</span>
                     </label>
                     <input type="password" class="form-control border-light custom-tab-font-size" name="passwordAgain"
-                           placeholder="请再次输入您的密码" minlength="10"  autocomplete="off"/>
+                           placeholder="请再次输入您的密码" minlength="10" autocomplete="off"/>
                 </div>
 
                 <div class="form-group mt-2">
@@ -123,14 +123,47 @@
             window.location.href = "/Home/Index";
         }
 
-        $("input[name='passwordAgain']").bind('input propertychange',
+        $("input[name='passwordAgain'],input[name='password']").bind('input propertychange',
             function() {
                 var checkResult = CheckPassword();
                 if (!checkResult)
                     $("button").attr("disabled", "disabled");
                 else
                     $("button").removeAttr("disabled");
-            })
+            });
+
+        function CheckFormData(e) {
+            $target = $(e.target);
+            var inputName = $target.attr("name"), value = $target.val();
+
+            var emailReg = /^\w+([-+.]\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ig;
+            var nameReg = /^[a-zA-Z0-9_]{6,12}$/ig;
+            var passwordReg = /^.*(?=.{8,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@@#$%^&*? ]).*$/ig;
+
+            switch (inputName) {
+            case "email":
+                if (!emailReg.test(value)) {
+                    $target.popover("show");
+                }
+                break;
+            case "username":
+                if (!nameReg.test(value)) {
+                    $target.popover("show");
+                }
+                break;
+            case "password":
+                if (!passwordReg.test(value)) {
+                    $target.popover("show");
+                }
+                break;
+            }
+        }
+
+        $("input").on("blur",
+            function(e) {
+                debugger;
+                CheckFormData(e);
+            });
 
         // 在这里点击时既会触发按钮的点击事件，又会触发input元素的blur事件，经过测试二者会先触发blur事件
         $("button[type='button']").on("click",
@@ -143,31 +176,8 @@
                         return false;
                     }
                     debugger;
-                    var inputName = $target.attr("name"), value = $target.val();
 
-                    var emailReg = /^\w+([-+.]\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ig;
-                    var nameReg = /^[a-zA-Z0-9_]{6,12}$/ig;
-                    var passwordReg = /^.*(?=.{8,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@@#$%^&*? ]).*$/ig;
-
-                    switch (inputName) {
-                    case "email":
-                        if (!emailReg.test(value)) {
-                            $target.popover("show");
-                        }
-                        break;
-                    case "username":
-                        if (!nameReg.test(value)) {
-                            $target.popover("show");
-                        }
-                        break;
-                    case "password":
-                        if (!passwordReg.test(value)) {
-                            $target.popover("show");
-                        }
-                        break;
-                    }
                 });
-
 
                 var formData = $("form").serializeArray();
                 var params = {};
