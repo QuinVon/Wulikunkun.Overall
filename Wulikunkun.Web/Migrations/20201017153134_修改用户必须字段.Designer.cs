@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Wulikunkun.Web.Models;
 
 namespace Web.Migrations
 {
     [DbContext(typeof(WangKunDbContext))]
-    partial class WangKunDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201017153134_修改用户必须字段")]
+    partial class 修改用户必须字段
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,7 +123,7 @@ namespace Web.Migrations
                         .HasColumnType("varchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<int?>("Phone")
+                    b.Property<int>("Phone")
                         .HasColumnType("int");
 
                     b.Property<string>("Province")

@@ -41,7 +41,7 @@ namespace Wulikunkun.Web.Controllers
             }
             else if (dbContext.Users.Any(item => item.Name == user.Name))
             {
-                return Json(new {StatusCode = 3});
+                return Json(new {StateCode = 3});
             }
 
             var salt = Guid.NewGuid().ToString();

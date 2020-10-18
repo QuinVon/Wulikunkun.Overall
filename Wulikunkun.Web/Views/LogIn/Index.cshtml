@@ -11,6 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Title</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link href="~/lib/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet"/>
     <link rel="stylesheet" href="/css/custom.css"/>
     <style>
         body {
@@ -29,11 +30,12 @@
             <!-- Modal -->
             <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content border-0 rounded-sm pb-3 pt-0">
-                        <div class="modal-header border-0">
+                        <div class="modal-header border-bottom border-light py-2">
                             <h5 class="modal-title text-secondary" id="exampleModalLabel"
                                 style="font-size: .95rem;">
+                                <i class="fa fa-info-circle text-info"></i>&nbsp;
                                 提示
                             </h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -186,9 +188,8 @@
                     });
 
                 CheckPassword();
-                debugger;
                 $.post({
-                    url: '@Url.Action("CreateUser","LogIn")',
+                    url: '@Url.Action("CreateUser", "LogIn")',
                     type: 'POST',
                     data: params,
                     timeout: 5000,
@@ -208,12 +209,13 @@
                             $("#alertModal").find(".modal-body").text("该邮箱已经注册，请更换邮箱重新注册！");
                             $('#alertModal').modal('show');
                         } else if (data.stateCode === 3) {
+                            debugger;
                             $("#alertModal").find(".modal-body").text("");
                             $("#alertModal").find(".modal-body").text("当前用户名已经注册，请更换用户名重新注册！");
                             $('#alertModal').modal('show');
                         }
                     },
-                    error: function (xhr, textStatus) {
+                    error: function(xhr, textStatus) {
                         console.log('错误', xhr.responseText);
                         console.log(xhr);
                         console.log(textStatus);
