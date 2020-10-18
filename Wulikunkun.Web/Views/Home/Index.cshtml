@@ -1,4 +1,7 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Mvc
+
+@{
     ViewData["Title"] = "主页";
 }
 <style>
@@ -307,7 +310,7 @@
 <div class="d-none d-md-block col-md-2 border-left">
     <div class="card rounded-sm">
         <div class="card-body">
-            @if (ViewBag.UserName != null)
+            @if (ViewBag.UserName!=null)
             {
                 <div>
                     Hello!<br/>
@@ -395,11 +398,15 @@
                 timeout: 5000,
                 dataType: 'json',
                 success: function(data, textStatus, jqXHR) {
-                    debugger;
                     if (data.statusCode === 1) {
                         $("#alertModal").find(".modal-body").text("");
                         $("#alertModal").find(".modal-body").text("登录成功！");
                         $('#alertModal').modal('show');
+                        setTimeout(function() {
+                                $('#alertModal').modal('hide');
+                                window.location.reload();
+                            },
+                            2000);
                     } else {
                         $("#alertModal").find(".modal-body").text("");
                         $("#alertModal").find(".modal-body").text("用户名或者密码错！");
