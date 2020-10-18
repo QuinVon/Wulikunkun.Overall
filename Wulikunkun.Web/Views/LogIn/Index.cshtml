@@ -66,7 +66,7 @@
 
                 <div class="form-group">
                     <label for="user_password">密码<span class="text-danger">&nbsp;*</span></label>
-                    <input type="password" class="form-control border-light custom-tab-font-size" name="password" placeholder="密码" minlength="16" autocomplete="off" data-container="body" data-toggle="popover" data-placement="right" data-content="至少包含一个大写英文字符，一个小写英文字符，一个数字，一个特殊符号，长度不少于8位"/>
+                    <input type="password" class="form-control border-light custom-tab-font-size" name="password" placeholder="密码" autocomplete="off" data-container="body" data-toggle="popover" data-placement="right" data-content="至少包含一个大写英文字符，一个小写英文字符，一个数字，一个特殊符号，长度不少于8位"/>
                 </div>
 
                 <div class="form_group">
@@ -74,7 +74,7 @@
                         确认密码<span class="text-danger">&nbsp;*</span>
                     </label>
                     <input type="password" class="form-control border-light custom-tab-font-size" name="passwordAgain"
-                           placeholder="请再次输入您的密码" minlength="10" autocomplete="off" data-container="body" data-placement="right" data-content="两次输入的密码不一致"/>
+                           placeholder="请再次输入您的密码" autocomplete="off" data-container="body" data-placement="right" data-content="两次输入的密码不一致"/>
                 </div>
 
                 <div class="form-group mt-2">
@@ -138,7 +138,7 @@
             $target = $(e.target);
             var inputName = $target.attr("name"), value = $target.val();
 
-            var emailReg = /^\w+([-+.]\w+)*@@\w+([-.]\w+)*\.\w+([-.]\w+)*$/ig;
+            var emailReg = /^\w+([\.\-]\w+)*\@@\w+([\.\-]\w+)*\.\w+$/ig;
             var nameReg = /^[a-zA-Z0-9_]{6,12}$/ig;
             var passwordReg = /^.*(?=.{8,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@@#$%^&*? ]).*$/ig;
 
@@ -147,18 +147,24 @@
                 if (!emailReg.test(value)) {
                     $target.popover("show");
                     return false;
+                } else {
+                    $target.popover("hide");
                 }
                 break;
             case "username":
                 if (!nameReg.test(value)) {
                     $target.popover("show");
                     return false;
+                } else {
+                    $target.popover("hide");
                 }
                 break;
             case "password":
                 if (!passwordReg.test(value)) {
                     $target.popover("show");
                     return false;
+                } else {
+                    $target.popover("hide");
                 }
                 break;
             }
