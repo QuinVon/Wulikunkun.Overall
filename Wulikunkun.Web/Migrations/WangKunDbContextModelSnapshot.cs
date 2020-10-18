@@ -29,6 +29,9 @@ namespace Web.Migrations
                     b.Property<string>("HtmlContent")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsAllowed")
+                        .HasColumnType("bit");
+
                     b.Property<string>("MarkContent")
                         .HasColumnType("text");
 

@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using System.Linq;
 using Wulikunkun.Web.Models;
 using Microsoft.AspNetCore.Http;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace Wulikunkun.Web.Controllers
 {
-
     public class HomeController : Controller
     {
         private readonly WangKunDbContext dbContext;
@@ -29,12 +32,29 @@ namespace Wulikunkun.Web.Controllers
                     ViewBag.UserName = username;
                 }
             }
+
             return View();
         }
 
-        public IActionResult LogIn()
+        public JsonResult LogIn(User user)
         {
-            return View();
+            User corrUser = dbContext.Users.FirstOrDefault(item => item.Name == user.Name);
+            string userSalt = corrUser.Salt;
+            var passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + userSalt);
+            var hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
+            var hashString = Convert.ToBase64String(hashBytes);
+            if (hashString == corrUser.Password)
+            {
+                return Json(new
+                {
+                    StatusCode = 1
+                });
+            }
+
+            return Json(new
+            {
+                StatusCode = 0
+            });
         }
 
         public IActionResult Admin()
@@ -59,10 +79,10 @@ namespace Wulikunkun.Web.Controllers
 
         public void Edit(string markdownDoc, string htmlCode)
         {
-
         }
 
         #region 框架自带代码
+
         public IActionResult Privacy()
         {
             return View();
@@ -71,8 +91,9 @@ namespace Wulikunkun.Web.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
+
         #endregion
 
         #region Swagger测试部分
@@ -121,6 +142,7 @@ namespace Wulikunkun.Web.Controllers
         {
             return $"Delete Num {id} info";
         }
+
         #endregion
     }
 }
