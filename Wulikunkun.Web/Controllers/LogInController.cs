@@ -73,8 +73,10 @@ namespace Wulikunkun.Web.Controllers
             return jsonResult;
         }
 
-        public ViewResult Verify(string userName)
+        public ViewResult Verify()
         {
+            string userName = Request.QueryString;
+
             return View();
         }
     }

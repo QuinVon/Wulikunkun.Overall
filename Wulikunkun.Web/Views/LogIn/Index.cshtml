@@ -198,7 +198,7 @@
                     url: '@Url.Action("CreateUser", "LogIn")',
                     type: 'POST',
                     data: params,
-                    timeout: 5000,
+                    timeout: 10000,
                     dataType: 'json',
                     success: function(data, textStatus, jqXHR) {
                         if (data.stateCode === 1) {
