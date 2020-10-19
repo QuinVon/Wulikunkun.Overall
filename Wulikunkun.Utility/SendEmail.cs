@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Mail;
 
 namespace Wulikunkun.Utility
@@ -8,7 +9,7 @@ namespace Wulikunkun.Utility
         public static void Send(string address, string title, string content)
         {
             string sendAccount = "QuinVon@outlook.com";
-            string authorizeCode = "wangkun8899!";
+            string authorizeCode = Environment.GetEnvironmentVariable("MailPassword", EnvironmentVariableTarget.User);
             string receiver = address;
             MailMessage message = new MailMessage();
             MailAddress sendAddress = new MailAddress("QuinVon@outlook.com");
@@ -16,6 +17,7 @@ namespace Wulikunkun.Utility
             message.To.Add(receiver);
             message.Subject = title;
             message.Body = content;
+            message.IsBodyHtml = true;
             SmtpClient client = new SmtpClient("smtp-mail.outlook.com", 25);
             client.Credentials = new NetworkCredential(sendAccount, authorizeCode);
             client.EnableSsl = true;

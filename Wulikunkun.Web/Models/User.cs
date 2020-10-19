@@ -12,7 +12,8 @@ namespace Wulikunkun.Web.Models
         VipUser,
         SuperVipUser,
         Admin,
-        SuperAdmin
+        SuperAdmin,
+        Forbidden
     }
 
 
@@ -28,7 +29,7 @@ namespace Wulikunkun.Web.Models
         [MaxLength(256)] public string Province { get; set; }
         [MaxLength(256)] public string School { get; set; }
         [Required] public DateTime RegisterTime { get; set; }
-        public int ActiveCode { get; set; }
+        public int? ActiveCode { get; set; }
         [Required] public bool IsActive { get; set; }
         [Required] public Role UserRole { get; set; }
         public IEnumerable<Article> Articles { get; set; }

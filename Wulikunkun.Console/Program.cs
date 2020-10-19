@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Mail;
+using Wulikunkun.Utility;
 
 namespace Wulikunkun.Console
 {
@@ -8,6 +9,8 @@ namespace Wulikunkun.Console
     {
         static void Main(string[] args)
         {
+            SendEmail.Send("wulikunkun@foxmail.com", "Test", "test");
+
             for (int i = 0; i < 10; i++)
             {
                 int randomNum = GenerageRandomCode();

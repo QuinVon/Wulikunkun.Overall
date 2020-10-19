@@ -204,18 +204,17 @@
                         if (data.stateCode === 1) {
                             $("input").val("");
                             $("#alertModal").find(".modal-body").text("");
-                            $("#alertModal").find(".modal-body").text("注册成功，正在跳转...");
+                            $("#alertModal").find(".modal-body").text("注册成功，请在两分钟内点击您邮箱中的链接激活账户，否则无法登陆！");
                             $('#alertModal').modal('show');
                             // 错误的写法，这种写法表示立即执行
                             // setTimeout(Redirect(), 2000);
                             // 正确的写法
-                            setTimeout(Redirect, 2000);
+                            setTimeout(Redirect, 3000);
                         } else if (data.stateCode === 2) {
                             $("#alertModal").find(".modal-body").text("");
                             $("#alertModal").find(".modal-body").text("该邮箱已经注册，请更换邮箱重新注册！");
                             $('#alertModal').modal('show');
                         } else if (data.stateCode === 3) {
-                            debugger;
                             $("#alertModal").find(".modal-body").text("");
                             $("#alertModal").find(".modal-body").text("当前用户名已经注册，请更换用户名重新注册！");
                             $('#alertModal').modal('show');

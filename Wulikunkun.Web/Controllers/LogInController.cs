@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Wulikunkun.Web.Models;
+using StackExchange.Redis;
+using Wulikunkun.Utility;
 
 namespace Wulikunkun.Web.Controllers
 {
@@ -14,6 +16,9 @@ namespace Wulikunkun.Web.Controllers
     {
         private readonly ILogger<LogInController> _logger;
         private readonly WangKunDbContext dbContext;
+        private static readonly ConnectionMultiplexer _multiplexer = ConnectionMultiplexer.Connect("localhost");
+        private static readonly IDatabase _redisDatabase = _multiplexer.GetDatabase();
+
 
         public LogInController(ILogger<LogInController> logger, WangKunDbContext wangKunDbContext)
         {
@@ -34,14 +39,13 @@ namespace Wulikunkun.Web.Controllers
             {
                 result = new
                 {
-                    Message = "该邮箱已经注册！",
                     StateCode = 2
                 };
                 return Json(result);
             }
-            else if (dbContext.Users.Any(item => item.Name == user.Name))
+            else if (dbContext.Users.Any(item => item.Name.Equals(user.Name)))
             {
-                return Json(new {StateCode = 3});
+                return Json(new { StateCode = 3 });
             }
 
             var salt = Guid.NewGuid().ToString();
@@ -55,14 +59,23 @@ namespace Wulikunkun.Web.Controllers
             user.IsActive = false;
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
+
+            _redisDatabase.StringSet(user.Name, salt);
+            _redisDatabase.KeyExpire(user.Name, TimeSpan.FromMinutes(2));
+            SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/>https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}<a href='https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}'></a>");
+
             result = new
             {
-                Message = "注册成功！",
                 StateCode = 1
             };
             HttpContext.Session.SetString("username", user.Email);
             var jsonResult = Json(result);
             return jsonResult;
+        }
+
+        public ViewResult Verify(string userName)
+        {
+            return View();
         }
     }
 }
