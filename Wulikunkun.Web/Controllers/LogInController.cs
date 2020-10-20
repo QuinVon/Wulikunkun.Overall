@@ -19,7 +19,6 @@ namespace Wulikunkun.Web.Controllers
         private static readonly ConnectionMultiplexer _multiplexer = ConnectionMultiplexer.Connect("localhost");
         private static readonly IDatabase _redisDatabase = _multiplexer.GetDatabase();
 
-
         public LogInController(ILogger<LogInController> logger, WangKunDbContext wangKunDbContext)
         {
             dbContext = wangKunDbContext;
@@ -33,25 +32,16 @@ namespace Wulikunkun.Web.Controllers
 
         public JsonResult CreateUser(User user)
         {
-            object result = null;
-
             if (dbContext.Users.Any(item => item.Email.Equals(user.Email)))
-            {
-                result = new
-                {
-                    StateCode = 2
-                };
-                return Json(result);
-            }
+                return Json(new { StateCode = 2 });
             else if (dbContext.Users.Any(item => item.Name.Equals(user.Name)))
-            {
                 return Json(new { StateCode = 3 });
-            }
 
-            var salt = Guid.NewGuid().ToString();
-            var passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + salt);
-            var hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
-            var hashString = Convert.ToBase64String(hashBytes);
+            string salt = Guid.NewGuid().ToString();
+            byte[] passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + salt);
+            byte[] hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
+            string hashString = Convert.ToBase64String(hashBytes);
+
             user.Password = hashString;
             user.RegisterTime = DateTime.Now;
             user.Salt = salt;
@@ -62,21 +52,32 @@ namespace Wulikunkun.Web.Controllers
 
             _redisDatabase.StringSet(user.Name, salt);
             _redisDatabase.KeyExpire(user.Name, TimeSpan.FromMinutes(2));
-            SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/>https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}<a href='https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}'></a>");
+            SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/><a href='https://localhost:5001/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}'>https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}</a>");
 
-            result = new
-            {
-                StateCode = 1
-            };
             HttpContext.Session.SetString("username", user.Email);
-            var jsonResult = Json(result);
+            var jsonResult = Json(new { StateCode = 1 });
             return jsonResult;
         }
 
-        public ViewResult Verify()
+        public ViewResult Verify(string userName, string activeCode)
         {
-            string userName = Request.QueryString;
+            if (string.IsNullOrEmpty(userName) || string.IsNullOrEmpty(activeCode)) Redirect(Url.Action("Index", "Home"));
+            else
+            {
+                string currActiveCode = _redisDatabase.StringGet(userName).ToString();
 
+                if (currActiveCode == activeCode)
+                {
+                    ViewBag.Info = "验证成功";
+                    User user = dbContext.Users.FirstOrDefault(item => item.Name == userName);
+                    if (user != null)
+                        user.IsActive = true;
+                    else
+                        ViewBag.Info = "验证链接参数有误，请重新获取！";
+                }
+                else if (currActiveCode == null || currActiveCode != activeCode)
+                    ViewBag.Info = "验证链接已经失效，请重新获取！";
+            }
             return View();
         }
     }
