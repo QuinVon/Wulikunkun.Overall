@@ -35,7 +35,24 @@ namespace Wulikunkun.Web
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            services.AddDbContext<WangKunDbContext>(options=>options.UseMySQL(Configuration.GetConnectionString("WangKunDatabase")));
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            try
+            {
+                string value = Environment.GetEnvironmentVariable("MySqlConnection", EnvironmentVariableTarget.User);
+                if (string.IsNullOrEmpty(value))
+                {
+                    logger.Info($"环境变量获取失败！");
+                }
+                else
+                {
+                    logger.Info($"环境变量获取成功，值为{value}");
+                }
+                services.AddDbContext<WangKunDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection", EnvironmentVariableTarget.User)));
+            }
+            catch (Exception ex)
+            {
+                logger.Error($"环境变量获取失败，失败原因为：{ex.Message}");
+            }
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
