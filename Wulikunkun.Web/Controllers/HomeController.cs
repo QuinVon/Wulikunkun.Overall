@@ -40,11 +40,13 @@ namespace Wulikunkun.Web.Controllers
         {
             User corrUser = dbContext.Users.FirstOrDefault(item => item.Name == user.Name);
 
-            if (user == null)
+            if (corrUser == null)
+            {
                 return Json(new
                 {
                     StatusCode = 0
                 });
+            }
 
             string userSalt = corrUser.Salt;
             var passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + userSalt);
