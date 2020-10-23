@@ -35,15 +35,7 @@ namespace Wulikunkun.Web
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-            try
-            {
-                services.AddDbContext<WangKunDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection")));
-            }
-            catch (Exception ex)
-            {
-                logger.Error($"环境变量获取失败，失败原因为：{ex.Message}");
-            }
+            services.AddDbContext<WangKunDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection")));
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
@@ -59,17 +51,10 @@ namespace Wulikunkun.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
-            if (env.IsProduction())
-            {
-                logger.Info("当前处于生产环境！");
-            }
+            app.UseExceptionHandler("/Home/Error");
+            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            app.UseHsts();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
