@@ -39,11 +39,18 @@ namespace Wulikunkun.Web.Controllers
         public JsonResult LogIn(User user)
         {
             User corrUser = dbContext.Users.FirstOrDefault(item => item.Name == user.Name);
+
+            if (user == null)
+                return Json(new
+                {
+                    StatusCode = 0
+                });
+
             string userSalt = corrUser.Salt;
             var passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + userSalt);
             var hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
             var hashString = Convert.ToBase64String(hashBytes);
-            HttpContext.Session.SetString("UserName",user.Name);
+            HttpContext.Session.SetString("UserName", user.Name);
             if (hashString == corrUser.Password)
             {
                 return Json(new
