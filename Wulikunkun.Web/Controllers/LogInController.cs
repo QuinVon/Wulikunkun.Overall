@@ -16,7 +16,7 @@ namespace Wulikunkun.Web.Controllers
     {
         private readonly ILogger<LogInController> _logger;
         private readonly WangKunDbContext dbContext;
-        private static readonly ConnectionMultiplexer _multiplexer = ConnectionMultiplexer.Connect($"localhost:6379,password={ Environment.GetEnvironmentVariable("RedisPassword", EnvironmentVariableTarget.User)}");
+        private static readonly ConnectionMultiplexer _multiplexer = ConnectionMultiplexer.Connect($"localhost:6379,password={ Environment.GetEnvironmentVariable("RedisPassword")}");
         private static readonly IDatabase _redisDatabase = _multiplexer.GetDatabase();
 
         public LogInController(ILogger<LogInController> logger, WangKunDbContext wangKunDbContext)

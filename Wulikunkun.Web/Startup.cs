@@ -38,16 +38,7 @@ namespace Wulikunkun.Web
             var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
             try
             {
-                string value = Environment.GetEnvironmentVariable("MySqlConnection", EnvironmentVariableTarget.User);
-                if (string.IsNullOrEmpty(value))
-                {
-                    logger.Info($"环境变量获取失败！");
-                }
-                else
-                {
-                    logger.Info($"环境变量获取成功，值为{value}");
-                }
-                services.AddDbContext<WangKunDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection", EnvironmentVariableTarget.User)));
+                services.AddDbContext<WangKunDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection")));
             }
             catch (Exception ex)
             {
@@ -73,6 +64,11 @@ namespace Wulikunkun.Web
                 app.UseExceptionHandler("/Home/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+            }
+            var logger = NLog.Web.NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            if (env.IsProduction())
+            {
+                logger.Info("当前处于生产环境！");
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();

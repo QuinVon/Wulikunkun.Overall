@@ -9,7 +9,7 @@ namespace Wulikunkun.Utility
         public static void Send(string address, string title, string content)
         {
             string sendAccount = "QuinVon@outlook.com";
-            string authorizeCode = Environment.GetEnvironmentVariable("MailPassword", EnvironmentVariableTarget.User);
+            string authorizeCode = Environment.GetEnvironmentVariable("MailPassword");
             string receiver = address;
             MailMessage message = new MailMessage();
             MailAddress sendAddress = new MailAddress("QuinVon@outlook.com");
