@@ -53,7 +53,6 @@ namespace Wulikunkun.Web.Controllers
             _redisDatabase.StringSet(user.Name, salt);
             _redisDatabase.KeyExpire(user.Name, TimeSpan.FromMinutes(2));
             SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/><a href='https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}'>https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}</a>");
-
             HttpContext.Session.SetString("username", user.Email);
             var jsonResult = Json(new { StateCode = 1 });
             return jsonResult;

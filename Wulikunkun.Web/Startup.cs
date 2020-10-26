@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Wulikunkun.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Web.Attributes;
 
 namespace Wulikunkun.Web
 {
@@ -33,6 +34,11 @@ namespace Wulikunkun.Web
                 options.Cookie.IsEssential = true;
             });
 
+            services.AddAuthentication(options =>
+            {
+                options.AddScheme<CustomAuthHandler>(CustomAuthHandler.ScheName, "default scheme");
+            });
+
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddDbContext<WangKunDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection")));
@@ -51,9 +57,12 @@ namespace Wulikunkun.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseExceptionHandler("/Home/Error");
-            // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-            app.UseHsts();
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
+            }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -71,12 +80,15 @@ namespace Wulikunkun.Web
             });
             app.UseRouting();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseAuthentication();
         }
     }
 }
