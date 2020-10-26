@@ -1,14 +1,14 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
-using System.Text;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Wulikunkun.Web.Models;
 using StackExchange.Redis;
+using System;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
 using Wulikunkun.Utility;
+using Wulikunkun.Web.Models;
 
 namespace Wulikunkun.Web.Controllers
 {
@@ -30,7 +30,7 @@ namespace Wulikunkun.Web.Controllers
             return View();
         }
 
-        public JsonResult CreateUser(User user)
+        public JsonResult CreateUserAsync(User user)
         {
             if (dbContext.Users.Any(item => item.Email.Equals(user.Email)))
                 return Json(new { StateCode = 2 });
@@ -50,9 +50,17 @@ namespace Wulikunkun.Web.Controllers
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
 
-            _redisDatabase.StringSet(user.Name, salt);
-            _redisDatabase.KeyExpire(user.Name, TimeSpan.FromMinutes(2));
-            SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/><a href='https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}'>https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}</a>");
+            SendmailAsync();
+            async void SendmailAsync()
+            {
+                await Task.Factory.StartNew(() =>
+                {
+                    _redisDatabase.StringSet(user.Name, salt);
+                    _redisDatabase.KeyExpire(user.Name, TimeSpan.FromMinutes(2));
+                    SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/><a href='https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}'>https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}</a>");
+                });
+            }
+
             HttpContext.Session.SetString("username", user.Email);
             var jsonResult = Json(new { StateCode = 1 });
             return jsonResult;

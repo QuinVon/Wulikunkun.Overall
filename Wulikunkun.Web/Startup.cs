@@ -80,9 +80,10 @@ namespace Wulikunkun.Web
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 c.RoutePrefix = "api";
             });
+
             app.UseRouting();
+            // app.UseAuthentication();
             app.UseAuthorization();
-            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
