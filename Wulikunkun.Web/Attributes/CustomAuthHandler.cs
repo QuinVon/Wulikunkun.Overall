@@ -15,7 +15,7 @@ namespace Web.Attributes
         HttpContext _context;
         AuthenticationScheme _authenticationScheme;
         WangKunDbContext _dbContext;
-        public const string ScheName = "CustomAuth";
+        public const string SchemeName = "CustomAuth";
 
         public CustomAuthHandler(WangKunDbContext wangKunDbContext)
         {
@@ -31,10 +31,11 @@ namespace Web.Attributes
                 {
                     new Claim("UserName",user.Name),
                     new Claim("IsActive",user.IsActive.ToString())
-                }, ScheName);
+                }, SchemeName);
                 ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
                 AuthenticationTicket authenticationTicket = new AuthenticationTicket(claimsPrincipal, _authenticationScheme.Name);
                 return Task.FromResult(AuthenticateResult.Success(authenticationTicket));
+
             }
             else
                 return Task.FromResult(AuthenticateResult.Fail("未登陆"));

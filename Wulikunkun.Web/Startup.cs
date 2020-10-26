@@ -36,7 +36,9 @@ namespace Wulikunkun.Web
 
             services.AddAuthentication(options =>
             {
-                options.AddScheme<CustomAuthHandler>(CustomAuthHandler.ScheName, "default scheme");
+                options.AddScheme<CustomAuthHandler>(CustomAuthHandler.SchemeName, "default scheme");
+                options.DefaultAuthenticateScheme = CustomAuthHandler.SchemeName;
+                options.DefaultChallengeScheme = CustomAuthHandler.SchemeName;
             });
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
@@ -80,6 +82,7 @@ namespace Wulikunkun.Web
             });
             app.UseRouting();
             app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
@@ -87,8 +90,6 @@ namespace Wulikunkun.Web
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            app.UseAuthentication();
         }
     }
 }
