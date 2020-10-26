@@ -17,6 +17,7 @@ namespace Web.Attributes
         WangKunDbContext _dbContext;
         public const string SchemeName = "CustomAuth";
 
+        /* 经过测试这里的数据库上下文可以成功注入 */
         public CustomAuthHandler(WangKunDbContext wangKunDbContext)
         {
             _dbContext = wangKunDbContext;
