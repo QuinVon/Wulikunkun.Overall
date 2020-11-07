@@ -34,13 +34,6 @@ namespace Wulikunkun.Web
                 options.Cookie.IsEssential = true;
             });
 
-            services.AddAuthentication(options =>
-            {
-                options.AddScheme<CustomAuthHandler>(CustomAuthHandler.SchemeName, "default scheme");
-                options.DefaultAuthenticateScheme = CustomAuthHandler.SchemeName;
-                options.DefaultChallengeScheme = CustomAuthHandler.SchemeName;
-            });
-
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
             services.AddDbContext<WangKunDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection")));
