@@ -74,8 +74,10 @@ namespace Wulikunkun.Web
                 c.RoutePrefix = "api";
             });
 
+            app.UseAuthentication();
             app.UseRouting();
             // app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
