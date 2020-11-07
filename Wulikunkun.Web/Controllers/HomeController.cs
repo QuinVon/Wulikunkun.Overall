@@ -7,17 +7,18 @@ using Wulikunkun.Web.Models;
 using Microsoft.AspNetCore.Http;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Identity;
 
 namespace Wulikunkun.Web.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly WangKunDbContext dbContext;
+        private readonly ApplicationDbContext dbContext;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, WangKunDbContext wangKunDbContext)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext ApplicationDbContext)
         {
-            this.dbContext = wangKunDbContext;
+            this.dbContext = ApplicationDbContext;
             _logger = logger;
         }
 
@@ -36,9 +37,9 @@ namespace Wulikunkun.Web.Controllers
             return View();
         }
 
-        public JsonResult LogIn(User user)
+        public JsonResult LogIn(ApplicationUser user)
         {
-            User corrUser = dbContext.Users.FirstOrDefault(item => item.Name == user.Name);
+            ApplicationUser corrUser = dbContext.Users.FirstOrDefault(item => item.UserName == user.UserName);
 
             if (corrUser == null)
             {
@@ -52,7 +53,7 @@ namespace Wulikunkun.Web.Controllers
             var passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + userSalt);
             var hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
             var hashString = Convert.ToBase64String(hashBytes);
-            HttpContext.Session.SetString("UserName", user.Name);
+            HttpContext.Session.SetString("UserName", user.UserName);
             if (hashString == corrUser.Password)
             {
                 return Json(new

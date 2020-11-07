@@ -15,7 +15,7 @@ namespace Wulikunkun.Web.Models
         public int ViewTimes { get; set; }
         public bool IsAllowed { get; set; }
         public virtual int UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public virtual int CategoryId { get; set; }
         public virtual Category Category { get; set; }

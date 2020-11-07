@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace Wulikunkun.Web.Models
 {
@@ -17,11 +18,12 @@ namespace Wulikunkun.Web.Models
     }
 
 
-    public class User
+    public class ApplicationUser:IdentityUser
     {
-        [Key] public int Id { get; set; }
-        [Required] [MaxLength(32)] public string Name { get; set; }
-        [Required] [MaxLength(256)] public string Email { get; set; }
+        // IdentityUser已经包含Id和Email，所以这里进行注释
+        // [Key] public int Id { get; set; }
+
+        // [Required] [MaxLength(256)] public string Email { get; set; }
         public sbyte? Age { get; set; }
         [Required] [MaxLength(256)] public string Password { get; set; }
         [Required] [MaxLength(256)] public string Salt { get; set; }

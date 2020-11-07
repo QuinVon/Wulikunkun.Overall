@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using StackExchange.Redis;
@@ -15,13 +16,13 @@ namespace Wulikunkun.Web.Controllers
     public class LogInController : Controller
     {
         private readonly ILogger<LogInController> _logger;
-        private readonly WangKunDbContext dbContext;
+        private readonly ApplicationDbContext dbContext;
         private static readonly ConnectionMultiplexer _multiplexer = ConnectionMultiplexer.Connect($"localhost:6379,password={ Environment.GetEnvironmentVariable("RedisPassword")}");
         private static readonly IDatabase _redisDatabase = _multiplexer.GetDatabase();
 
-        public LogInController(ILogger<LogInController> logger, WangKunDbContext wangKunDbContext)
+        public LogInController(ILogger<LogInController> logger, ApplicationDbContext ApplicationDbContext)
         {
-            dbContext = wangKunDbContext;
+            dbContext = ApplicationDbContext;
             _logger = logger;
         }
 
@@ -30,11 +31,11 @@ namespace Wulikunkun.Web.Controllers
             return View();
         }
 
-        public JsonResult CreateUserAsync(User user)
+        public JsonResult CreateUserAsync(ApplicationUser user)
         {
             if (dbContext.Users.Any(item => item.Email.Equals(user.Email)))
                 return Json(new { StateCode = 2 });
-            else if (dbContext.Users.Any(item => item.Name.Equals(user.Name)))
+            else if (dbContext.Users.Any(item => item.UserName.Equals(user.UserName)))
                 return Json(new { StateCode = 3 });
 
             string salt = Guid.NewGuid().ToString();
@@ -55,9 +56,9 @@ namespace Wulikunkun.Web.Controllers
             {
                 await Task.Factory.StartNew(() =>
                 {
-                    _redisDatabase.StringSet(user.Name, salt);
-                    _redisDatabase.KeyExpire(user.Name, TimeSpan.FromMinutes(2));
-                    SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/><a href='https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}'>https://www.wulikunkun.com/LogIn/Verify?UserName={user.Name}&ActiveCode={salt}</a>");
+                    _redisDatabase.StringSet(user.UserName, salt);
+                    _redisDatabase.KeyExpire(user.UserName, TimeSpan.FromMinutes(2));
+                    SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/><a href='https://www.wulikunkun.com/LogIn/Verify?UserName={user.UserName}&ActiveCode={salt}'>https://www.wulikunkun.com/LogIn/Verify?UserName={user.UserName}&ActiveCode={salt}</a>");
                 });
             }
 
@@ -76,7 +77,7 @@ namespace Wulikunkun.Web.Controllers
                 if (currActiveCode == activeCode)
                 {
                     ViewBag.Info = "验证成功";
-                    User user = dbContext.Users.FirstOrDefault(item => item.Name == userName);
+                    IdnentityUser user = dbContext.Users.FirstOrDefault(item => item.UserName == userName);
                     if (user != null)
                         user.IsActive = true;
                     else

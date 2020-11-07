@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Wulikunkun.Web.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace Wulikunkun.Web
 {
@@ -35,7 +36,10 @@ namespace Wulikunkun.Web
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
-            services.AddDbContext<WangKunDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection")));
+            
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
