@@ -8,16 +8,19 @@ using Microsoft.AspNetCore.Http;
 using System.Text;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
 
 namespace Wulikunkun.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ApplicationDbContext dbContext;
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext ApplicationDbContext)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext ApplicationDbContext, UserManager<ApplicationUser> userManager)
         {
+            this._userManager = userManager;
             this.dbContext = ApplicationDbContext;
             _logger = logger;
         }
@@ -39,7 +42,7 @@ namespace Wulikunkun.Web.Controllers
 
         public JsonResult LogIn(ApplicationUser user)
         {
-            ApplicationUser corrUser = dbContext.Users.FirstOrDefault(item => item.UserName == user.UserName);
+            ApplicationUser corrUser = _userManager.FindByNameAsync(user.UserName).Result;
 
             if (corrUser == null)
             {

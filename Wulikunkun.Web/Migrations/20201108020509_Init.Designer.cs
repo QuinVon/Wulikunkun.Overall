@@ -9,7 +9,7 @@ using Wulikunkun.Web.Models;
 namespace Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201107130710_Init")]
+    [Migration("20201108020509_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,7 +22,8 @@ namespace Web.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(36)")
+                        .HasMaxLength(36);
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -59,7 +60,7 @@ namespace Web.Migrations
 
                     b.Property<string>("RoleId")
                         .IsRequired()
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -71,13 +72,18 @@ namespace Web.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(36)")
+                        .HasMaxLength(36);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Email")
@@ -130,6 +136,8 @@ namespace Web.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -146,7 +154,7 @@ namespace Web.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -170,7 +178,7 @@ namespace Web.Migrations
 
                     b.Property<string>("UserId")
                         .IsRequired()
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -182,10 +190,10 @@ namespace Web.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("RoleId")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -197,7 +205,7 @@ namespace Web.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
                     b.Property<string>("UserId")
-                        .HasColumnType("varchar(767)");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("varchar(128)")
@@ -246,6 +254,9 @@ namespace Web.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId1")
+                        .HasColumnType("varchar(36)");
+
                     b.Property<int>("ViewTimes")
                         .HasColumnType("int");
 
@@ -253,7 +264,7 @@ namespace Web.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId1");
 
                     b.ToTable("Articles");
                 });
@@ -279,24 +290,22 @@ namespace Web.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("ApplicationUserId")
+                        .HasColumnType("varchar(36)");
+
                     b.Property<DateTime>("LogTime")
                         .HasColumnType("datetime");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Logs");
                 });
 
-            modelBuilder.Entity("Wulikunkun.Web.Models.User", b =>
+            modelBuilder.Entity("Wulikunkun.Web.Models.ApplicationUser", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<int?>("ActiveCode")
                         .HasColumnType("int");
@@ -304,18 +313,8 @@ namespace Web.Migrations
                     b.Property<sbyte?>("Age")
                         .HasColumnType("smallint");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("varchar(256)")
-                        .HasMaxLength(256);
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("varchar(32)")
-                        .HasMaxLength(32);
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -341,12 +340,7 @@ namespace Web.Migrations
                         .HasColumnType("varchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<int>("UserRole")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
+                    b.HasDiscriminator().HasValue("ApplicationUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -408,20 +402,16 @@ namespace Web.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Wulikunkun.Web.Models.User", "User")
+                    b.HasOne("Wulikunkun.Web.Models.ApplicationUser", "User")
                         .WithMany("Articles")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId1");
                 });
 
             modelBuilder.Entity("Wulikunkun.Web.Models.Log", b =>
                 {
-                    b.HasOne("Wulikunkun.Web.Models.User", "User")
+                    b.HasOne("Wulikunkun.Web.Models.ApplicationUser", null)
                         .WithMany("Logs")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ApplicationUserId");
                 });
 #pragma warning restore 612, 618
         }

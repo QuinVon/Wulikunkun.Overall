@@ -17,11 +17,13 @@ namespace Wulikunkun.Web.Controllers
     {
         private readonly ILogger<LogInController> _logger;
         private readonly ApplicationDbContext dbContext;
+        private readonly UserManager<ApplicationUser> _userManager;
         private static readonly ConnectionMultiplexer _multiplexer = ConnectionMultiplexer.Connect($"localhost:6379,password={ Environment.GetEnvironmentVariable("RedisPassword")}");
         private static readonly IDatabase _redisDatabase = _multiplexer.GetDatabase();
 
-        public LogInController(ILogger<LogInController> logger, ApplicationDbContext ApplicationDbContext)
+        public LogInController(ILogger<LogInController> logger, ApplicationDbContext ApplicationDbContext, UserManager<ApplicationUser> userManager)
         {
+            this._userManager = userManager;
             dbContext = ApplicationDbContext;
             _logger = logger;
         }
@@ -46,7 +48,7 @@ namespace Wulikunkun.Web.Controllers
             user.Password = hashString;
             user.RegisterTime = DateTime.Now;
             user.Salt = salt;
-            user.UserRole = Role.CommonUser;
+            // user.UserRole = Role.CommonUser;
             user.IsActive = false;
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
@@ -77,7 +79,8 @@ namespace Wulikunkun.Web.Controllers
                 if (currActiveCode == activeCode)
                 {
                     ViewBag.Info = "验证成功";
-                    IdnentityUser user = dbContext.Users.FirstOrDefault(item => item.UserName == userName);
+
+                    ApplicationUser user = _userManager.FindByNameAsync(userName).Result;
                     if (user != null)
                         user.IsActive = true;
                     else

@@ -7,18 +7,19 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Wulikunkun.Web.Models
 {
-    public enum Role
-    {
-        CommonUser,
-        VipUser,
-        SuperVipUser,
-        Admin,
-        SuperAdmin,
-        Forbidden
-    }
+    // 将自己设置角色注释掉
+    // public enum Role
+    // {
+    //     CommonUser,
+    //     VipUser,
+    //     SuperVipUser,
+    //     Admin,
+    //     SuperAdmin,
+    //     Forbidden
+    // }
 
-
-    public class ApplicationUser:IdentityUser
+    // 对IdentityUesr的扩展不必放入ApplicationDbContext中
+    public class ApplicationUser : IdentityUser
     {
         // IdentityUser已经包含Id和Email，所以这里进行注释
         // [Key] public int Id { get; set; }
@@ -33,7 +34,8 @@ namespace Wulikunkun.Web.Models
         [Required] public DateTime RegisterTime { get; set; }
         public int? ActiveCode { get; set; }
         [Required] public bool IsActive { get; set; }
-        [Required] public Role UserRole { get; set; }
+
+        // [Required] public Role UserRole { get; set; }
         public IEnumerable<Article> Articles { get; set; }
         public IEnumerable<Log> Logs { get; set; }
     }

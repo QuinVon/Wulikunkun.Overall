@@ -12,7 +12,7 @@ namespace Web.Migrations
                 name: "AspNetRoles",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(maxLength: 36, nullable: false),
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true)
@@ -26,7 +26,7 @@ namespace Web.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
+                    Id = table.Column<string>(maxLength: 36, nullable: false),
                     UserName = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
                     Email = table.Column<string>(maxLength: 256, nullable: true),
@@ -40,7 +40,17 @@ namespace Web.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Discriminator = table.Column<string>(nullable: false),
+                    Age = table.Column<short>(nullable: true),
+                    Password = table.Column<string>(maxLength: 256, nullable: true),
+                    Salt = table.Column<string>(maxLength: 256, nullable: true),
+                    Phone = table.Column<int>(nullable: true),
+                    Province = table.Column<string>(maxLength: 256, nullable: true),
+                    School = table.Column<string>(maxLength: 256, nullable: true),
+                    RegisterTime = table.Column<DateTime>(nullable: true),
+                    ActiveCode = table.Column<int>(nullable: true),
+                    IsActive = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -58,30 +68,6 @@ namespace Web.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Users",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 32, nullable: false),
-                    Email = table.Column<string>(maxLength: 256, nullable: false),
-                    Age = table.Column<short>(nullable: true),
-                    Password = table.Column<string>(maxLength: 256, nullable: false),
-                    Salt = table.Column<string>(maxLength: 256, nullable: false),
-                    Phone = table.Column<int>(nullable: true),
-                    Province = table.Column<string>(maxLength: 256, nullable: true),
-                    School = table.Column<string>(maxLength: 256, nullable: true),
-                    RegisterTime = table.Column<DateTime>(nullable: false),
-                    ActiveCode = table.Column<int>(nullable: true),
-                    IsActive = table.Column<bool>(nullable: false),
-                    UserRole = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -191,6 +177,26 @@ namespace Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Logs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    LogTime = table.Column<DateTime>(nullable: false),
+                    ApplicationUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Logs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Logs_AspNetUsers_ApplicationUserId",
+                        column: x => x.ApplicationUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Articles",
                 columns: table => new
                 {
@@ -204,6 +210,7 @@ namespace Web.Migrations
                     ViewTimes = table.Column<int>(nullable: false),
                     IsAllowed = table.Column<bool>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
+                    UserId1 = table.Column<string>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -216,31 +223,11 @@ namespace Web.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Articles_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_Articles_AspNetUsers_UserId1",
+                        column: x => x.UserId1,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Logs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    LogTime = table.Column<DateTime>(nullable: false),
-                    UserId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Logs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Logs_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -249,9 +236,9 @@ namespace Web.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Articles_UserId",
+                name: "IX_Articles_UserId1",
                 table: "Articles",
-                column: "UserId");
+                column: "UserId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -291,9 +278,9 @@ namespace Web.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Logs_UserId",
+                name: "IX_Logs_ApplicationUserId",
                 table: "Logs",
-                column: "UserId");
+                column: "ApplicationUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -327,9 +314,6 @@ namespace Web.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Users");
         }
     }
 }
