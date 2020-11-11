@@ -24,7 +24,6 @@ namespace Wulikunkun.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDistributedMemoryCache();
-
             services.AddSession(options =>
             {
                 // Set a short timeout for easy testing.
@@ -33,14 +32,11 @@ namespace Wulikunkun.Web
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;
             });
-
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
-
+            services.AddHttpContextAccessor();
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection")));
-            
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                  .AddEntityFrameworkStores<ApplicationDbContext>();
-
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
                 {

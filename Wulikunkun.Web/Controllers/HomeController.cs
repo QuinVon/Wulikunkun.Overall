@@ -15,13 +15,15 @@ namespace Wulikunkun.Web.Controllers
     public class HomeController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ApplicationDbContext dbContext;
+        private readonly ApplicationDbContext _dbContext;
         private readonly ILogger<HomeController> _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext ApplicationDbContext, UserManager<ApplicationUser> userManager)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext ApplicationDbContext, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor)
         {
-            this._userManager = userManager;
-            this.dbContext = ApplicationDbContext;
+            _httpContextAccessor = httpContextAccessor;
+            _userManager = userManager;
+            _dbContext = ApplicationDbContext;
             _logger = logger;
         }
 
