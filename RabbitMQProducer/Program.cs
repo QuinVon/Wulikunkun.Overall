@@ -11,10 +11,13 @@ namespace RabbitMQProducer
     {
         static void Main(string[] args)
         {
-            ConnectionFactory connectionFactory = new ConnectionFactory();
-            connectionFactory.HostName = "127.0.0.1";
-            connectionFactory.UserName = "wangkun";
-            connectionFactory.Password = "88888888";
+            ConnectionFactory connectionFactory = new ConnectionFactory
+            {
+                HostName = "127.0.0.1",
+                UserName = "wangkun",
+                Password = "88888888"
+            };
+
             using (var connection = connectionFactory.CreateConnection())
             {
                 using (var channel = connection.CreateModel())
