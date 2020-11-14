@@ -35,7 +35,7 @@ namespace Wulikunkun.Web
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddHttpContextAccessor();
             services.AddDbContext<ApplicationDbContext>(options => options.UseMySQL(Environment.GetEnvironmentVariable("MySqlConnection")));
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddRoles<IdentityRole>()
                  .AddEntityFrameworkStores<ApplicationDbContext>();
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
