@@ -43,7 +43,6 @@ namespace Web.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
                     Age = table.Column<short>(nullable: true),
-                    Password = table.Column<string>(maxLength: 256, nullable: true),
                     Salt = table.Column<string>(maxLength: 256, nullable: true),
                     Phone = table.Column<int>(nullable: true),
                     Province = table.Column<string>(maxLength: 256, nullable: true),

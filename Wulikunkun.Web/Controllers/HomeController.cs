@@ -55,17 +55,17 @@ namespace Wulikunkun.Web.Controllers
             }
 
             string userSalt = corrUser.Salt;
-            var passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + userSalt);
-            var hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
-            var hashString = Convert.ToBase64String(hashBytes);
+            // var passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + userSalt);
+            // var hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
+            // var hashString = Convert.ToBase64String(hashBytes);
             HttpContext.Session.SetString("UserName", user.UserName);
-            if (hashString == corrUser.Password)
-            {
-                return Json(new
-                {
-                    StatusCode = 1
-                });
-            }
+            // if (hashString == corrUser.Password)
+            // {
+            //     return Json(new
+            //     {
+            //         StatusCode = 1
+            //     });
+            // }
 
             return Json(new
             {

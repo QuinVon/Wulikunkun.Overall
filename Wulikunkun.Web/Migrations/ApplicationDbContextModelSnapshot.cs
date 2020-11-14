@@ -314,11 +314,6 @@ namespace Web.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("varchar(256)")
-                        .HasMaxLength(256);
-
                     b.Property<int?>("Phone")
                         .HasColumnType("int");
 

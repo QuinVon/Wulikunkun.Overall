@@ -26,7 +26,6 @@ namespace Wulikunkun.Web.Models
 
         // [Required] [MaxLength(256)] public string Email { get; set; }
         public sbyte? Age { get; set; }
-        [Required] [MaxLength(256)] public string Password { get; set; }
         [Required] [MaxLength(256)] public string Salt { get; set; }
         public int? Phone { get; set; }
         [MaxLength(256)] public string Province { get; set; }

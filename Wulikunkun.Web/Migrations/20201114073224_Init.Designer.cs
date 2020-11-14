@@ -9,7 +9,7 @@ using Wulikunkun.Web.Models;
 namespace Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201108020509_Init")]
+    [Migration("20201114073224_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -315,11 +315,6 @@ namespace Web.Migrations
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("varchar(256)")
-                        .HasMaxLength(256);
 
                     b.Property<int?>("Phone")
                         .HasColumnType("int");

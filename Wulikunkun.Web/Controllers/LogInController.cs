@@ -41,11 +41,11 @@ namespace Wulikunkun.Web.Controllers
                 return Json(new { StateCode = 3 });
 
             string salt = Guid.NewGuid().ToString();
-            byte[] passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + salt);
-            byte[] hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
-            string hashString = Convert.ToBase64String(hashBytes);
+            // byte[] passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + salt);
+            // byte[] hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
+            // string hashString = Convert.ToBase64String(hashBytes);
 
-            user.Password = hashString;
+            // user.Password = hashString;
             user.RegisterTime = DateTime.Now;
             user.Salt = salt;
             // user.UserRole = Role.CommonUser;
