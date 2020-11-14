@@ -40,15 +40,12 @@ namespace Wulikunkun.Web.Controllers
             else if (dbContext.Users.Any(item => item.UserName.Equals(user.UserName)))
                 return Json(new { StateCode = 3 });
 
-            string salt = Guid.NewGuid().ToString();
             // byte[] passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + salt);
             // byte[] hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
             // string hashString = Convert.ToBase64String(hashBytes);
 
             // user.Password = hashString;
             user.RegisterTime = DateTime.Now;
-            user.Salt = salt;
-            // user.UserRole = Role.CommonUser;
             user.IsActive = false;
             dbContext.Users.Add(user);
             dbContext.SaveChanges();
@@ -58,13 +55,14 @@ namespace Wulikunkun.Web.Controllers
             {
                 await Task.Factory.StartNew(() =>
                 {
-                    _redisDatabase.StringSet(user.UserName, salt);
+                    string verifyNum = Guid.NewGuid().ToString();
+
+                    _redisDatabase.StringSet(user.UserName, verifyNum);
                     _redisDatabase.KeyExpire(user.UserName, TimeSpan.FromMinutes(2));
-                    SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/><a href='https://www.wulikunkun.com/LogIn/Verify?UserName={user.UserName}&ActiveCode={salt}'>https://www.wulikunkun.com/LogIn/Verify?UserName={user.UserName}&ActiveCode={salt}</a>");
+                    SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/><a href='https://www.wulikunkun.com/LogIn/Verify?UserName={user.UserName}&ActiveCode={verifyNum}'>https://www.wulikunkun.com/LogIn/Verify?UserName={user.UserName}&ActiveCode={verifyNum}</a>");
                 });
             }
 
-            HttpContext.Session.SetString("username", user.Email);
             var jsonResult = Json(new { StateCode = 1 });
             return jsonResult;
         }
