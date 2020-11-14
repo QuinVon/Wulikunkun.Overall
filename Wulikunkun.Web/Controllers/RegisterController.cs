@@ -11,6 +11,9 @@ using Wulikunkun.Web.Models;
 
 namespace Wulikunkun.Web.Controllers
 {
+    public class RegisterUser:ApplicationUser{
+        public string Password{get;set;}
+    }
     public class RegisterController : Controller
     {
         private readonly ILogger<RegisterController> _logger;
@@ -33,22 +36,26 @@ namespace Wulikunkun.Web.Controllers
             return View();
         }
 
-        public JsonResult CreateUserAsync(ApplicationUser user)
+        public async Task<IActionResult> CreateUserAsync(RegisterUser user)
         {
-            if (dbContext.Users.Any(item => item.Email.Equals(user.Email)))
+            var taskOne = _userManager.FindByEmailAsync(user.Email);
+            if (taskOne.Result != null)
+            {
                 return Json(new { StateCode = 2 });
-            else if (dbContext.Users.Any(item => item.UserName.Equals(user.UserName)))
+            }
+            var taskTwo = _userManager.FindByNameAsync(user.UserName);
+            if (taskTwo.Result != null)
+            {
                 return Json(new { StateCode = 3 });
+            }
 
-            // byte[] passwordAndSaltBytes = Encoding.UTF8.GetBytes(user.Password + salt);
-            // byte[] hashBytes = new SHA256Managed().ComputeHash(passwordAndSaltBytes);
-            // string hashString = Convert.ToBase64String(hashBytes);
-
-            // user.Password = hashString;
-            user.RegisterTime = DateTime.Now;
-            user.IsActive = false;
-            dbContext.Users.Add(user);
-            dbContext.SaveChanges();
+            var newUser=new ApplicationUser(){
+                Email=user.Email,
+                UserName=user.UserName,
+                RegisterTime=DateTime.Now,
+                IsActive=false
+            };
+            await _userManager.CreateAsync(newUser,user.Password);
 
             // 临时取消发送邮件验证
             // SendmailAsync();
