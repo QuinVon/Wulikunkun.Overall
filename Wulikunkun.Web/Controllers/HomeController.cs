@@ -71,8 +71,9 @@ namespace Wulikunkun.Web.Controllers
             }
             else
             {
-                var result = _signManager.PasswordSignInAsync(user.UserName, user.Password, true, true);
-                if (result.IsCompletedSuccessfully)
+                /* 人家微软官方的Doc其实没问题，这里的await千万不能漏写，否则得到的就是一个Task<IdentityResult>而不是IdentityResult，另外就是需要注意，在使用Identity进行用户认证时，该用户在aspnetusers表中的EmailConfirmed必须为true才会允许对该用户进行验证 */
+                var logInResult = await _signManager.PasswordSignInAsync(user.UserName, user.Password, true, true);
+                if (logInResult.Succeeded)
                 {
                     var claims = new List<Claim>
                     {
