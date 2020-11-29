@@ -1,4 +1,5 @@
 ﻿/*字体*/
+
 .custom-input-font-size {
     font-size: 0.7rem;
 }
@@ -15,12 +16,20 @@
     font-size: 0.85rem;
 }
 
+.custom-font-family {
+    font-family: 'Noto Serif SC', serif !important;
+}
+
+
 /* 自定义宽度 */
+
 .custom-w-40 {
     width: 40%;
 }
 
+
 /* 倒角 */
+
 .custom-large-radius {
     border-radius: 50%;
 }

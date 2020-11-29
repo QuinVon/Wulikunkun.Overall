@@ -1,4 +1,4 @@
-(function (jQuery, window, document, undefined) {
+; (function (jQuery, window, document, undefined) {
     function Reader(ele, options) {
         this.$ele = $(ele);
 
@@ -14,22 +14,22 @@
 
         this.components = {
             $container: $(
-                    "<div class='container-fluid'><div class='row p-1' id='container'></div></div>"
+                "<div class='container-fluid'><div class='row p-1' id='container'></div></div>"
             ),
             $leftPanel: $(
-                    '<div class="col-3 vh-100 overflow-auto position-relative px-2 left-panel custom-scroll custom-font"></div>'
+                '<div class="col-3 vh-100 overflow-auto position-relative px-2 left-panel custom-scroll custom-font"></div>'
             ),
             $leftPanelTopBar: $(
-                    '<div class="w-100 px-2 text-muted py-3 border-bottom border-light"><i class="fa fa-angle-left text-black-50" aria-hidden="true"></i><a class="float-right text-black-50 small" href="#">返 回</a></div>'
+                '<div class="w-100 px-2 text-muted py-3 border-bottom border-light"><i class="fa fa-angle-left text-black-50" aria-hidden="true"></i><a class="float-right text-black-50 small" href="#">返 回</a></div>'
             ),
             $leftPanelCover: $(
-                    '<div class="mt-5"><img src="' +
-                    this.settings.coverUrl +
-                    '" class="d-block p-2 mx-auto my-2 custom-large-radius custom-w-40"/></div>'
+                '<div class="mt-5"><img src="' +
+                this.settings.coverUrl +
+                '" class="d-block p-2 mx-auto my-2 custom-large-radius custom-w-40"/></div>'
             ),
             $leftPanelNavContainer: $('<nav class="nav-bar px-3 mt-5"></nav>'),
             $rightPanel: $(
-                    '<div class="col-9 custom-light-panel-bg vh-100 overflow-auto position-relative px-5 rounded-lg"><div class="min-vh-100 my-5 p-5 border-0 shadow-sm mx-auto rounded-sm bg-white" style="width:210mm;min-width:210mm"><div class="overflow-hidden"><span class="border-bottom border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-bottom float-right" style="width:1.5rem;height:1.5rem"></span></div><div class="card px-4 py-4 border-0"></div></div></div>'
+                '<div class="col-9 custom-light-panel-bg vh-100 overflow-auto position-relative px-5 rounded-lg"><div class="min-vh-100 my-5 p-5 border-0 mx-auto bg-white" style="width:210mm;min-width:210mm"><div class="overflow-hidden"><span class="border-bottom border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-bottom float-right" style="width:1.5rem;height:1.5rem"></span></div><div class="card px-4 py-4 border-0"></div></div></div>'
             ),
         };
 
@@ -44,24 +44,24 @@
         initStyle: function () {
             /* 倒序加载DOM */
             var $hTagDoms =
-                    this.$domData.filter("h1,h2,h3,h4,h5,h6").length == 0
-                            ? this.$domData.find("h1,h2,h3,h4,h5,h6")
-                            : this.$domData.filter("h1,h2,h3,h4,h5,h6");
+                this.$domData.filter("h1,h2,h3,h4,h5,h6").length == 0
+                    ? this.$domData.find("h1,h2,h3,h4,h5,h6")
+                    : this.$domData.filter("h1,h2,h3,h4,h5,h6");
 
             for (var i = 0; i < $hTagDoms.length; i++) {
                 var currentItem = $hTagDoms[i],
-                        $currentItem = $(currentItem);
+                    $currentItem = $(currentItem);
 
                 /* 给文档中的H标签添加锚点 */
                 $currentItem.attr("id", $currentItem.text());
 
                 if (currentItem.tagName == "H1") {
                     var $nextLevelItem = $(
-                            '<a class="nav-link text-black-50 py-3 text-left px-4 rounded-sm small custom-link custom-light-border" data-level="1" href="#' +
-                            $currentItem.text() +
-                            '">' +
-                            $currentItem.text() +
-                            "</a>"
+                        '<a class="nav-link text-black-50 py-3 text-left px-4 rounded-sm small custom-link custom-light-border" data-level="1" href="#' +
+                        $currentItem.text() +
+                        '">' +
+                        $currentItem.text() +
+                        "</a>"
                     );
                     this.components.$leftPanelNavContainer.append($nextLevelItem);
                 } else this.GenerateChildLevel(currentItem);
@@ -69,19 +69,19 @@
 
             /* 向左侧面板添加内容 */
             this.components.$leftPanel
-                    .append(this.components.$leftPanelTopBar)
-                    .append(this.components.$leftPanelCover);
+                .append(this.components.$leftPanelTopBar)
+                .append(this.components.$leftPanelCover);
 
             this.components.$leftPanelCover.after(
-                    this.components.$leftPanelNavContainer
+                this.components.$leftPanelNavContainer
             );
 
             this.components.$container.children().append(this.components.$leftPanel);
 
             this.components.$leftPanelNavContainer
-                    .children()
-                    .first()
-                    .css("background", "#a2c9f9");
+                .children()
+                .first()
+                .css("background", "#a2c9f9");
 
             /* 向右侧面板添加内容 ,初始加载时只显示第一个H1节点及其字节点对应的内容*/
             /* 使用jquery容易弄混子代和同级的查询，下面这行代码实现了一种‘区间查询的效果’ */
@@ -100,23 +100,23 @@
 
             this.components.$rightPanel.find("div.card").html(firstHTagTotalContent);
             this.components.$rightPanel
-                    .find("div.card")
-                    .parent()
-                    .append(
-                            '<div class="overflow-hidden"><span class="border-top border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-top float-right" style="width:1.5rem;height:1.5rem"></span></div>'
-                    );
+                .find("div.card")
+                .parent()
+                .append(
+                    '<div class="overflow-hidden"><span class="border-top border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-top float-right" style="width:1.5rem;height:1.5rem"></span></div>'
+                );
 
             this.components.$container.children().append(this.components.$rightPanel);
             this.$ele.append(this.components.$container);
         },
         initEvents: function () {
             this.components.$leftPanelNavContainer
-                    .children()
-                    .on("click", $.proxy(this.showOrHideChildLevel, this));
+                .children()
+                .on("click", $.proxy(this.showOrHideChildLevel, this));
 
             this.components.$leftPanelNavContainer
-                    .find("a")
-                    .on("click", $.proxy(this.ShowLevelContent, this));
+                .find("a")
+                .on("click", $.proxy(this.ShowLevelContent, this));
         },
         showOrHideChildLevel: function (e) {
             var $currentLevel = $(e.target);
@@ -144,17 +144,17 @@
         },
         GenerateChildLevel: function (tagItem) {
             var nextLevelNum = tagItem.tagName[1],
-                    parentLevelNum = nextLevelNum - 1;
+                parentLevelNum = nextLevelNum - 1;
 
             var $nextLevelItem = $(
-                    '<a class="nav-link py-2 text-left px-4 small rounded-sm custom-purple-font custom-light-border custom-small-font custom-link" href="#' +
-                    $(tagItem).text() +
-                    '" data-level="' +
-                    nextLevelNum +
-                    '">' +
-                    "&nbsp;&nbsp;".repeat(parentLevelNum) +
-                    $(tagItem).text() +
-                    "</a>"
+                '<a class="nav-link py-2 text-left px-4 small rounded-sm custom-purple-font custom-light-border custom-small-font custom-link" href="#' +
+                $(tagItem).text() +
+                '" data-level="' +
+                nextLevelNum +
+                '">' +
+                "&nbsp;&nbsp;".repeat(parentLevelNum) +
+                $(tagItem).text() +
+                "</a>"
             );
 
             /* last是对当前选择器选中的dom集合进行过滤，而不是从当前jquery对象的子元素中进行过滤 */
@@ -162,20 +162,20 @@
             var $parentLevel = null;
             if (parentLevelNum == 1) {
                 $parentLevel = this.components.$leftPanelNavContainer
-                        .children("a[data-level='" + parentLevelNum + "']")
-                        .last();
+                    .children("a[data-level='" + parentLevelNum + "']")
+                    .last();
             } else {
                 $parentLevel = this.components.$leftPanelNavContainer
-                        .find("a[data-level='" + parentLevelNum + "']")
-                        .last();
+                    .find("a[data-level='" + parentLevelNum + "']")
+                    .last();
             }
 
             if ($parentLevel.children("i").length == 0) {
                 $parentLevel.append(
-                        '&nbsp;&nbsp;<i class="fa fa-angle-right text-black-50" aria-hidden="true"></i>'
+                    '&nbsp;&nbsp;<i class="fa fa-angle-right text-black-50" aria-hidden="true"></i>'
                 );
                 var $nextLevelContainer = $(
-                        "<div class='rounded-sm' style='background-color:rgb(238 242 245)'></div>"
+                    "<div class='rounded-sm' style='background-color:rgb(238 242 245)'></div>"
                 );
                 $nextLevelContainer.append($nextLevelItem);
                 $nextLevelContainer.hide();
@@ -196,7 +196,7 @@
             if (level == 1) {
                 var firstLevelTitle = $targetLevel.text().trim();
                 var $firstLevelItem = this.$domData.find(
-                        "h1:contains(" + firstLevelTitle + ")"
+                    "h1:contains(" + firstLevelTitle + ")"
                 );
 
                 var firstHTag = $firstLevelItem.prop("outerHTML");
@@ -208,20 +208,20 @@
                 var firstHTagTotalContent = firstHTag + firstHTagContentString;
 
                 this.components.$rightPanel
-                        .find("div.card")
-                        .html(firstHTagTotalContent);
+                    .find("div.card")
+                    .html(firstHTagTotalContent);
 
                 /*  确定右侧panel底部定位器的数量，如果已经存在，则不必重复添加*/
                 var bottomLocatorNum = this.components.$rightPanel.find(
-                        "span.border-top.border-right"
+                    "span.border-top.border-right"
                 ).length;
                 if (bottomLocatorNum === 0) {
                     this.components.$rightPanel
-                            .find("div.card")
-                            .parent()
-                            .append(
-                                    '<div class="overflow-hidden"><span class="border-top border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-top float-right" style="width:1.5rem;height:1.5rem"></span></div>'
-                            );
+                        .find("div.card")
+                        .parent()
+                        .append(
+                            '<div class="overflow-hidden"><span class="border-top border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-top float-right" style="width:1.5rem;height:1.5rem"></span></div>'
+                        );
                 }
             }
         },
