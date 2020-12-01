@@ -78,7 +78,8 @@ namespace Wulikunkun.Web.Controllers
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name,corrUser.UserName),
-                        new Claim(ClaimTypes.Email,corrUser.Email)
+                        new Claim(ClaimTypes.Email,corrUser.Email),
+                        new Claim("UserId",corrUser.Id)
                      };
                     await _userManager.AddClaimsAsync(corrUser, claims);
                 }

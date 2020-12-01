@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "编辑页面";
     Layout = null;
 }
@@ -17,18 +16,18 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <link href="~/css/bootstrap.min.css" rel="stylesheet" />
     <link href="~/article/editor.md/css/editormd.css" rel="stylesheet" />
- 
+
 </head>
 
 <body class="m-0 min-vh-100">
 
     <div class="container-fluid p-2 min-vh-100" style="background-color:#f0f8ff">
-        @using(Html.BeginForm("Edit","Content"))
+        @using (Html.BeginForm("Submit", "Article"))
         {
-        <div class="editormd" id="editor">
-            <textarea class="editormd-markdown-textarea" name="markdownDoc"></textarea>
-            <textarea class="editormd-html-textarea" name="htmlCode"></textarea>
-        </div>
+            <div class="editormd" id="editor">
+                <textarea class="editormd-markdown-textarea" name="markdownDoc"></textarea>
+                <textarea class="editormd-html-textarea" name="htmlCode"></textarea>
+            </div>
         }
     </div>
 
@@ -37,21 +36,21 @@
         $(function () {
             var editor = editormd("editor", {
                 height: "1000px",
-                path: "editor.md/lib/",
-                toolbarIcons:function(){
+                path: "/article/editor.md/lib/",
+                toolbarIcons: function () {
                     return editormd.toolbarModes.full.concat(['postbutton']);
                 },
-                saveHTMLToTextarea : true,
-                toolbarIconsClass:{
-                    postbutton:"fa-paper-plane"
+                saveHTMLToTextarea: true,
+                toolbarIconsClass: {
+                    postbutton: "fa-paper-plane"
                 },
-                lang:{
-                    toolbar:{
-                        postbutton:"提交"
+                lang: {
+                    toolbar: {
+                        postbutton: "提交"
                     }
                 },
-                onload:function(){
-                    editormd.loadPlugin("./editor.md/plugins/postbutton/postbutton", function() {
+                onload: function () {
+                    editormd.loadPlugin("./editor.md/plugins/postbutton/postbutton", function () {
                         // 初始化插件 实现监听
                         editor.postbutton();
                     });
