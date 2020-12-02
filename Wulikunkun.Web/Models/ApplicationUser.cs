@@ -34,5 +34,6 @@ namespace Wulikunkun.Web.Models
         // [Required] public Role UserRole { get; set; }
         public IEnumerable<Article> Articles { get; set; }
         public IEnumerable<Log> Logs { get; set; }
+        public IEnumerable<Category> Categories { get; set; }
     }
 }
