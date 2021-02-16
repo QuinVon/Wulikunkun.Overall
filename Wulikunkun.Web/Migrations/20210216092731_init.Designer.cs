@@ -9,7 +9,7 @@ using Wulikunkun.Web.Models;
 namespace Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210216030133_init")]
+    [Migration("20210216092731_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -276,12 +276,7 @@ namespace Web.Migrations
                         .HasColumnType("varchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("varchar(36)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Categories");
                 });
@@ -390,13 +385,6 @@ namespace Web.Migrations
 
                     b.HasOne("Wulikunkun.Web.Models.ApplicationUser", "User")
                         .WithMany("Articles")
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("Wulikunkun.Web.Models.Category", b =>
-                {
-                    b.HasOne("Wulikunkun.Web.Models.ApplicationUser", "User")
-                        .WithMany("Categories")
                         .HasForeignKey("UserId");
                 });
 
