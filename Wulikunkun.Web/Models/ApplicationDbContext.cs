@@ -20,7 +20,6 @@ namespace Wulikunkun.Web.Models
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Article>().HasOne<ApplicationUser>(article => article.User).WithMany(user => user.Articles).HasForeignKey(article => article.UserId);
             modelBuilder.Entity<Article>().HasOne<Category>(article => article.Category).WithMany(category => category.Articles).HasForeignKey(article => article.CategoryId);
-            modelBuilder.Entity<Category>().HasOne<ApplicationUser>(category => category.User).WithMany(user => user.Categories).HasForeignKey(category => category.UserId);
             modelBuilder.Entity<ApplicationUser>().Property(user => user.Id).HasMaxLength(36);
             modelBuilder.Entity<IdentityRole>().Property(role => role.Id).HasMaxLength(36);
         }
