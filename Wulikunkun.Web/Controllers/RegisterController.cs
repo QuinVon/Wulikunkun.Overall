@@ -107,7 +107,11 @@ namespace Wulikunkun.Web.Controllers
 
                     ApplicationUser user = _userManager.FindByNameAsync(userName).Result;
                     if (user != null)
+                    {
                         user.IsActive = true;
+                        user.EmailConfirmed = true;
+                        _userManager.UpdateAsync(user);
+                    }
                     else
                         ViewBag.Info = "验证链接参数有误，请重新获取！";
                 }

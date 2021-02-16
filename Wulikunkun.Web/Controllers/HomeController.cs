@@ -64,6 +64,12 @@ namespace Wulikunkun.Web.Controllers
             /* 判断用户是否存在 */
             ApplicationUser corrUser = _userManager.FindByNameAsync(user.UserName).Result;
 
+            /* 如果邮箱尚未验证则无法登录 */
+            if (corrUser.EmailConfirmed == false)
+            {
+                return Json(new { StatusCode = -1 });
+            }
+
             if (corrUser == null)
             {
                 return Json(new
