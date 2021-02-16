@@ -2,6 +2,7 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
+@model Wulikunkun.Web.Controllers.PaginatedList<Article>
 
 @{
     ViewData["Title"] = "主页";
@@ -15,20 +16,33 @@
         border-bottom: 1px solid #f3f3f3;
     }
 
-    .nav-tabs .nav-link.active {
-        border-top-color: #f3f3f3;
-        border-left-color: #f3f3f3;
-        border-right-color: #f3f3f3;
+        .nav-tabs .nav-link.active {
+            border-top-color: #f3f3f3;
+            border-left-color: #f3f3f3;
+            border-right-color: #f3f3f3;
+        }
+
+    .custom-fixed-height {
+        max-height: 5rem !important;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: #6c757d !important;
+    }
+
+    .custom-index-card-content, .custom-index-card-content h1, .custom-index-card-content h2, .custom-index-card-content h3, .custom-index-card-content h4, .custom-index-card-content h5, .custom-index-card-content h6 {
+        font-size: .8rem !important;
     }
 
     .col-sm-12.col-md-8 .nav-link {
         color: rgba(0, 0, 0, .5) !important;
     }
 
-    .col-sm-12.col-md-8 .nav-link.active {
-        color: #007bff !important;
-    }
+        .col-sm-12.col-md-8 .nav-link.active {
+            color: #007bff !important;
+        }
 </style>
+
 <!-- 中间图片滚动区域 -->
 <div id="carouselExampleIndicators" class="carousel slide pb-3" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -106,7 +120,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button"
-                        aria-expanded="false" aria-controls="collapseExample" style="font-size: .8rem;">
+                       aria-expanded="false" aria-controls="collapseExample" style="font-size: .8rem;">
                         More>>
                     </a>
                 </li>
@@ -141,186 +155,78 @@
         </div>
 
         <div>
-            <div
-                class="card rounded-sm my-2 my-lg-3 border-top-0 border-left-0 border-bottom-0 border-right-0 bg-light">
-                <div class="card-body mb-lg-2">
-                    <h5 class="card-title text-primary" style="font-size: .88rem;">
-                        如何设置网站的默认文档
-                        <span class="badge badge-primary float-right rounded-circle ml-3 small"
-                            style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                            7
-                        </span>
-                        <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                            2019-09-16-14-17-13
-                        </small>
-                    </h5>
-                    <p class="card-text text-muted" style="font-size: .8rem;">
-                        当我们在一个网站名称上单击时，在右边会有它的‘功能视图’和‘内容视图’，在内容视图中可以看到这个网站所包含的文件，而在功能视图中，在中间部分会有一个‘默认文档’，进入即可设置。</p>
-                </div>
-            </div>
-
-            <div class="card rounded-sm my-2 my-lg-3 border-light">
-                <div class="card-body mb-lg-2">
-                    <h5 class="card-title text-primary" style="font-size: .88rem;">
-                        第一次在windows server上打开Filezilla
-                        <span class="badge badge-warning float-right rounded-circle ml-3 small"
-                            style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                            1
-                        </span>
-                        <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                            2019-09-16-14-21-25
-                        </small>
-                    </h5>
-                    <p class="card-text text-muted" style="font-size: .8rem;">第一次在windows
-                        server上打开Filezilla时，可能会弹出一个“Enter sever to administrate”小窗口，我们勾选这个窗口下面的“always connect to the
-                        server”选项，然后单击connect按钮即可。</p>
-                </div>
-            </div>
-
-            <div
-                class="card rounded-sm my-2 my-lg-3 border-top-0 border-left-0 border-bottom-0 border-right-0 bg-light">
-                <div class="card-body mb-lg-2">
-                    <h5 class="card-title text-primary" style="font-size: .88rem;">
-                        如何使用Filezilla与服务器进行连接
-                        <span class="badge badge-danger float-right rounded-circle ml-3 small"
-                            style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                            3
-                        </span>
-                        <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                            2019-09-16-14-22-07
-                        </small>
-                    </h5>
-                    <p class="card-text text-muted" style="font-size: .8rem;">
-                        首先我们需要在电脑上下载一个filezilla客户端，安装好之后，登陆到自己的服务器主机，打开服务器主机的浏览器，下载一个Filezilla服务器端安装到自己的服务器主机上。</p>
-                </div>
-            </div>
-
-            <div class="card rounded-sm my-2 my-lg-3  border-light">
-                <div class="card-body mb-lg-2">
-                    <h5 class="card-title text-primary" style="font-size: .88rem;">
-                        如何通过Filezilla同步本地主机和服务器
-                        <span class="badge badge-warning float-right rounded-circle ml-3 small"
-                            style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                            5
-                        </span>
-                        <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                            2019-09-16-14-22-16
-                        </small>
-                    </h5>
-                    <p class="card-text text-muted" style="font-size: .8rem;">
-                        配置完云端Filezilla之后，就可以在自己的电脑上和云端进行同步，打开电脑上的Filezilla，在主机栏输入公网ip，输入我们在云端Filezilla配置的用户名和密码，端口号是21，单击连接。
-                    </p>
-                </div>
-            </div>
-
-            <div
-                class="card rounded-sm my-2 my-lg-3  border-top-0 border-left-0 border-bottom-0 border-right-0 bg-light">
-                <div class="card-body mb-lg-2">
-                    <h5 class="card-title text-primary" style="font-size: .88rem;">
-                        Filezilla下载服务器文件注意问题
-                        <span class="badge badge-danger float-right rounded-circle ml-3 small"
-                            style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                            9
-                        </span>
-                        <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                            2019-09-16-14-22-26
-                        </small>
-                    </h5>
-                    <p class="card-text text-muted" style="font-size: .8rem;">
-                        在自己电脑端上的Fillezilla上下载云服务器中的文件时，需要注意先在Filezilla界面的左端选择一个下载路径，这时右侧的云服务器文件夹在鼠标右键时才可以用。</p>
-                </div>
-            </div>
-
-            <div class="card rounded-sm my-2 my-lg-3 border-light">
-                <div class="card-body mb-lg-2">
-                    <h5 class="card-title text-primary" style="font-size: .88rem;">
-                        XFTP连接服务器注意事项
-                        <span class="badge badge-primary float-right rounded-circle ml-3 small"
-                            style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                            2
-                        </span>
-                        <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                            2019-09-16-14-22-39
-                        </small>
-                    </h5>
-                    <p class="card-text text-muted" style="font-size: .8rem;">
-                        我们可以在本地机器上安装XFTP对服务器进行文件传输，但是在这是XFTP与服务器之间的连接时，不可以使用服务器主机的用户名和密码，而是也需要在服务器上安装FileZilla
-                        Server进行用户的设置</p>
-                </div>
-            </div>
-
-            <div
-                class="card rounded-sm my-2 my-lg-3 border-top-0 border-left-0 border-bottom-0 border-right-0 bg-light">
-                <div class="card-body mb-lg-2">
-                    <h5 class="card-title text-primary" style="font-size: .88rem;">
-                        如何远程登陆windows server服务器
-                        <span class="badge badge-warning float-right rounded-circle ml-3 small"
-                            style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                            1
-                        </span>
-                        <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                            2019-09-16-14-22-50
-                        </small>
-                    </h5>
-                    <p class="card-text text-muted" style="font-size: .8rem;">
-                        设置好实例之后，单击开始Windows附件中的远程连接，在新弹出的窗口中输入对应实例的公网IP，确定之后在新弹出的窗口中输入用户名默认是administrator，密码就是设置好的实例的密码。
-                    </p>
-                </div>
-            </div>
-
-            <div class="card rounded-sm my-2 my-lg-3 border-light">
-                <div class="card-body mb-lg-2">
-                    <h5 class="card-title text-primary" style="font-size: .88rem;">
-                        服务器上的IE浏览器提示无法下载软件
-                        <span class="badge badge-warning float-right rounded-circle ml-3 small"
-                            style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                            1
-                        </span>
-                        <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                            2019-09-16-14-22-57
-                        </small>
-                    </h5>
-                    <p class="card-text text-muted" style="font-size: .8rem;">
-                        在服务器中用ie下载软件时可能会提示当前设置不允许下载，可以对ie进行设置：单击设置按钮，选择Internet选项，选择安全选项卡中的自定义级别，在新弹出的窗口中滑动到最低端，将允许下载文件勾选即可。
-                    </p>
-                </div>
-            </div>
-
-            <div
-                class="card rounded-sm my-2 my-lg-3 border-top-0 border-left-0 border-bottom-0 border-right-0 bg-light">
-                <div class="card-body mb-lg-2">
-                    <h5 class="card-title text-primary" style="font-size: .88rem;">
-                        如何在Windows Server上面卸载程序
-                        <span class="badge badge-warning float-right rounded-circle ml-3 small"
-                            style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                            1
-                        </span>
-                        <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                            2019-09-16-14-23-05
-                        </small>
-                    </h5>
-                    <p class="card-text text-muted" style="font-size: .8rem;">
-                        在服务器上卸载程序是通过控制面板，右键计算机属性，选择控制面板，选择程序，即可查找对应程序进行卸载，在服务器上卸载程序这是我能够找到的方式。</p>
-                </div>
-            </div>
+            @{
+                int i = 1;
+                foreach (var item in Model)
+                {
+                    i++;
+                    if (i % 2 == 0)
+                    {
+                        <div class="card rounded-sm my-2 my-lg-3 border-top-0 border-left-0 border-bottom-0 border-right-0 bg-light custom-fixed-height">
+                            <div class="card-body mb-lg-2">
+                                <h5 class="card-title text-primary" style="font-size: .88rem;">
+                                    @item.Title
+                                    <span class="badge badge-primary float-right rounded-circle ml-3 small"
+                                          style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
+                                        @item.ViewTimes
+                                    </span>
+                                    <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
+                                        @item.PublishTime
+                                    </small>
+                                </h5>
+                                <div class="card-text text-muted overflow-hidden custom-index-card-content">
+                                    @Html.Raw(item.HtmlContent)
+                                    @*@item.HtmlContent*@
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card rounded-sm my-2 my-lg-3 border-light custom-fixed-height">
+                            <div class="card-body mb-lg-2">
+                                <h5 class="card-title text-primary" style="font-size: .88rem;">
+                                    @item.Title
+                                    <span class="badge badge-warning float-right rounded-circle ml-3 small"
+                                          style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
+                                        @item.ViewTimes
+                                    </span>
+                                    <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
+                                        @item.PublishTime
+                                    </small>
+                                </h5>
+                                <div class="card-text text-muted overflow-hidden custom-index-card-content">
+                                    @Html.Raw(item.HtmlContent)
+                                    @*@item.HtmlContent*@
+                                </div>
+                            </div>
+                        </div>
+                    }
+                }
+            }
         </div>
+
+        @{
+            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+        }
 
         <nav aria-label="Page navigation example">
             <ul class="pagination pagination-sm justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                <li class="page-item @prevDisabled">
+                    <a class="page-link" asp-page="/Home/Index" asp-route-pageNumber="@(Model.PageIndex - 1)">Previous</a>
                 </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
+                @*<li class="page-item">
+                        <a class="page-link" href="#">1</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">2</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="#">3</a>
+                    </li>*@
+                <li class="page-item  @nextDisabled">
+                    <a class="page-link" asp-page="/Home/Index" asp-route-pageNumber="@(Model.PageIndex + 1)">Next</a>
                 </li>
             </ul>
         </nav>
@@ -342,98 +248,99 @@
                         <div class="form-group">
                             <label for="email_input" style="font-size: .88rem;">用户名称:</label>
                             <input type="text" name="username" class="form-control small" placeholder="用户名称"
-                                id="email_input" style="font-size: .88rem" />
+                                   id="email_input" style="font-size: .88rem" />
                         </div>
                         <div class="form-group">
                             <label for="password_input" style="font-size: .88rem">
                                 用户密码:
                             </label>
                             <input name="password" type="password" placeholder="密码" id="password_input" class="form-control"
-                                style="font-size: .88rem" />
+                                   style="font-size: .88rem" />
                         </div>
                         <div class="form-group form-check">
                             <input type="checkbox" class="form-check-input" id="input_check" />
                             <label class="form-check-label" for="input_check" style="font-size: .88rem;">记住我</label>
                         </div>
                         <button type="button" name="submitButton" class="btn btn-sm btn-primary float-left ml-1 rounded-sm"
-                            style="font-size: .88rem;">
+                                style="font-size: .88rem;">
                             登&nbsp;录
                         </button>
                         <a class="btn btn-primary btn-sm float-right mr-1 rounded-sm"
-                            href="@Url.Action("Index", "Register")" style="font-size: .88rem;">
+                           href="@Url.Action("Index", "Register")" style="font-size: .88rem;">
                             注&nbsp;册
                         </a>
                     </form>
                 }
-                </div>
             </div>
+        </div>
 
-            <div class="card rounded-sm my-3">
-                <div class="card-body">
-                    <p class="card-text">
-                        How many users visited your website yesterday?
-                    </p>
-                    <p class="card-text">
-                        How many likes did you get yesterday?
-                    </p>
-                </div>
+        <div class="card rounded-sm my-3">
+            <div class="card-body">
+                <p class="card-text">
+                    How many users visited your website yesterday?
+                </p>
+                <p class="card-text">
+                    How many likes did you get yesterday?
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content border-0 rounded-sm pb-3 pt-0">
+            <div class="modal-header border-bottom border-light py-2">
+                <h5 class="modal-title text-secondary" id="exampleModalLabel" style="font-size: .95rem;">
+                    <i class="fa fa-info-circle text-info"></i>
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
             </div>
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content border-0 rounded-sm pb-3 pt-0">
-                <div class="modal-header border-bottom border-light py-2">
-                    <h5 class="modal-title text-secondary" id="exampleModalLabel" style="font-size: .95rem;">
-                        <i class="fa fa-info-circle text-info"></i>
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-center">
-                </div>
-            </div>
-        </div>
-    </div>
+</div>
 
-    <script src="~/js/jquery-3.3.1.min.js"></script>
-    <script>
-        $("button[name='submitButton']").on("click",
-            function () {
+<script src="~/js/jquery-3.3.1.min.js"></script>
+<script>
+    $("button[name='submitButton']").on("click",
+        function () {
 
-                var formData = $("form[name='logInForm']").serializeArray();
-                var params = {};
-                $.each(formData,
-                    function () {
-                        params[this.name] = this.value;
-                    });
-
-                $.ajax({
-                    url: '@Url.Action("LogIn", "Home")',
-                    type: 'POST',
-                    data: params,
-                    timeout: 5000,
-                    dataType: 'json',
-                    success: function (data, textStatus, jqXHR) {
-                        if (data.statusCode === 1) {
-                            $("#alertModal").find(".modal-body").text("");
-                            $("#alertModal").find(".modal-body").text("登录成功！");
-                            $('#alertModal').modal('show');
-                            setTimeout(function () {
-                                $('#alertModal').modal('hide');
-                                window.location.reload();
-                            },
-                                2000);
-                        } else {
-                            $("#alertModal").find(".modal-body").text("");
-                            $("#alertModal").find(".modal-body").text("用户名或者密码错！");
-                            $('#alertModal').modal('show');
-                        }
-                    },
+            var formData = $("form[name='logInForm']").serializeArray();
+            var params = {};
+            $.each(formData,
+                function () {
+                    params[this.name] = this.value;
                 });
+
+            $.ajax({
+                url: '@Url.Action("LogIn", "Home")',
+                type: 'POST',
+                data: params,
+                timeout: 5000,
+                dataType: 'json',
+                success: function (data, textStatus, jqXHR) {
+                    if (data.statusCode === 1) {
+                        $("#alertModal").find(".modal-body").text("");
+                        $("#alertModal").find(".modal-body").text("登录成功！");
+                        $('#alertModal').modal('show');
+                        setTimeout(function () {
+                            $('#alertModal').modal('hide');
+                            window.location.reload();
+                        },
+                            2000);
+                    } else {
+                        $("#alertModal").find(".modal-body").text("");
+                        $("#alertModal").find(".modal-body").text("用户名或者密码错！");
+                        $('#alertModal').modal('show');
+                    }
+                },
             });
-    </script>
+        });
+</script>

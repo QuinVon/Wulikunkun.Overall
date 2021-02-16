@@ -4,7 +4,7 @@ using MySql.Data.EntityFrameworkCore.Metadata;
 
 namespace Web.Migrations
 {
-    public partial class Init : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -43,30 +43,14 @@ namespace Web.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
                     Age = table.Column<short>(nullable: true),
-                    Salt = table.Column<string>(maxLength: 256, nullable: true),
-                    Phone = table.Column<int>(nullable: true),
                     Province = table.Column<string>(maxLength: 256, nullable: true),
                     School = table.Column<string>(maxLength: 256, nullable: true),
                     RegisterTime = table.Column<DateTime>(nullable: true),
-                    ActiveCode = table.Column<int>(nullable: true),
                     IsActive = table.Column<bool>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Categories",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(maxLength: 256, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -176,6 +160,26 @@ namespace Web.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 256, nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Categories_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Logs",
                 columns: table => new
                 {
@@ -208,8 +212,7 @@ namespace Web.Migrations
                     Tag = table.Column<byte>(nullable: false),
                     ViewTimes = table.Column<int>(nullable: false),
                     IsAllowed = table.Column<bool>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    UserId1 = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true),
                     CategoryId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -222,8 +225,8 @@ namespace Web.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Articles_AspNetUsers_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Articles_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -235,9 +238,9 @@ namespace Web.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Articles_UserId1",
+                name: "IX_Articles_UserId",
                 table: "Articles",
-                column: "UserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -275,6 +278,11 @@ namespace Web.Migrations
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Categories_UserId",
+                table: "Categories",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Logs_ApplicationUserId",

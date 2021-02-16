@@ -77,7 +77,7 @@ namespace Wulikunkun.Web.Controllers
 
 
             /* 临时取消发送邮件验证 */
-            /* SendmailAsync();
+            SendmailAsync();
             async void SendmailAsync()
             {
                 await Task.Factory.StartNew(() =>
@@ -88,7 +88,7 @@ namespace Wulikunkun.Web.Controllers
                     _redisDatabase.KeyExpire(user.UserName, TimeSpan.FromMinutes(2));
                     SendEmail.Send(user.Email, "激活邮件", $"请点击下面的链接激活您的账户:<br/><a href='https://www.wulikunkun.com/Register/Verify?UserName={user.UserName}&ActiveCode={verifyNum}'>https://www.wulikunkun.com/Register/Verify?UserName={user.UserName}&ActiveCode={verifyNum}</a>");
                 });
-            } */
+            }
 
             var jsonResult = Json(new { StateCode = 1 });
             return jsonResult;

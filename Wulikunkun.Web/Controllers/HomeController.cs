@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Wulikunkun.Web.Controllers
 {
@@ -20,6 +22,7 @@ namespace Wulikunkun.Web.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
+        public PaginatedList<Article> PaginatedListArticles { get; set; }
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext ApplicationDbContext, UserManager<ApplicationUser> userManager, IHttpContextAccessor httpContextAccessor, RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
         {
@@ -32,7 +35,7 @@ namespace Wulikunkun.Web.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 3)
         {
             if (HttpContext.Session.IsAvailable)
             {
@@ -43,7 +46,10 @@ namespace Wulikunkun.Web.Controllers
                 }
             }
 
-            return View();
+            IQueryable<Article> articlesIQ = _dbContext.Articles;
+            var articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);
+
+            return View(articles);
         }
 
         /* 尽管这里的Action以Async结尾，但是在前端页面发起Ajax请求时URL里面不可以给Action名称加Async，否则请求不到  */
@@ -90,4 +96,48 @@ namespace Wulikunkun.Web.Controllers
             }
         }
     }
+
+    #region 引用代码，引用地址：https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/sort-filter-page?view=aspnetcore-2.1#add-paging-functionality-to-the-students-index-page
+    public class PaginatedList<T> : List<T>
+    {
+        public int PageIndex { get; private set; }
+        public int TotalPages { get; private set; }
+
+        public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
+        {
+            PageIndex = pageIndex;
+            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+
+            this.AddRange(items);
+        }
+
+        public bool HasPreviousPage
+        {
+            get
+            {
+                return (PageIndex > 1);
+            }
+        }
+
+        public bool HasNextPage
+        {
+            get
+            {
+                return (PageIndex < TotalPages);
+            }
+        }
+
+        public static async Task<PaginatedList<T>> CreateAsync(
+         IQueryable<T> source, int pageIndex, int pageSize)
+        {
+            var count = await source.CountAsync();
+            var items = await source.Skip(
+                (pageIndex - 1) * pageSize)
+                .Take(pageSize).ToListAsync();
+            return new PaginatedList<T>(items, count, pageIndex, pageSize);
+        }
+    }
+
+    #endregion
+
 }

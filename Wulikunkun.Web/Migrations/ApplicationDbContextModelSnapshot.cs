@@ -249,10 +249,7 @@ namespace Web.Migrations
                         .HasColumnType("varchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("varchar(36)");
 
                     b.Property<int>("ViewTimes")
@@ -262,7 +259,7 @@ namespace Web.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Articles");
                 });
@@ -391,7 +388,7 @@ namespace Web.Migrations
 
                     b.HasOne("Wulikunkun.Web.Models.ApplicationUser", "User")
                         .WithMany("Articles")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Wulikunkun.Web.Models.Category", b =>
