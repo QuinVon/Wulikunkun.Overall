@@ -35,7 +35,7 @@ namespace Wulikunkun.Web.Controllers
         }
 
 
-        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 3)
+        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 5)
         {
             if (HttpContext.Session.IsAvailable)
             {
@@ -48,8 +48,14 @@ namespace Wulikunkun.Web.Controllers
 
             IQueryable<Article> articlesIQ = _dbContext.Articles;
             var articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);
-
             return View(articles);
+        }
+
+        public async Task<PartialViewResult> GetPartialView(int pageNumber = 1, int pageSize = 5)
+        {
+            IQueryable<Article> articlesIQ = _dbContext.Articles;
+            var articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);
+            return PartialView("_IndexTabContent", articles);
         }
 
         /* 尽管这里的Action以Async结尾，但是在前端页面发起Ajax请求时URL里面不可以给Action名称加Async，否则请求不到  */

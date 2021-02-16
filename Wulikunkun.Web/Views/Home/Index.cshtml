@@ -22,6 +22,14 @@
             border-right-color: #f3f3f3;
         }
 
+    .col-sm-12.col-md-8 .nav-link {
+        color: rgba(0, 0, 0, .5) !important;
+    }
+
+        .col-sm-12.col-md-8 .nav-link.active {
+            color: #007bff !important;
+        }
+
     .custom-fixed-height {
         max-height: 5rem !important;
         overflow: hidden;
@@ -34,13 +42,9 @@
         font-size: .8rem !important;
     }
 
-    .col-sm-12.col-md-8 .nav-link {
-        color: rgba(0, 0, 0, .5) !important;
+    .custom-cursor {
+        cursor: pointer;
     }
-
-        .col-sm-12.col-md-8 .nav-link.active {
-            color: #007bff !important;
-        }
 </style>
 
 <!-- 中间图片滚动区域 -->
@@ -107,7 +111,7 @@
 
     <!-- 中间tab区域 -->
     <div class="col-sm-12 col-md-8">
-        <div style="font-size: .9rem;" class="mb-2">
+        <div style="font-size: .9rem;" class="mb-2" id="category_tab">
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <a class="nav-link active" href="#" style="font-size: .8rem;">TypeScript</a>
@@ -126,7 +130,7 @@
                 </li>
             </ul>
 
-            <div class="collapse bg-light rounded-lg" id="collapseExample">
+            <div class="collapse bg-light rounded-lg">
                 <ul class="nav border-bottom-0 py-1 px-3">
                     <li class="nav-item display-inline-block">
                         <a class="nav-link small py-1 pl-0" href="#">F#</a>
@@ -154,82 +158,9 @@
             </div>
         </div>
 
-        <div>
-            @{
-                int i = 1;
-                foreach (var item in Model)
-                {
-                    i++;
-                    if (i % 2 == 0)
-                    {
-                        <div class="card rounded-sm my-2 my-lg-3 border-top-0 border-left-0 border-bottom-0 border-right-0 bg-light custom-fixed-height">
-                            <div class="card-body mb-lg-2">
-                                <h5 class="card-title text-primary" style="font-size: .88rem;">
-                                    @item.Title
-                                    <span class="badge badge-primary float-right rounded-circle ml-3 small"
-                                          style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                                        @item.ViewTimes
-                                    </span>
-                                    <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                                        @item.PublishTime
-                                    </small>
-                                </h5>
-                                <div class="card-text text-muted overflow-hidden custom-index-card-content">
-                                    @Html.Raw(item.HtmlContent)
-                                    @*@item.HtmlContent*@
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="card rounded-sm my-2 my-lg-3 border-light custom-fixed-height">
-                            <div class="card-body mb-lg-2">
-                                <h5 class="card-title text-primary" style="font-size: .88rem;">
-                                    @item.Title
-                                    <span class="badge badge-warning float-right rounded-circle ml-3 small"
-                                          style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
-                                        @item.ViewTimes
-                                    </span>
-                                    <small class="text-muted float-right d-none d-md-block" style="font-size: .9rem;">
-                                        @item.PublishTime
-                                    </small>
-                                </h5>
-                                <div class="card-text text-muted overflow-hidden custom-index-card-content">
-                                    @Html.Raw(item.HtmlContent)
-                                    @*@item.HtmlContent*@
-                                </div>
-                            </div>
-                        </div>
-                    }
-                }
-            }
+        <div id="update_panel">
         </div>
 
-        @{
-            var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-            var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-        }
-
-        <nav aria-label="Page navigation example">
-            <ul class="pagination pagination-sm justify-content-center">
-                <li class="page-item @prevDisabled">
-                    <a class="page-link" asp-page="/Home/Index" asp-route-pageNumber="@(Model.PageIndex - 1)">Previous</a>
-                </li>
-                @*<li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>*@
-                <li class="page-item  @nextDisabled">
-                    <a class="page-link" asp-page="/Home/Index" asp-route-pageNumber="@(Model.PageIndex + 1)">Next</a>
-                </li>
-            </ul>
-        </nav>
     </div>
 
     <!-- 右侧登录信息区域 -->
@@ -304,11 +235,12 @@
             </div>
         </div>
     </div>
-
 </div>
 
 <script src="~/js/jquery-3.3.1.min.js"></script>
+
 <script>
+
     $("button[name='submitButton']").on("click",
         function () {
 
@@ -343,4 +275,20 @@
                 },
             });
         });
+
+    $("#category_tab a").on("click", function () {
+        $.ajax({
+            url: '@Url.Action("GetPartialView", "Home")',
+            type: 'GET',
+            async: true,
+            timeout: 5000,
+            dataType: 'html',
+            success: function (data, textStatus, jqXHR) {
+                $("#update_panel").html(data);
+            }
+        });
+    });
+
+    /* 默认选中第一个Tab */
+    $("#category_tab a").first().click();
 </script>
