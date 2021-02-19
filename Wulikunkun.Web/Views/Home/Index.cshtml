@@ -51,6 +51,10 @@
     .custom-cursor {
         cursor: pointer;
     }
+
+    .custom-avatar-color {
+        color: rgb(195 195 195 / 50%) !important;
+    }
 </style>
 
 <!-- 中间图片滚动区域 -->
@@ -175,8 +179,9 @@
             <div class="card-body">
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <div>
-                        @User.Identity.Name<br />
+                    <div class="text-center mx-auto">
+                        <i class="fa fa-user-circle d-block h1 custom-avatar-color"></i>
+                        <span>Hi~ </span> <a asp-controller="Personal" asp-action="Index">@User.Identity.Name</a>
                     </div>
                 }
                 else
