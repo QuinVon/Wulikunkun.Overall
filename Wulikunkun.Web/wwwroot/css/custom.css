@@ -33,3 +33,11 @@
 .custom-large-radius {
     border-radius: 50%;
 }
+
+.custom-header-shadow{
+    box-shadow: 0 0 10px -5px rgb(23 54 71 / 50%);
+}
+
+a.custom-text-decoration-none:hover {
+    text-decoration: none;
+}
