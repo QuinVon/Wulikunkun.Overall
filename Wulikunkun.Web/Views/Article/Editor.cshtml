@@ -31,9 +31,45 @@
         }
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 rounded-sm pb-3 pt-0">
+                <div class="modal-header border-bottom border-light py-2">
+                    <h5 class="modal-title text-secondary" id="exampleModalLabel" style="font-size: .95rem;">
+                        <i class="fa fa-info-circle text-info"></i>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-left">
+                    &nbsp;&nbsp;&nbsp;&nbsp; 请您在开始写作之前，务必了解以下注意事项：
+                    <ul>
+                        <li>请确保您已经了解Markdown的相关语法，如您从未使用Markdown进行过文档编辑，可以花5分钟简单学习一下：<a
+                                href="https://www.jianshu.com/p/191d1e21f7ed">https://www.jianshu.com/p/191d1e21f7ed</a>
+                        </li>
+                        <li>
+                            服务器空间有限，暂不支持上传图片，建议通过Markdown实现自己需要的图片效果。
+                        </li>
+                        <li>
+                            文档编辑完成之后，请点击顶部工具栏中的‘纸飞机’按钮进行提交。
+                        </li>
+                        <li>
+                            文档提交之后会进行审核，审核通过的时间取决于站长的懒癌有没有发病。
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="~/article/editor.md/src/editormd.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(function () {
+            $("#alertModal").modal("show");
             var editor = editormd("editor", {
                 height: "1000px",
                 path: "/article/editor.md/lib/",
