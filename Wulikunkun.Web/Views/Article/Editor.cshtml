@@ -31,7 +31,7 @@
         }
     </div>
 
-    <!-- Modal -->
+    <!-- 提醒Modal -->
     <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -60,6 +60,43 @@
                             文档提交之后会进行审核，审核通过的时间取决于站长的懒癌有没有发病。
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 点击提交按钮之后选择分类的Modal -->
+    <div class="modal fade" id="categoryModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 rounded-sm pb-3 pt-0">
+                <div class="modal-header border-bottom border-light py-2">
+                    <h5 class="modal-title text-secondary" id="exampleModalLabel" style="font-size: .95rem;">
+                        <i class="fa fa-info-circle text-info"></i>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-left">
+
+                    <form>
+                        <div class="form-group">
+                            <label for="article_title">输入一个文章标题：</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="文章标题">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">选择您的文章分类：</label>
+                            <select class="form-control form-control" name="category">
+                                <option>C#</option>
+                                <option>Java</option>
+                                <option>Python</option>
+                                <option>C++</option>
+                                <option>Go</option>
+                            </select>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>

@@ -4,8 +4,8 @@
     exports.postbutton = function () { };
     exports.fn.postbutton = function () {
       $("i.fa.fa-paper-plane").click(function () {
-        debugger;
-        $("form").submit();
+        $("#categoryModel").modal("show");
+        // $("form").submit();
       });
     };
   };
