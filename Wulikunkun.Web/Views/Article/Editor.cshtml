@@ -60,7 +60,7 @@
                             严禁传播黄、赌、毒及反动等违法信息，违者必追究法律责任！
                         </li>
                     </ul>
-                    <button type="button" class="btn btn-primary btn-sm btn-block w-75 mx-auto"
+                    <button type="button" class="btn btn-primary  btn-block w-75 mx-auto"
                         onclick="CloseAlertModal()">好的，我已知晓</button>
                 </div>
             </div>
@@ -68,10 +68,10 @@
     </div>
 
     <!-- 点击提交按钮之后选择分类的Modal -->
-    <div class="modal fade" id="categoryModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="categoryModel" tabindex="-1" role="dialog" data-backdrop="static"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content border-0 rounded-sm pb-3 pt-0">
+            <div class="modal-content border-0 rounded-sm pb-1 pt-0">
                 <div class="modal-header border-bottom border-light py-2">
                     <h5 class="modal-title text-secondary" id="exampleModalLabel" style="font-size: .95rem;">
                         <i class="fa fa-info-circle text-info"></i>
@@ -80,8 +80,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body text-left">
-
+                <div class="modal-body text-left pb-0">
                     <form>
                         <div class="form-group">
                             <label for="article_title">输入一个文章标题：</label>
@@ -97,8 +96,11 @@
                                 <option>Go</option>
                             </select>
                         </div>
+                        <div class="form-group mt-3">
+                            <button type="button" class="btn btn-primary btn-block mx-auto">提交文章
+                            </button>
+                        </div>
                     </form>
-
                 </div>
             </div>
         </div>
