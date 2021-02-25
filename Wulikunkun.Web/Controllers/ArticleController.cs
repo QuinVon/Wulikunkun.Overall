@@ -1,3 +1,4 @@
+using System;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -30,19 +31,15 @@ namespace Wulikunkun.Web.Controllers
             return View();
         }
 
-        public IActionResult Submit(string markdownDoc, string htmlCode)
+        public IActionResult Submit(Article article)
         {
             /* 这是目前暂时采用的获取用户id的方式 */
             ClaimsPrincipal claimsPrincipal = HttpContext.User as ClaimsPrincipal;
             string userId = _signManager.UserManager.GetUserId(claimsPrincipal);
             
-            Article article = new Article
-            {
-                MarkContent = markdownDoc,
-                HtmlContent = htmlCode,
-                UserId = userId,
-                CategoryId = 1
-            };
+            article.UserId=userId;
+            article.PublishTime = DateTime.Now;
+            article.Status = ArticleStatus.NotAllowed;
             _dbContext.Articles.Add(article);
             _dbContext.SaveChanges();
             return Ok();

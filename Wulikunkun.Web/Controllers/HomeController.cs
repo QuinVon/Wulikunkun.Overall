@@ -34,8 +34,7 @@ namespace Wulikunkun.Web.Controllers
             _signManager = signInManager;
         }
 
-
-        public async Task<IActionResult> Index(int pageNumber = 1, int pageSize = 5)
+        public IActionResult Index()
         {
             if (HttpContext.Session.IsAvailable)
             {
@@ -45,15 +44,12 @@ namespace Wulikunkun.Web.Controllers
                     ViewBag.UserName = username;
                 }
             }
-
-            IQueryable<Article> articlesIQ = _dbContext.Articles;
-            var articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);
-            return View(articles);
+            return View();
         }
 
         public async Task<PartialViewResult> GetPartialView(int pageNumber = 1, int pageSize = 5)
         {
-            IQueryable<Article> articlesIQ = _dbContext.Articles;
+            IQueryable<Article> articlesIQ = _dbContext.Articles.Where(item => item.Status == ArticleStatus.Allowed);
             var articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);
             return PartialView("_IndexTabContent", articles);
         }
