@@ -32,10 +32,10 @@
     </div>
 
     <!-- 提醒Modal -->
-    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content border-0 rounded-sm pb-3 pt-0">
+    <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" data-backdrop="static"
+        aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content border-0 rounded-sm pb-2 pt-0">
                 <div class="modal-header border-bottom border-light py-2">
                     <h5 class="modal-title text-secondary" id="exampleModalLabel" style="font-size: .95rem;">
                         <i class="fa fa-info-circle text-info"></i>
@@ -57,9 +57,11 @@
                             文档编辑完成之后，请点击顶部工具栏中的‘纸飞机’按钮进行提交。
                         </li>
                         <li>
-                            文档提交之后会进行审核，审核通过的时间取决于站长的懒癌有没有发病。
+                            严禁传播黄、赌、毒及反动等违法信息，违者必追究法律责任！
                         </li>
                     </ul>
+                    <button type="button" class="btn btn-primary btn-sm btn-block w-75 mx-auto"
+                        onclick="CloseAlertModal()">好的，我已知晓</button>
                 </div>
             </div>
         </div>
@@ -105,6 +107,11 @@
     <script src="~/article/editor.md/src/editormd.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
+        function CloseAlertModal() {
+            $("#alertModal").modal("hide");
+        };
+
         $(function () {
             $("#alertModal").modal("show");
             var editor = editormd("editor", {
@@ -128,7 +135,7 @@
                         editor.postbutton();
                     });
                 }
-            })
+            });
         });
     </script>
 </body>
