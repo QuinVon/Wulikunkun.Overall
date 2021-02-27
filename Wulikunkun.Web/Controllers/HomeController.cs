@@ -36,6 +36,8 @@ namespace Wulikunkun.Web.Controllers
 
         public IActionResult Index()
         {
+            var categories = _dbContext.Categories.ToList();
+            ViewBag.Categories = categories;
             if (HttpContext.Session.IsAvailable)
             {
                 string username = HttpContext.Session.GetString("UserName");
@@ -47,9 +49,9 @@ namespace Wulikunkun.Web.Controllers
             return View();
         }
 
-        public async Task<PartialViewResult> GetPartialView(int pageNumber = 1, int pageSize = 5)
+        public async Task<PartialViewResult> GetPartialView(int categoryId, string searchContent = "", int pageNumber = 1, int pageSize = 5)
         {
-            IQueryable<Article> articlesIQ = _dbContext.Articles.Where(item => item.Status == ArticleStatus.Allowed);
+            IQueryable<Article> articlesIQ = _dbContext.Articles.Where(item => item.Status == ArticleStatus.Allowed && item.CategoryId == categoryId);
             var articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);
             return PartialView("_IndexTabContent", articles);
         }

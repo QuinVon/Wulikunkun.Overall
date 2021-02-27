@@ -43,10 +43,7 @@
         },
         initStyle: function () {
             /* 倒序加载DOM */
-            var $hTagDoms =
-                this.$domData.filter("h1,h2,h3,h4,h5,h6").length == 0
-                    ? this.$domData.find("h1,h2,h3,h4,h5,h6")
-                    : this.$domData.filter("h1,h2,h3,h4,h5,h6");
+            var $hTagDoms = this.$domData.find("h1,h2,h3,h4,h5,h6");
 
             for (var i = 0; i < $hTagDoms.length; i++) {
                 var currentItem = $hTagDoms[i],

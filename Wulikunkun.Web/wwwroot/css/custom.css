@@ -16,6 +16,10 @@
     font-size: 0.85rem;
 }
 
+.custom-sm-font{
+    font-size: 12px;
+}
+
 .custom-font-family {
     font-family: 'Noto Serif SC', serif !important;
 }

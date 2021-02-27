@@ -123,49 +123,13 @@
     <div class="col-sm-12 col-md-8">
         <div style="font-size: .9rem;" class="mb-2" id="category_tab">
             <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#" style="font-size: .8rem;">TypeScript</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="font-size: .8rem;">C#</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" style="font-size: .8rem;">SQL Server</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#collapseExample" role="button"
-                        aria-expanded="false" aria-controls="collapseExample" style="font-size: .8rem;">
-                        More>>
-                    </a>
-                </li>
+                @foreach (var item in @ViewBag.Categories)
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" style="font-size: .8rem;" data-categoryid="@item.Id">@item.Name</a>
+                    </li>
+                }
             </ul>
-
-            <div class="collapse bg-light rounded-lg">
-                <ul class="nav border-bottom-0 py-1 px-3">
-                    <li class="nav-item display-inline-block">
-                        <a class="nav-link small py-1 pl-0" href="#">F#</a>
-                    </li>
-                    <li class="nav-item display-inline-block">
-                        <a class="nav-link small py-1 pl-0" href="#">VB</a>
-                    </li>
-                    <li class="nav-item display-inline-block">
-                        <a class="nav-link small py-1 pl-0" href="#">Web Service</a>
-                    </li>
-                    <li class="nav-item display-inline-block">
-                        <a class="nav-link small py-1 pl-0" href="#">Web API</a>
-                    </li>
-                    <li class="nav-item display-inline-block">
-                        <a class="nav-link small py-1 pl-0" href="#">ASP.NET MVC</a>
-                    </li>
-                    <li class="nav-item display-inline-block">
-                        <a class="nav-link small py-1 pl-0" href="#">.NET Core</a>
-                    </li>
-                    <li class="nav-item display-inline-block">
-                        <a class="nav-link small py-1 pl-0" href="#">Redis&.NET</a>
-                    </li>
-                </ul>
-
-            </div>
         </div>
 
         <div id="update_panel">
@@ -296,11 +260,20 @@
             });
         });
 
-    $("#category_tab a").on("click", function () {
+    $(".pagination a,#category_tab a,button[type='submit']").on("click", function () {
+        debugger;
+        var categoryId = $(this).data("categoryid");
+        var searchcontent = $("input[name='searchcontent']").val();
+        var pageNum = $(this).data("pagenum");
         $.ajax({
             url: '@Url.Action("GetPartialView", "Home")',
             type: 'GET',
             async: true,
+            data: {
+                pageNumber: pageNum,
+                categoryId: categoryId,
+                searchContent: searchcontent
+            },
             timeout: 5000,
             dataType: 'html',
             success: function (data, textStatus, jqXHR) {
@@ -310,5 +283,6 @@
     });
 
     /* 默认选中第一个Tab */
+    $("#category_tab a").first().addClass("active");
     $("#category_tab a").first().click();
 </script>

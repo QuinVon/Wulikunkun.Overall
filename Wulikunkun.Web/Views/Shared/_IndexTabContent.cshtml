@@ -14,7 +14,7 @@
                 <div class="card rounded-sm my-2 my-lg-3 border-top-0 border-left-0 border-bottom-0 border-right-0 bg-light custom-fixed-height">
                     <div class="card-body mb-lg-2">
                         <h5 class="card-title text-primary" style="font-size: .88rem;">
-                            @item.Title
+                            <a asp-controller="article" asp-action="detail" asp-route-articleid="@item.Id">@item.Title</a>
                             <span class="badge badge-primary float-right rounded-circle ml-3 small"
                                   style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
                                 @item.ViewTimes
@@ -34,7 +34,7 @@
                 <div class="card rounded-sm my-2 my-lg-3 border-light custom-fixed-height">
                     <div class="card-body mb-lg-2">
                         <h5 class="card-title text-primary" style="font-size: .88rem;">
-                            @item.Title
+                            <a asp-controller="article" asp-action="detail" asp-route-articleid="@item.Id">@item.Title</a>
                             <span class="badge badge-warning float-right rounded-circle ml-3 small"
                                   style="width: 1.2rem; height: 1.2rem; font-size: .8rem;">
                                 @item.ViewTimes
@@ -79,26 +79,4 @@
         <a class="page-link custom-cursor" data-pagenum="@(Model.PageIndex + 1)">下一页</a>
     </li>
 </ul>
-
-<script>
-    $(".pagination a").on("click", function () {
-        var pageNum = $(this).data("pagenum");
-        $.ajax({
-            url: '@Url.Action("GetPartialView", "Home")',
-            type: 'GET',
-            async: true,
-            data: {
-                pageNumber :pageNum
-            },
-            timeout: 5000,
-            dataType: 'html',
-            success: function (data, textStatus, jqXHR) {
-                debugger;
-                $("#update_panel").html(data);
-            }
-        });
-    });
-
-</script>
-
 

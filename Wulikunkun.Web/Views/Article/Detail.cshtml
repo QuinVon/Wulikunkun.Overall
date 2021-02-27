@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "详情页面";
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css?family=Noto+Serif+SC&display=swap" rel="stylesheet">
+    <link href="~/css/reader.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/fontawesome-free-5.13.0-web/css/all.css" rel="stylesheet" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <link href="~/article/editor.md/css/editormd.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="menu"></div>
+    @* 如果将后端的HTML标签数据直接赋值到JS变量中，会因为数据中包含的单双引号以及其它特殊符号导致reader.js插件无法正常渲染，所以这里将后端的标签数据直接渲染到了一个隐藏的div中 *@
+    <div id="test" style="display: none;">@Html.Raw(ViewBag.ArticleHtmlContent)</div>
+    <script src="~/js/reader.js"></script>
+    <script>
+        var data = $("#test").html().toString();
+        $(function () {
+            $("#menu").Reader({
+                data: data,
+                width: "20%",
+                height: "100%",
+                coverUrl: "/imgs/Profile.JPG"
+            });
+        })
+    </script>
+</body>

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Wulikunkun.Web.Models;
+using System.Linq;
+
 
 namespace Wulikunkun.Web.Controllers
 {
@@ -26,8 +28,10 @@ namespace Wulikunkun.Web.Controllers
             return View();
         }
 
-        public IActionResult Index()
+        public IActionResult Detail(int articleId)
         {
+            string articleHtmlContent = _dbContext.Articles.Where(item => item.Id == articleId).FirstOrDefault().HtmlContent;
+            ViewBag.ArticleHtmlContent = articleHtmlContent;
             return View();
         }
 
@@ -36,8 +40,8 @@ namespace Wulikunkun.Web.Controllers
             /* 这是目前暂时采用的获取用户id的方式 */
             ClaimsPrincipal claimsPrincipal = HttpContext.User as ClaimsPrincipal;
             string userId = _signManager.UserManager.GetUserId(claimsPrincipal);
-            
-            article.UserId=userId;
+
+            article.UserId = userId;
             article.PublishTime = DateTime.Now;
             article.Status = ArticleStatus.NotAllowed;
             _dbContext.Articles.Add(article);
