@@ -221,7 +221,6 @@
 
     $("button[name='submitButton']").on("click",
         function () {
-
             var formData = $("form[name='logInForm']").serializeArray();
             var params = {};
             $.each(formData,
@@ -260,11 +259,10 @@
             });
         });
 
-    $(".pagination a,#category_tab a,button[type='submit']").on("click", function () {
-        debugger;
-        var categoryId = $(this).data("categoryid");
+    function updateTabContent($clickitem) {
+        var categoryId = $clickitem.data("categoryid");
         var searchcontent = $("input[name='searchcontent']").val();
-        var pageNum = $(this).data("pagenum");
+        var pageNum = $clickitem.data("pagenum");
         $.ajax({
             url: '@Url.Action("GetPartialView", "Home")',
             type: 'GET',
@@ -280,7 +278,18 @@
                 $("#update_panel").html(data);
             }
         });
+    }
+
+    $("#category_tab a,button[type='submit']").on("click", function () {
+        var $this = $(this);
+        updateTabContent($this);
     });
+
+    $("#update_panel").on("click", ".pagination a", function () {
+        var $this = $(this);
+        updateTabContent($this);
+    })
+
 
     /* 默认选中第一个Tab */
     $("#category_tab a").first().addClass("active");
