@@ -12,6 +12,7 @@
         /* 考虑到用户编写的内容中可能并没有父级标签包裹标题标签，所以在此手动使用div进行强制包裹 */
         this.$domData = $("<div>" + this.settings.data + "</div>");
 
+        debugger;
         this.components = {
             $container: $(
                 "<div class='container-fluid'><div class='row p-1' id='container'></div></div>"
@@ -28,8 +29,9 @@
                 '" class="d-block p-2 mx-auto my-2 custom-large-radius custom-w-40"/></div>'
             ),
             $leftPanelNavContainer: $('<nav class="nav-bar px-3 mt-5"></nav>'),
+            /* 需要注意的就是这里的‘markdown-body editormd-preview-container’这两个class类是editor.md用来渲染背景颜色时需要用到的类，以后在改造插件的时候需要注意 */
             $rightPanel: $(
-                '<div class="col-9 custom-light-panel-bg vh-100 overflow-auto position-relative px-5 rounded-lg"><div class="min-vh-100 my-5 p-5 border-0 mx-auto bg-white" style="width:210mm;min-width:210mm"><div class="overflow-hidden"><span class="border-bottom border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-bottom float-right" style="width:1.5rem;height:1.5rem"></span></div><div class="card px-4 py-4 border-0"></div></div></div>'
+                '<div class="col-9 custom-light-panel-bg vh-100 overflow-auto position-relative px-5 rounded-lg"><div class="min-vh-100 my-5 p-4 border-0 mx-auto bg-white shadow-sm" style="width:210mm;min-width:210mm"><div class="overflow-hidden"><span class="border-bottom border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-bottom float-right" style="width:1.5rem;height:1.5rem"></span></div><div class="card px-4 py-4 border-0 markdown-body editormd-preview-container custom-font"></div></div></div>'
             ),
         };
 

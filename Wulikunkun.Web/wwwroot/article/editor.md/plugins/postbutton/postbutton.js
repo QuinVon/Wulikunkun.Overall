@@ -5,7 +5,8 @@
     exports.fn.postbutton = function () {
       $("i.fa.fa-paper-plane").click(function () {
         $("#categoryModel").modal("show");
-        // $("form").submit();
+        debugger;
+        $("textarea[name='htmlcontent']").val(editor.getPreviewedHTML());
       });
     };
   };

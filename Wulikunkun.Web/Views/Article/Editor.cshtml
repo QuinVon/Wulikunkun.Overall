@@ -30,7 +30,7 @@
 
             <!-- 点击提交按钮之后选择分类的Modal -->
             <div class="modal fade" id="categoryModel" tabindex="-1" role="dialog" data-backdrop="static"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content border-0 rounded-sm pb-1 pt-0">
                         <div class="modal-header border-bottom border-light py-2">
@@ -108,35 +108,33 @@
     <script src="~/article/editor.md/src/editormd.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-
+        $("#alertModal").modal("show");
+        
         function CloseAlertModal() {
             $("#alertModal").modal("hide");
         };
 
-        $(function () {
-            $("#alertModal").modal("show");
-            var editor = editormd("editor", {
-                height: "1000px",
-                path: "/article/editor.md/lib/",
-                toolbarIcons: function () {
-                    return editormd.toolbarModes.full.concat(['postbutton']);
-                },
-                saveHTMLToTextarea: true,
-                toolbarIconsClass: {
-                    postbutton: "fa-paper-plane"
-                },
-                lang: {
-                    toolbar: {
-                        postbutton: "提交"
-                    }
-                },
-                onload: function () {
-                    editormd.loadPlugin("./editor.md/plugins/postbutton/postbutton", function () {
-                        // 初始化插件 实现监听
-                        editor.postbutton();
-                    });
+        var editor = editormd("editor", {
+            height: "1000px",
+            path: "/article/editor.md/lib/",
+            toolbarIcons: function () {
+                return editormd.toolbarModes.full.concat(['postbutton']);
+            },
+            saveHTMLToTextarea: true,
+            toolbarIconsClass: {
+                postbutton: "fa-paper-plane"
+            },
+            lang: {
+                toolbar: {
+                    postbutton: "提交"
                 }
-            });
+            },
+            onload: function () {
+                editormd.loadPlugin("./editor.md/plugins/postbutton/postbutton", function () {
+                    // 初始化插件 实现监听
+                    editor.postbutton();
+                });
+            }
         });
     </script>
 </body>
