@@ -52,7 +52,7 @@ namespace Wulikunkun.Web.Controllers
         public async Task<PartialViewResult> GetPartialView(int categoryId, string searchContent = "", int pageNumber = 1, int pageSize = 10)
         {
             IQueryable<Article> articlesIQ = _dbContext.Articles.Where(item => item.Status == ArticleStatus.Allowed && item.CategoryId == categoryId);
-            var articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);
+            PaginatedList<Article> articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);
             return PartialView("_IndexTabContent", articles);
         }
 
@@ -60,7 +60,7 @@ namespace Wulikunkun.Web.Controllers
         public async Task<IActionResult> LogInAsync(RegisterUser user)
         {
             /* 判断用户是否存在 */
-            ApplicationUser corrUser = _userManager.FindByNameAsync(user.UserName).Result;
+            ApplicationUser corrUser = await _userManager.FindByNameAsync(user.UserName);
 
             /* 如果邮箱尚未验证则无法登录 */
             if (corrUser.EmailConfirmed == false)

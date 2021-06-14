@@ -41,13 +41,14 @@ namespace Wulikunkun.Web.Controllers
 
         public async Task<IActionResult> CreateUserAsync(RegisterUser user)
         {
-            var taskOne = _userManager.FindByEmailAsync(user.Email);
-            if (taskOne.Result != null)
+            ApplicationUser appUser = await _userManager.FindByEmailAsync(user.Email);
+            if (appUser != null)
             {
                 return Json(new { StateCode = 2 });
             }
-            var taskTwo = _userManager.FindByNameAsync(user.UserName);
-            if (taskTwo.Result != null)
+
+            appUser = await _userManager.FindByNameAsync(user.UserName);
+            if (appUser != null)
             {
                 return Json(new { StateCode = 3 });
             }
