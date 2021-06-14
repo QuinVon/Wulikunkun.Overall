@@ -127,7 +127,7 @@
     <!-- 中间tab区域 -->
     <div class="col-sm-12 col-md-8">
         <div style="font-size: .9rem;" class="mb-2" id="category_tab">
-            <ul class="nav nav-tabs">
+            <ul class="nav nav-tabs" data-tabs>
                 @foreach (var item in @ViewBag.Categories)
                 {
                     <li class="nav-item">
@@ -264,10 +264,10 @@
             });
         });
 
-    function updateTabContent($clickitem) {
-        var categoryId = $clickitem.data("categoryid");
-        var searchcontent = $("input[name='searchcontent']").val();
-        var pageNum = $clickitem.data("pagenum");
+
+    var categoryId=1, searchcontent="", pageNum=1;
+
+    function updateTabContent() {
         $.ajax({
             url: '@Url.Action("GetPartialView", "Home")',
             type: 'GET',
@@ -285,14 +285,23 @@
         });
     }
 
-    $("#category_tab a,button[type='submit']").on("click", function () {
-        var $this = $(this);
-        updateTabContent($this);
+    $("#category_tab a").on("click", function () {
+        pageNum = 1;
+        categoryId = $(this).data("categoryid");
+        updateTabContent();
     });
 
+    $("button[type='submit']").on("click", function () {
+        debugger;
+        pageNum = 1;
+        searchcontent = $("input[name='searchcontent']").val();
+        updateTabContent();
+    });
+
+
     $("#update_panel").on("click", ".pagination a", function () {
-        var $this = $(this);
-        updateTabContent($this);
+        pageNum = $(this).data("pagenum");
+        updateTabContent();
     })
 
 
