@@ -5,11 +5,10 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Wulikunkun.Web.Models;
 using System.Linq;
-
+using System.Threading.Tasks;
 
 namespace Wulikunkun.Web.Controllers
 {
-    [Authorize]
     public class ArticleController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
@@ -23,18 +22,24 @@ namespace Wulikunkun.Web.Controllers
             _userManager = userManager;
             _signManager = signInManager;
         }
+
+        [Authorize]
         public IActionResult Editor()
         {
             return View();
         }
 
-        public IActionResult Detail(int articleId)
+        public IActionResult DetailAsync(int articleId)
         {
-            string articleHtmlContent = _dbContext.Articles.Where(item => item.Id == articleId).FirstOrDefault().HtmlContent;
-            ViewBag.ArticleHtmlContent = articleHtmlContent;
+            ValueTask<Article> articleTask = _dbContext.Articles.FindAsync(articleId);
+            Article targetArticle = articleTask.Result;
+            ViewBag.ArticleHtmlContent = targetArticle.HtmlContent;
+            targetArticle.ViewTimes++;
+            _dbContext.SaveChangesAsync();
             return View();
         }
 
+        [Authorize]
         public IActionResult Submit(Article article)
         {
             /* 这是目前暂时采用的获取用户id的方式 */
