@@ -1,15 +1,17 @@
+@model List<Article>
 @{
     ViewData["Title"] = "个人首页";
 }
+
 <style>
     /*覆盖bootstrap默认的样式*/
     .col-9.border-left .nav-link {
         color: rgba(0, 0, 0, .5) !important;
     }
 
-    .col-9.border-left .nav-link.active {
-        color: #007bff !important;
-    }
+        .col-9.border-left .nav-link.active {
+            color: #007bff !important;
+        }
 
     .table td,
     .table th {
@@ -26,76 +28,77 @@
             <label class="small text-muted">我很拽</label>
         </div>
     </div>
-    <div class="col-9 border-left">
+    <div class="col-9 border-left border-light">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                 <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <div class="nav nav-tabs border-light" id="nav-tab" role="tablist">
                         <a class="nav-item nav-link active custom-tab-font-size" id="nav-home-tab" data-toggle="tab"
-                            href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">文章</a>
+                           href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">文章</a>
                         <a class="nav-item nav-link custom-tab-font-size" id="nav-profile-tab" data-toggle="tab"
-                            href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">评论</a>
+                           href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">评论</a>
                         <a class="nav-item nav-link custom-tab-font-size" id="nav-contact-tab" data-toggle="tab"
-                            href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">关注</a>
+                           href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">关注</a>
                         <a class="nav-item nav-link custom-tab-font-size" id="nav-nav-setting-tab" data-toggle="tab"
-                            href="#nav-setting" role="tab" aria-controls="nav-setting" aria-selected="false">设置</a>
+                           href="#nav-setting" role="tab" aria-controls="nav-setting" aria-selected="false">设置</a>
                     </div>
                 </nav>
                 <div class="tab-content" id="nav-tabContent">
 
                     <div class="tab-pane fade show active mt-3" id="nav-home" role="tabpanel"
-                        aria-labelledby="nav-home-tab">
+                         aria-labelledby="nav-home-tab">
 
                         <div class="overflow-hidden">
                             <a asp-controller="article" asp-action="editor"
-                                class="float-right custom-text-decoration-none small" title="写文章"><i
-                                    class="fa fa-edit mr-1"></i>写文章</a>
+                               class="float-right custom-text-decoration-none small" title="写文章">
+                                <i class="fa fa-edit mr-1"></i>写文章
+                            </a>
                         </div>
 
                         <table class="table table-striped mt-3 mb-4 border-top border-light">
                             <thead>
                                 <tr>
+                                    @*<th scope="col"
+                                            class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">
+                                            编号
+                                        </th>*@
                                     <th scope="col"
-                                        class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">
-                                        编号</th>
-                                    <th scope="col"
-                                        class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">文章名称
+                                        class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
+                                        文章名称
                                     </th>
                                     <th scope="col"
                                         class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">
-                                        浏览量</th>
+                                        浏览量
+                                    </th>
                                     <th scope="col"
-                                        class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">发布时间
+                                        class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
+                                        发布时间
+                                    </th>
+                                    <th scope="col"
+                                        class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
+                                        操作
                                     </th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <th scope="row"
-                                        class="text-secondary font-weight-light text-center custom-table-font-size">1
-                                    </th>
-                                    <td class="text-secondary font-weight-lighter custom-table-font-size">为什么不能作弊</td>
-                                    <td class="text-secondary font-weight-light text-center custom-table-font-size">24
-                                    </td>
-                                    <td class="text-secondary font-weight-light custom-table-font-size">mdo</td>
-                                </tr>
-                                <tr>
-                                    <th class="text-secondary font-weight-lighter  text-center custom-table-font-size"
-                                        scope="row">2</th>
-                                    <td class="text-secondary font-weight-lighter custom-table-font-size">Jacob</td>
-                                    <td class="text-secondary font-weight-lighter text-center custom-table-font-size">8
-                                    </td>
-                                    <td class="text-secondary font-weight-lighter custom-table-font-size">fat</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row"
-                                        class="text-secondary font-weight-lighter text-center custom-table-font-size">3
-                                    </th>
-                                    <td class="text-secondary font-weight-lighter custom-table-font-size">Larry</td>
-                                    <td class="text-secondary font-weight-lighter text-center custom-table-font-size">92
-                                    </td>
-                                    <td class="text-secondary font-weight-lighter custom-table-font-size">twitter</td>
-                                </tr>
+                                @foreach (var article in Model)
+                                {
+                                    <tr>
+                                        @*<th scope="row"
+                                                class="text-secondary font-weight-light text-center custom-table-font-size">
+                                                1
+                                            </th>*@
+                                        <td class="text-secondary align-middle font-weight-lighter custom-table-font-size">@article.Title</td>
+                                        <td class="text-secondary align-middle font-weight-light text-center custom-table-font-size">
+                                            @article.ViewTimes
+                                        </td>
+                                        <td class="text-secondary align-middle font-weight-light custom-table-font-size">@article.PublishTime</td>
+                                        <td>
+                                            <a type="button" class="btn btn-primary btn-sm py-0" asp-controller="Article" asp-action="Editor" asp-route-articleId="@article.Id">编辑</a>
+                                            <button type="button" class="btn btn-secondary btn-sm py-0">删除</button>
+                                        </td>
+                                    </tr>
+                                }
                             </tbody>
                         </table>
                         <nav aria-label="Page navigation example">
@@ -112,31 +115,33 @@
                             </ul>
                         </nav>
                     </div>
-                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...
+                    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                        ...
                     </div>
-                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...
+                    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                        ...
                     </div>
                     <div class="tab-pane fade" id="nav-setting" role="tabpanel" aria-labelledby="nav-setting-tab">
                         <form class="w-75 mt-4 p-3 rounded-sm">
                             <div class="form-group">
                                 <label for="email" class="small text-secondary">邮箱地址</label>
                                 <input type="email" class="form-control custom-input-font-size" id="email"
-                                    placeholder="name@example.com">
+                                       placeholder="name@example.com">
                             </div>
                             <div class="form-group">
                                 <label for="phone" class="small text-secondary">手机号码</label>
                                 <input type="text" class="form-control custom-input-font-size" id="phone"
-                                    placeholder="手机号码">
+                                       placeholder="手机号码">
                             </div>
                             <div class="form-group">
                                 <label for="username" class="small text-secondary">用户名</label>
                                 <input type="text" class="form-control custom-input-font-size" id="username"
-                                    placeholder="用户名">
+                                       placeholder="用户名">
                             </div>
                             <div class="form-group">
                                 <label for="introduction" class="small text-secondary">个人简介</label>
                                 <textarea class="form-control custom-input-font-size" id="introduction" rows="3"
-                                    placeholder="简单介绍一下自己吧……"></textarea>
+                                          placeholder="简单介绍一下自己吧……"></textarea>
                             </div>
                             <div class="form-group">
                                 <button type="button" class="btn btn-sm btn-primary rounded-lg">提&nbsp;交</button>
@@ -145,7 +150,8 @@
                     </div>
                 </div>
             </div>
-            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...
+            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                ...
             </div>
         </div>
     </div>

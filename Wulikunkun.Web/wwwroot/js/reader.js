@@ -21,7 +21,7 @@
                 '<div class="col-3 vh-100 overflow-auto position-relative px-2 left-panel custom-scroll custom-font"></div>'
             ),
             $leftPanelTopBar: $(
-                '<div class="w-100 px-2 text-muted py-3 border-bottom border-light"><i class="fa fa-angle-left text-black-50" aria-hidden="true"></i><a class="float-right text-black-50 small" href="#">返 回</a></div>'
+                '<div class="w-100 px-2 text-muted py-3 border-bottom border-light"><a href="/" class="text-light" title="返回首页"><i class="fa fa-home text-black-50" aria-hidden="true"></a></i><a class="float-right text-black-50 small" href="#">返 回</a></div>'
             ),
             $leftPanelCover: $(
                 '<div class="mt-5"><img src="' +

@@ -25,7 +25,6 @@ namespace Wulikunkun.Web.Controllers
         private static readonly IDatabase _redisDatabase = _multiplexer.GetDatabase();
 
 
-
         public RegisterController(ILogger<RegisterController> logger, ApplicationDbContext ApplicationDbContext, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             this._userManager = userManager;

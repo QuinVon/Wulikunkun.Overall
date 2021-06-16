@@ -15,7 +15,6 @@ namespace Wulikunkun.Web.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signManager;
 
-
         public ArticleController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
             _dbContext = dbContext;
@@ -24,8 +23,14 @@ namespace Wulikunkun.Web.Controllers
         }
 
         [Authorize]
-        public IActionResult Editor()
+        public async Task<IActionResult> Editor(int? articleId)
         {
+            if (articleId != null)
+            {
+                var article = await _dbContext.Articles.FindAsync(articleId);
+                ViewBag.ArticleId = articleId;
+                ViewBag.ArticleMarkdownContent = article.MarkContent;
+            }
             return View();
         }
 

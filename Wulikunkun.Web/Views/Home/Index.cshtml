@@ -2,11 +2,12 @@
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-@model Wulikunkun.Web.Controllers.PaginatedList<Article>
+@model Web.Models.PaginatedList<Article>
 
 @{
     ViewData["Title"] = "主页";
 }
+
 <link href="~/css/custom.css" rel="stylesheet" />
 <style>
     input::-webkit-input-placeholder {

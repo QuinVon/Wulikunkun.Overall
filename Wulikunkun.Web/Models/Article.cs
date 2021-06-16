@@ -14,6 +14,7 @@ namespace Wulikunkun.Web.Models
         public byte Tag { get; set; }
         public int ViewTimes { get; set; }
         public bool IsAllowed { get; set; }
+        public bool IsDeleted { get; set; }
 
         public ArticleStatus Status { get; set; }
         public virtual string UserId { get; set; }
