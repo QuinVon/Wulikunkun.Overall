@@ -21,15 +21,15 @@
 <body class="m-0 min-vh-100">
 
     <div class="container-fluid p-2 min-vh-100" style="background-color:#f0f8ff">
-        @using (Html.BeginForm("Submit", "Article"))
-        {
+
+        <form name="articleForm">
             <div class="editormd" id="editor">
                 <textarea class="editormd-markdown-textarea" name="markcontent"></textarea>
                 <textarea class="editormd-html-textarea" name="htmlcontent"></textarea>
             </div>
 
             <!-- 点击提交按钮之后选择分类的Modal -->
-            <div class="modal fade" id="categoryModel" tabindex="-1" role="dialog" data-backdrop="static"
+            <div class="modal fade" id="SubmitModal" tabindex="-1" role="dialog" data-backdrop="static"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content border-0 rounded-sm pb-1 pt-0">
@@ -42,38 +42,40 @@
                             </button>
                         </div>
                         <div class="modal-body text-left pb-0">
-                            <form>
-                                <div class="form-group">
-                                    <label for="article_title">输入一个文章标题：</label>
-                                    <input type="text" class="form-control" name="title" placeholder="文章标题">
-                                </div>
-                                <div class="form-group">
-                                    <label for="category">选择您的文章分类：</label>
-                                    <select class="form-control form-control" name="categoryid">
-                                        <option value="1">C#</option>
-                                        <option value="2">Java</option>
-                                        <option value="3">Python</option>
-                                        <option value="4">C++</option>
-                                        <option value="5">Go</option>
-                                    </select>
-                                </div>
-                                <div class="form-group mt-4">
-                                    <button type="submit" class="btn btn-primary btn-block mx-auto">
-                                        提交文章
-                                    </button>
-                                </div>
-                            </form>
+                            <div class="form-group">
+                                <label for="article_title">输入一个文章标题：</label>
+                                <input type="text" class="form-control" name="title" placeholder="文章标题" value="@ViewBag.ArticleTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="category">选择您的文章分类：</label>
+                                <select class="form-control form-control" name="categoryid">
+                                    @foreach (var item in @ViewBag.Categories){
+                                        if(item.Id==ViewBag.ArticleCategoryId){
+                                    <option value="@item.Id" selected="selected">@item.Name</option>
+                                        }
+                                        else{
+                                    <option value="@item.Id">@item.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="form-group mt-4">
+                                <button name="submitButton" type="button" class="btn btn-primary btn-block mx-auto">
+                                    提交文章
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        }
+        </form>
+
     </div>
 
     <!-- 提醒Modal -->
     <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" data-backdrop="static"
          aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content border-0 rounded-sm pb-2 pt-0">
                 <div class="modal-header border-bottom border-light py-2">
                     <h5 class="modal-title text-secondary" id="exampleModalLabel" style="font-size: .95rem;">
@@ -108,12 +110,32 @@
         </div>
     </div>
 
+    @*提交结果Modal*@
+    <div class="modal fade" id="SubmitResultModal" tabindex="-1" role="dialog" data-backdrop="static"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0 rounded-sm pb-2 pt-0">
+                <div class="modal-header border-bottom border-light py-2">
+                    <h5 class="modal-title text-secondary" id="exampleModalLabel" style="font-size: .95rem;">
+                        <i class="fa fa-info-circle text-info"></i>
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center" data-submitresult>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <input type="hidden" id="test" value="@ViewBag.ArticleMarkdownContent" />
 
     <script src="~/article/editor.md/editormd.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        var articleId ='@ViewBag.ArticleId';
+        var articleId = '@ViewBag.ArticleId';
+        var submitUrl = '@Url.Action("Submit","Article")';
         var articleMarkDownContent = $("#test").val();
 
         $("#alertModal").modal("show");
@@ -147,6 +169,38 @@
                 }
             }
         });
+
+        $("button[name='submitButton']").on("click", function () {
+            var formData = $("form[name='articleForm']").serializeArray();
+            var params = {};
+            $.each(formData,
+                function () {
+                    params[this.name] = this.value;
+                });
+            params.id = articleId;
+
+            $.ajax({
+                url: submitUrl,
+                type: 'POST',
+                async: true,
+                data: params,
+                timeout: 5000,
+                dataType: 'json',
+                success: function (data) {
+                    $("div[data-submitresult]").text("提交成功，等待审核……");
+                    $("#SubmitResultModal").modal("show");
+                },
+                error: function (xhr, textStatus) {
+                    $("div[data-submitresult]").text("提交失败！");
+                    $("#SubmitResultModal").modal("show");
+                },
+                complete: function () {
+                    $("#SubmitModal").modal("hide");
+                }
+            });
+
+        });
+
     </script>
 </body>
 

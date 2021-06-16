@@ -32,7 +32,7 @@ namespace Wulikunkun.Web.Controllers
             ClaimsPrincipal claimsPrincipal = HttpContext.User as ClaimsPrincipal;
             string userId = _signManager.UserManager.GetUserId(claimsPrincipal);
             /* 可以留意一下这里异步ToList的API */
-            List<Article> articles = await _dbContext.Articles.Where(article => article.UserId == userId&&article.Status==ArticleStatus.Allowed).ToListAsync();
+            List<Article> articles = await _dbContext.Articles.Where(article => article.UserId == userId).ToListAsync();
             return View(articles);
         }
     }

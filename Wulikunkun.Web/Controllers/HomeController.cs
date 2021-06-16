@@ -34,9 +34,9 @@ namespace Wulikunkun.Web.Controllers
             _signManager = signInManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            var categories = _dbContext.Categories.ToList();
+            var categories = await _dbContext.Categories.ToListAsync();
             ViewBag.Categories = categories;
             if (HttpContext.Session.IsAvailable)
             {
