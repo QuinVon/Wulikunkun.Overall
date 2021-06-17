@@ -43,5 +43,17 @@ namespace Wulikunkun.Web.Controllers
             return PartialView("_PersonalArticles", paginatedArticles);
         }
 
+        public async Task<IActionResult> DeleteArticle(int? deleteArticleId)
+        {
+            if (deleteArticleId == null)
+            {
+                return BadRequest();
+            }
+            Article targetArticle = await _dbContext.Articles.FindAsync(deleteArticleId);
+            targetArticle.Status = ArticleStatus.Deleted;
+            await _dbContext.SaveChangesAsync();
+            return Ok();
+        }
+
     }
 }
