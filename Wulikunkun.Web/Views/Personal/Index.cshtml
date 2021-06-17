@@ -1,4 +1,3 @@
-@model List<Article>
 @{
     ViewData["Title"] = "个人首页";
 }
@@ -55,65 +54,9 @@
                             </a>
                         </div>
 
-                        <table class="table table-striped mt-3 mb-4 border-top border-light">
-                            <thead>
-                                <tr>
-                                    @*<th scope="col"
-                                            class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">
-                                            编号
-                                        </th>*@
-                                    <th scope="col"
-                                        class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
-                                        文章名称
-                                    </th>
-                                    <th scope="col"
-                                        class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">
-                                        浏览量
-                                    </th>
-                                    <th scope="col"
-                                        class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
-                                        发布时间
-                                    </th>
-                                    <th scope="col"
-                                        class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
-                                        操作
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var article in Model)
-                                {
-                                    <tr>
-                                        @*<th scope="row"
-                                                class="text-secondary font-weight-light text-center custom-table-font-size">
-                                                1
-                                            </th>*@
-                                        <td class="text-secondary align-middle font-weight-lighter custom-table-font-size">@article.Title</td>
-                                        <td class="text-secondary align-middle font-weight-light text-center custom-table-font-size">
-                                            @article.ViewTimes
-                                        </td>
-                                        <td class="text-secondary align-middle font-weight-light custom-table-font-size">@article.PublishTime</td>
-                                        <td>
-                                            <a type="button" class="btn btn-primary btn-sm py-0" asp-controller="Article" asp-action="Editor" asp-route-articleId="@article.Id">编辑</a>
-                                            <button type="button" class="btn btn-secondary btn-sm py-0">删除</button>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination pagination-sm justify-content-left">
-                                <li class="page-item disabled">
-                                    <a class="page-link" href="#" tabindex="-1" aria-disabled="true">上一页</a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">下一页</a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <div data-articlesContainer>
+
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                         ...
@@ -160,6 +103,10 @@
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script>
+
+    var partialViewUrl = "@Url.Action("GetPartialView","Personal")";
+    var pageNumber = 1;
+
     /* 动态设置个人首页的高度，使其能够撑起页面 */
     function SetHeight() {
         $("div[data-name='middle-content']").css("min-height", $(window).height() - 400);
@@ -170,6 +117,27 @@
         $(window).on("resize", function () {
             SetHeight();
         })
+        updateArticleList(pageNumber);
+
+        $("div[data-articlesContainer]").on("click", ".pagination a", function () {
+            pageNumber = $(this).data("pagenum");
+            updateArticleList(pageNumber);
+        })
     });
 
+    function updateArticleList(pageNumber) {
+        $.ajax({
+            url: partialViewUrl,
+            type: 'POST',
+            async: true,
+            timeout: 5000,
+            data: {
+                pageNumber: pageNumber
+            },
+            dataType: 'html',
+            success: function (data) {
+                $("div[data-articlesContainer]").html(data);
+            }
+        });
+    }
 </script>

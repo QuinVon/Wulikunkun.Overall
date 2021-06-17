@@ -8,10 +8,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Web.Models;
 using Wulikunkun.Web.Models;
 
 namespace Wulikunkun.Web.Controllers
 {
+    [Authorize]
     public class PersonalController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
@@ -26,14 +28,20 @@ namespace Wulikunkun.Web.Controllers
             this._signManager = signInManager;
         }
 
-        [Authorize]
-        public async Task<IActionResult> IndexAsync()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public async Task<PartialViewResult> GetPartialView(int pageNumber = 1, int pageSize = 10)
         {
             ClaimsPrincipal claimsPrincipal = HttpContext.User as ClaimsPrincipal;
             string userId = _signManager.UserManager.GetUserId(claimsPrincipal);
             /* 可以留意一下这里异步ToList的API */
-            List<Article> articles = await _dbContext.Articles.Where(article => article.UserId == userId).ToListAsync();
-            return View(articles);
+            IQueryable<Article> articles = _dbContext.Articles.Where(article => article.UserId == userId && article.Status != ArticleStatus.Deleted);
+            PaginatedList<Article> paginatedArticles = await PaginatedList<Article>.CreateAsync(articles.AsNoTracking(), pageNumber, pageSize);
+            return PartialView("_PersonalArticles", paginatedArticles);
         }
+
     }
 }

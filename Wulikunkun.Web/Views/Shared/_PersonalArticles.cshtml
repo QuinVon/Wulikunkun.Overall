@@ -1,0 +1,81 @@
+﻿@{
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+}
+
+<table class="table table-striped mt-3 mb-4 border-top border-light">
+    <thead>
+        <tr>
+            @*<th scope="col"
+                    class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">
+                    编号
+                </th>*@
+            <th scope="col"
+                class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
+                文章名称
+            </th>
+            <th scope="col"
+                class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">
+                浏览量
+            </th>
+            <th scope="col"
+                class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
+                发布时间
+            </th>
+            <th scope="col"
+                class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
+                操作
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var article in Model)
+        {
+            <tr>
+                @*<th scope="row"
+                        class="text-secondary font-weight-light text-center custom-table-font-size">
+                        1
+                    </th>*@
+                <td class="align-middle font-weight-lighter custom-table-font-size">
+                    <a class="text-secondary" asp-controller="Article" asp-action="Detail" asp-route-articleId="@article.Id">
+                        @article.Title
+                    </a>
+                </td>
+                <td class="text-secondary align-middle font-weight-light text-center custom-table-font-size">
+                    @article.ViewTimes
+                </td>
+                <td class="text-secondary align-middle font-weight-light custom-table-font-size">@article.PublishTime</td>
+                <td>
+                    <a type="button" class="btn btn-primary btn-sm py-0" asp-controller="Article" asp-action="Editor" asp-route-articleId="@article.Id">编辑</a>
+                    <button type="button" class="btn btn-secondary btn-sm py-0">删除</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<ul class="pagination pagination-sm justify-content-left">
+    <li class="page-item @prevDisabled">
+        <a class="page-link custom-cursor" data-pagenum="@(Model.PageIndex - 1)">上一页</a>
+    </li>
+    @{
+        for (int j = 1; j <= Model.TotalPages; j++)
+        {
+            @if (@Model.PageIndex == j)
+            {
+                <li class="page-item disabled">
+                    <a class="page-link custom-cursor " data-pagenum="@j">@j</a>
+                </li>
+            }
+            else
+            {
+                <li class="page-item">
+                    <a class="page-link custom-cursor" data-pagenum="@j">@j</a>
+                </li>
+            }
+        }
+    }
+    <li class="page-item  @nextDisabled">
+        <a class="page-link custom-cursor" data-pagenum="@(Model.PageIndex + 1)">下一页</a>
+    </li>
+</ul>

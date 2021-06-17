@@ -12,15 +12,15 @@
     <title>Admin Page</title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <style>
         h5 {
             font-size: 1rem;
         }
 
-        h5~p {
-            font-size: .9rem;
-        }
+            h5 ~ p {
+                font-size: .9rem;
+            }
     </style>
 </head>
 
@@ -35,36 +35,36 @@
                     <div class="col-9 pr-0">
                         <div class="w-100 vh-100 bg-light">
                             <div class="w-100 vh-100 px-0 float-left bg-primary"
-                                style="box-shadow: .2rem 0 .2rem .2rem lightgray;">
+                                 style="box-shadow: .2rem 0 .2rem .2rem lightgray;">
 
                                 <div class="text-center py-2">
                                     <i class="fa fa-bars text-white" aria-hidden="true"
-                                        style="font-size:2rem;cursor:pointer"></i>
+                                       style="font-size:2rem;cursor:pointer"></i>
                                 </div>
                                 <h5 class="text-center py-3 text-white font-weight-bold">
                                     管理台
                                 </h5>
                                 <nav class="nav flex-column nav-pills text-left" id="v-pills-tab overflow-hidden"
-                                    role="tablist">
+                                     role="tablist">
 
                                     <a class="nav-link rounded-0 text-white font-weight-normal mt-5 mb-0 py-2"
-                                        id="v-pills-home-tab" data-toggle="collapse" href="#hideContent" role="tab"
-                                        style="font-size:.9rem;">
+                                       id="v-pills-home-tab" data-toggle="collapse" href="#hideContent" role="tab"
+                                       style="font-size:.9rem;">
                                         概况
                                         <i class="fa fa-angle-down d-inline-block float-right mt-1"></i>
                                     </a>
                                     <div class="collapse" id="hideContent"
-                                        style="background-color: rgb(5, 95, 230) !important;">
+                                         style="background-color: rgb(5, 95, 230) !important;">
                                         <ul class="nav nav-sm flex-column">
                                             <li class="nav-item">
                                                 <a class="nav-link text-light h6 collapsed small mb-0 py-3" href="#"
-                                                    data-url="@Url.Action("Contact", "Home")" data-tab="contact">
+                                                   data-url="@Url.Action("Contact", "Home")" data-tab="contact">
                                                     联系页面
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link text-light h6 collapsed small mb-0 py-3"
-                                                    data-url="@Url.Action("About", "Home")" data-tab="关于页面" href="#">
+                                                   data-url="@Url.Action("About", "Home")" data-tab="关于页面" href="#">
                                                     关于页面
                                                 </a>
                                             </li>
@@ -72,29 +72,29 @@
                                     </div>
 
                                     <a class="nav-link rounded-0 text-white font-weight-normal mb-0 py-2"
-                                        id="v-pills-profile-tab" data-toggle="collapse" href="#hideContent2" role="tab"
-                                        style="font-size: .9rem;">
+                                       id="v-pills-profile-tab" data-toggle="collapse" href="#hideContent2" role="tab"
+                                       style="font-size: .9rem;">
                                         主页
                                         <i class="fa fa-angle-down d-inline-block float-right mt-1"></i>
                                     </a>
                                     <div class="collapse" id="hideContent2"
-                                        style="background-color: rgb(5, 95, 230) !important;">
+                                         style="background-color: rgb(5, 95, 230) !important;">
                                         <ul class="nav nav-sm flex-column">
                                             <li class="nav-item">
                                                 <a class="nav-link text-light h6 collapsed small mb-0 py-3" href="#"
-                                                    data-tab="主页子选项一">
+                                                   data-tab="主页子选项一">
                                                     子选项1
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link text-light h6 collapsed small mb-0 py-3" href="#"
-                                                    data-tab="主页子选项二">
+                                                   data-tab="主页子选项二">
                                                     子选项2
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link text-light h6 collapsed small mb-0 py-3" href="#"
-                                                    data-tab="主页子选项三">
+                                                   data-tab="主页子选项三">
                                                     子选项3
                                                 </a>
                                             </li>
@@ -103,29 +103,29 @@
 
 
                                     <a class="nav-link rounded-0 text-white font-weight-normal mb-0 py-2"
-                                        style="font-size: .9rem;" id="v-pills-messages-tab" data-toggle="collapse"
-                                        href="#hideContent3" role="tab" aria-controls="v-pills-messages">
+                                       style="font-size: .9rem;" id="v-pills-messages-tab" data-toggle="collapse"
+                                       href="#hideContent3" role="tab" aria-controls="v-pills-messages">
                                         通讯录
                                         <i class="fa fa-angle-down d-inline-block float-right mt-1"></i>
                                     </a>
                                     <div class="collapse" id="hideContent3"
-                                        style="background-color: rgb(5, 95, 230) !important;">
+                                         style="background-color: rgb(5, 95, 230) !important;">
                                         <ul class="nav nav-sm flex-column">
                                             <li class="nav-item">
                                                 <a class="nav-link text-light h6 collapsed small mb-0 py-3" href="#"
-                                                    data-tab="通讯录子选项一">
+                                                   data-tab="通讯录子选项一">
                                                     子选项1
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link text-light h6 collapsed small mb-0 py-3" href="#"
-                                                    data-tab="通讯录子选项二">
+                                                   data-tab="通讯录子选项二">
                                                     子选项2
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link text-light h6 collapsed small mb-0 py-3" href="#"
-                                                    data-tab="通讯录子选项三">
+                                                   data-tab="通讯录子选项三">
                                                     子选项3
                                                 </a>
                                             </li>
@@ -133,15 +133,15 @@
                                     </div>
 
                                     <a class="nav-link rounded-0 text-white font-weight-normal mb-0 py-2"
-                                        style="font-size: .9rem;" id="v-pills-settings-tab" href="#v-pills-settings"
-                                        role="tab">
+                                       style="font-size: .9rem;" id="v-pills-settings-tab" href="#v-pills-settings"
+                                       role="tab">
                                         设置
                                     </a>
                                 </nav>
 
                                 <div class="text-center py-2 position-absolute w-75" style="bottom:40px;left:18%">
                                     <i class="fa fa-power-off text-white" aria-hidden="true"
-                                        style="font-size:1.5rem;cursor:pointer"></i>
+                                       style="font-size:1.5rem;cursor:pointer"></i>
                                 </div>
                             </div>
                         </div>
@@ -167,7 +167,7 @@
                     style="left:auto !important">
                     <li class="nav-item">
                         <a class="nav-link active py-2" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-                            aria-selected="true" style="font-size: .9rem;">
+                           aria-selected="true" style="font-size: .9rem;">
                             &nbsp;&nbsp;主页&nbsp;&nbsp;
                             </i>
                         </a>
@@ -178,8 +178,8 @@
                     <div class="w-100 h-100 tab-content" data-framecontainer>
                         <div class="tab-pane fade show active" role="tabpanel" id="home">
                             <iframe src="@Url.Action("AdminIndex", "Home")" class="w-100 min-vh-100" frameborder="0"
-                                name="homeFrame" scrolling="no"
-                                onload="this.height=this.contentWindow.document.body.scrollHeight">
+                                    name="homeFrame" scrolling="no"
+                                    onload="this.height=this.contentWindow.document.body.scrollHeight">
                             </iframe>
                         </div>
                     </div>
@@ -189,11 +189,11 @@
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-        crossorigin="anonymous"></script>
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
     <script>
 
         $(function () {
@@ -262,9 +262,6 @@
                 $("div.w-100.h-100.tab-content").append($panelTemplate);
                 $("div.w-100.h-100.tab-content>div").siblings().removeClass("active");
                 $("div.w-100.h-100.tab-content>div").last().addClass("active");
-            })
-            $(function () {
-                alert("wangkun");
             })
         })
     </script>
