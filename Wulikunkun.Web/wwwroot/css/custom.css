@@ -16,7 +16,7 @@
     font-size: 0.85rem;
 }
 
-.custom-sm-font{
+.custom-sm-font {
     font-size: 12px;
 }
 
@@ -31,14 +31,20 @@
     width: 40%;
 }
 
+.custom-fixed-w-sm {
+    width: .7rem;
+}
+
+.custom-fixed-h-sm {
+    height: .7rem;
+}
 
 /* 倒角 */
-
 .custom-large-radius {
     border-radius: 50%;
 }
 
-.custom-header-shadow{
+.custom-header-shadow {
     box-shadow: 0 0 10px -5px rgb(23 54 71 / 50%);
 }
 
@@ -46,6 +52,6 @@ a.custom-text-decoration-none:hover {
     text-decoration: none;
 }
 
-a:hover{
+a:hover {
     text-decoration: none;
 }

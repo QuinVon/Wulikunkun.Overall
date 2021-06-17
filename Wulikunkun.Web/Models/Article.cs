@@ -20,9 +20,11 @@ namespace Wulikunkun.Web.Models
         public virtual Category Category { get; set; }
     }
 
+    /* 已删除，审核中，已通过，审核未通过 */
     public enum ArticleStatus
     {
         Deleted,
+        Audit,
         Allowed,
         NotAllowed
     }

@@ -74,7 +74,7 @@ namespace Wulikunkun.Web.Controllers
                     targetArticle.Title = article.Title;
                     targetArticle.MarkContent = article.MarkContent;
                     targetArticle.HtmlContent = article.HtmlContent;
-                    targetArticle.Status = ArticleStatus.NotAllowed;
+                    targetArticle.Status = ArticleStatus.Audit;
                     await _dbContext.SaveChangesAsync();
                 }
                 else
@@ -85,7 +85,7 @@ namespace Wulikunkun.Web.Controllers
 
                     article.UserId = userId;
                     article.PublishTime = DateTime.Now;
-                    article.Status = ArticleStatus.NotAllowed;
+                    article.Status = ArticleStatus.Audit;
                     _dbContext.Articles.Add(article);
                     await _dbContext.SaveChangesAsync();
                 }
