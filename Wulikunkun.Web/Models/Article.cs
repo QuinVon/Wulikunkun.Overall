@@ -11,6 +11,7 @@ namespace Wulikunkun.Web.Models
         public string MarkContent { get; set; }
         public string HtmlContent { get; set; }
         public DateTime PublishTime { get; set; }
+        public DateTime UpdateTime { get; set; }
         public byte Tag { get; set; }
         public int ViewTimes { get; set; }
         public ArticleStatus? Status { get; set; }

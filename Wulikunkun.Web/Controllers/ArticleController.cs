@@ -74,6 +74,7 @@ namespace Wulikunkun.Web.Controllers
                     targetArticle.Title = article.Title;
                     targetArticle.MarkContent = article.MarkContent;
                     targetArticle.HtmlContent = article.HtmlContent;
+                    targetArticle.UpdateTime = DateTime.Now;
                     targetArticle.Status = ArticleStatus.Audit;
                     await _dbContext.SaveChangesAsync();
                 }
@@ -84,7 +85,9 @@ namespace Wulikunkun.Web.Controllers
                     string userId = _signManager.UserManager.GetUserId(claimsPrincipal);
 
                     article.UserId = userId;
-                    article.PublishTime = DateTime.Now;
+                    DateTime now = DateTime.Now;
+                    article.PublishTime = now;
+                    article.UpdateTime = now;
                     article.Status = ArticleStatus.Audit;
                     _dbContext.Articles.Add(article);
                     await _dbContext.SaveChangesAsync();
