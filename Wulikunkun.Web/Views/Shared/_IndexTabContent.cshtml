@@ -11,14 +11,15 @@
             i++;
             if (i % 2 == 0)
             {
-                <div class="card rounded-sm my-2 my-lg-3 border-top-0 border-left-0 border-bottom-0 border-right-0 bg-light custom-fixed-height">
+                <div
+            class="card rounded-sm my-2 my-lg-3 border-top-0 border-left-0 border-bottom-0 border-right-0 bg-light custom-fixed-height">
                     <div class="card-body mb-lg-2">
                         <h5 class="card-title text-primary" style="font-size: .88rem;">
                             <a asp-controller="article" asp-action="detail" asp-route-articleid="@item.Id">@item.Title</a>
                             <span class="badge badge-primary float-right rounded-circle ml-3 small"
-                                  style="width: 1.3rem; height: 1.3rem; font-size: .8rem;" title="浏览次数">
-                                @{ 
-                                    if(item.ViewTimes>9)
+                        style="width: 1.3rem; height: 1.3rem; font-size: .8rem;" title="浏览次数">
+                                @{
+                                    if (item.ViewTimes > 9)
                                     {
                                         <span>9+</span>
                                     }
@@ -45,7 +46,7 @@
                         <h5 class="card-title text-primary" style="font-size: .88rem;">
                             <a asp-controller="article" asp-action="detail" asp-route-articleid="@item.Id">@item.Title</a>
                             <span class="badge badge-warning float-right rounded-circle ml-3 small"
-                                  style="width: 1.3rem; height: 1.3rem; font-size: .8rem;" title="浏览次数">
+                        style="width: 1.3rem; height: 1.3rem; font-size: .8rem;" title="浏览次数">
                                 @{
                                     if (item.ViewTimes > 9)
                                     {
@@ -97,4 +98,3 @@
         <a class="page-link custom-cursor" data-pagenum="@(Model.PageIndex + 1)">下一页</a>
     </li>
 </ul>
-
