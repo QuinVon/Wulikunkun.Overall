@@ -37,16 +37,9 @@ namespace Wulikunkun.Web.Controllers
         {
             ClaimsPrincipal claimsPrincipal = HttpContext.User as ClaimsPrincipal;
             string userId = _signManager.UserManager.GetUserId(claimsPrincipal);
+            /* ø…“‘¡Ù“‚“ªœ¬’‚¿Ô“Ï≤ΩToListµƒAPI */
             IQueryable<Article> articles = _dbContext.Articles.Where(article => article.UserId == userId && article.Status != ArticleStatus.Deleted);
             PaginatedList<Article> paginatedArticles = await PaginatedList<Article>.CreateAsync(articles.AsNoTracking(), pageNumber, pageSize);
-            /* Êà™ÂèñÊØè‰∏ÄÁØáÊñáÁ´†ÂÜÖÂÆπÁöÑÂâç200‰∏™Â≠óÁ¨¶ÂëàÁé∞Âà∞‰∏™‰∫∫È¶ñÈ°µ */
-            paginatedArticles.ForEach(article =>
-            {
-                if (article.HtmlContent.Length > 200)
-                {
-                    article.HtmlContent = article.HtmlContent.Substring(0, 200);
-                }
-            });
             return PartialView("_PersonalArticles", paginatedArticles);
         }
 

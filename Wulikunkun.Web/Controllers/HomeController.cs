@@ -53,14 +53,6 @@ namespace Wulikunkun.Web.Controllers
         {
             IQueryable<Article> articlesIQ = _dbContext.Articles.Where(item => item.Status == ArticleStatus.Allowed && item.CategoryId == categoryId).OrderByDescending(article => article.UpdateTime);
             PaginatedList<Article> articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);
-            /* 截取每一篇文章内容的前200个字符呈现到首页 */
-            articles.ForEach(article =>
-            {
-                if (article.HtmlContent.Length > 200)
-                {
-                    article.HtmlContent = article.HtmlContent.Substring(0, 200);
-                }
-            });
             return PartialView("_IndexTabContent", articles);
         }
 
