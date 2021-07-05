@@ -37,7 +37,6 @@ namespace Wulikunkun.Web.Controllers
         {
             ClaimsPrincipal claimsPrincipal = HttpContext.User as ClaimsPrincipal;
             string userId = _signManager.UserManager.GetUserId(claimsPrincipal);
-            /* 可以留意一下这里异步ToList的API */
             IQueryable<Article> articles = _dbContext.Articles.Where(article => article.UserId == userId && article.Status != ArticleStatus.Deleted);
             PaginatedList<Article> paginatedArticles = await PaginatedList<Article>.CreateAsync(articles.AsNoTracking(), pageNumber, pageSize);
             return PartialView("_PersonalArticles", paginatedArticles);

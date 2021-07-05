@@ -12,7 +12,6 @@
         /* 考虑到用户编写的内容中可能并没有父级标签包裹标题标签，所以在此手动使用div进行强制包裹 */
         this.$domData = $("<div>" + this.settings.data + "</div>");
 
-        debugger;
         this.components = {
             $container: $(
                 "<div class='container-fluid'><div class='row p-1' id='container'></div></div>"
@@ -74,7 +73,7 @@
             this.components.$leftPanelCover.after(
                 this.components.$leftPanelNavContainer
             );
-
+            this.components.$container.children().append(this.components.$rightPanel);
             this.components.$container.children().append(this.components.$leftPanel);
 
             this.components.$leftPanelNavContainer
@@ -82,30 +81,32 @@
                 .first()
                 .css("background", "#a2c9f9");
 
+
             /* 向右侧面板添加内容 ,初始加载时只显示第一个H1节点及其字节点对应的内容*/
             /* 使用jquery容易弄混子代和同级的查询，下面这行代码实现了一种‘区间查询的效果’ */
-            var firstHTag = this.$domData.find("h1").first().prop("outerHTML");
-            var $firstHTagContent = this.$domData.find("h1").first().nextUntil("h1");
-            var firstHTagContentString = "";
+            // var firstHTag = this.$domData.find("h1").first().prop("outerHTML");
+            // var $firstHTagContent = this.$domData.find("h1").first().nextUntil("h1");
+            // var firstHTagContentString = "";
 
-            /*一个常见的问题，在对一个jquery对象集合 进行遍历时，遍历的单个元素需要使用$包裹 */
-            for (var i = 0; i < $firstHTagContent.length; i++) {
-                firstHTagContentString += $($firstHTagContent[i]).prop("outerHTML");
-            }
+            /*一个常见的问题，在对一个jquery对象集合进行遍历时，遍历的单个元素需要使用$包裹 */
+            // for (var i = 0; i < $firstHTagContent.length; i++) {
+            //     firstHTagContentString += $($firstHTagContent[i]).prop("outerHTML");
+            // }
             /* 在没有添加到dom之前，貌似不可以对其调用after方法 */
             // var $firstHTagTotalContent = $firstHTag.after($firstHTagContent);
 
-            var firstHTagTotalContent = firstHTag + firstHTagContentString;
+            // var firstHTagTotalContent = firstHTag + firstHTagContentString;
 
-            this.components.$rightPanel.find("div.card").html(firstHTagTotalContent);
-            this.components.$rightPanel
-                .find("div.card")
-                .parent()
-                .append(
-                    '<div class="overflow-hidden"><span class="border-top border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-top float-right" style="width:1.5rem;height:1.5rem"></span></div>'
-                );
+            // this.components.$rightPanel.find("div.card").html(firstHTagTotalContent);
+            // this.components.$rightPanel
+            //     .find("div.card")
+            //     .parent()
+            //     .append(
+            //         '<div class="overflow-hidden"><span class="border-top border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-top float-right" style="width:1.5rem;height:1.5rem"></span></div>'
+            //     );
 
             this.components.$container.children().append(this.components.$rightPanel);
+
             this.$ele.append(this.components.$container);
         },
         initEvents: function () {
@@ -116,6 +117,9 @@
             this.components.$leftPanelNavContainer
                 .find("a")
                 .on("click", $.proxy(this.ShowLevelContent, this));
+
+            /* 默认加载第一个标题及其下面的内容，不论这个标题是几级标题 */
+            this.components.$leftPanelNavContainer.find("a").first().click();
         },
         showOrHideChildLevel: function (e) {
             var $currentLevel = $(e.target);
@@ -157,7 +161,6 @@
             );
 
             /* last是对当前选择器选中的dom集合进行过滤，而不是从当前jquery对象的子元素中进行过滤 */
-
             var $parentLevel = null;
             if (parentLevelNum == 1) {
                 $parentLevel = this.components.$leftPanelNavContainer
@@ -169,7 +172,13 @@
                     .last();
             }
 
-            if ($parentLevel.children("i").length == 0) {
+
+            /* 如果没有找到父level */
+            if ($parentLevel.length == 0) {
+                this.components.$leftPanelNavContainer.append($nextLevelItem);
+            }
+            /* 找到了父level但是父level还没有子level */
+            else if ($parentLevel.children("i").length == 0) {
                 $parentLevel.append(
                     '&nbsp;&nbsp;<i class="fa fa-angle-right text-black-50" aria-hidden="true"></i>'
                 );
@@ -179,49 +188,66 @@
                 $nextLevelContainer.append($nextLevelItem);
                 $nextLevelContainer.hide();
                 $parentLevel.after($nextLevelContainer);
-            } else {
+            }
+            /* 找到了父level同时父level已经有了子level */
+            else {
                 $parentLevel.next().append($nextLevelItem);
             }
         },
         /* 在左侧导航栏点击不同的一级链接时在右侧只显示该一级标题下的内容 */
         ShowLevelContent: function (e) {
+
             var $targetLevel = $(e.target);
+            var currHTagTitle = $targetLevel.text().trim();
 
-            /*  左侧导航栏选中项的背景色设置*/
-            this.components.$leftPanelNavContainer.find("a").removeAttr("style");
-            $targetLevel.css("background", "#a2c9f9");
-
-            var level = $targetLevel.data("level");
-            if (level == 1) {
-                var firstLevelTitle = $targetLevel.text().trim();
-                var $firstLevelItem = this.$domData.find(
-                    "h1:contains(" + firstLevelTitle + ")"
-                );
-
-                var firstHTag = $firstLevelItem.prop("outerHTML");
-                var $firstHTagContent = $firstLevelItem.nextUntil("h1");
-                var firstHTagContentString = "";
-                for (var i = 0; i < $firstHTagContent.length; i++) {
-                    firstHTagContentString += $($firstHTagContent[i]).prop("outerHTML");
+            /* 在文章内容中定位到我们对应的HTag,这里的find选择器待优化 */
+            var $seletedHTag;
+            var allHTags = this.$domData.find("h1,h2,h3,h4,h5,h6");
+            for (var i = 0; i < allHTags.length; i++) {
+                var $tagItem = $(allHTags[i]);
+                if ($tagItem.text() === currHTagTitle) {
+                    $seletedHTag = $tagItem;
                 }
-                var firstHTagTotalContent = firstHTag + firstHTagContentString;
+            }
 
+            /* 获取选中的H标签的HTML */
+            var selectedHTagHtml = $seletedHTag.prop("outerHTML");
+
+            /* 获取选中的H标签后面的正文内容的HTML */
+            var $selectedHTagContent = $seletedHTag.nextUntil("h1,h2,h3,h4,h5,h6");
+            var selectedHTagContentString = "";
+            for (var i = 0; i < $selectedHTagContent.length; i++) {
+                selectedHTagContentString += $($selectedHTagContent[i]).prop("outerHTML");
+            }
+            /* 将选中的H标签及其对应的正文内容进行合并 */
+            var selectedHTagTotalContent = selectedHTagHtml + selectedHTagContentString;
+
+            this.components.$rightPanel.find("div.card").html(selectedHTagTotalContent);
+            debugger;
+
+            /* 如果该标题下没有内容，则直接定位到下一个有内容的标题 */
+            if (selectedHTagTotalContent == "") {
+                /* 如果其包含子标题，则定位到其第一个子标题 */
+                if ($targetLevel.next()[0].tagName.toLowerCase() == "div") {
+                    $targetLevel.next().find("a").first().click();
+                } else {
+                    /* 如果不包含子标题，则定位到其下一个相邻的兄弟标题 */
+                    $targetLevel.next().click();
+                }
+            }
+            this.components.$rightPanel.find("div.custom-card").parent().scrollTop(0);
+
+            /* 确定右侧panel底部定位器的数量，如果已经存在，则不必重复添加 */
+            var bottomLocatorNum = this.components.$rightPanel.find(
+                "span.border-top.border-right"
+            ).length;
+            if (bottomLocatorNum === 0) {
                 this.components.$rightPanel
                     .find("div.card")
-                    .html(firstHTagTotalContent);
-
-                /*  确定右侧panel底部定位器的数量，如果已经存在，则不必重复添加*/
-                var bottomLocatorNum = this.components.$rightPanel.find(
-                    "span.border-top.border-right"
-                ).length;
-                if (bottomLocatorNum === 0) {
-                    this.components.$rightPanel
-                        .find("div.card")
-                        .parent()
-                        .append(
-                            '<div class="overflow-hidden"><span class="border-top border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-top float-right" style="width:1.5rem;height:1.5rem"></span></div>'
-                        );
-                }
+                    .parent()
+                    .append(
+                        '<div class="overflow-hidden"><span class="border-top border-right float-left" style="width:1.5rem;height:1.5rem"></span><span class="border-left border-top float-right" style="width:1.5rem;height:1.5rem"></span></div>'
+                    );
             }
         },
     };
