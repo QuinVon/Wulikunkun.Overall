@@ -118,6 +118,10 @@
                 .find("a")
                 .on("click", $.proxy(this.ShowLevelContent, this));
 
+            this.components.$leftPanel
+                .find("a")
+                .on("click", $.proxy(this.ChangeNavBg, this));
+
             /* 默认加载第一个标题及其下面的内容，不论这个标题是几级标题 */
             this.components.$leftPanelNavContainer.find("a").first().click();
         },
@@ -144,6 +148,11 @@
             var $selectedLevel = selectedLevel;
             $selectedLevel.attr("isshow", "false");
             $selectedLevel.next("div").slideUp();
+        },
+        ChangeNavBg: function (e) {
+            var $targetItem = $(e.target);
+            this.components.$leftPanel.find("a").removeAttr("style");
+            $targetItem.css("background", "rgb(162, 201, 249)");
         },
         GenerateChildLevel: function (tagItem) {
             var nextLevelNum = tagItem.tagName[1],
@@ -226,7 +235,7 @@
             debugger;
 
             /* 如果该标题下没有内容，则直接定位到下一个有内容的标题 */
-            if (selectedHTagTotalContent == "") {
+            if (selectedHTagContentString == "") {
                 /* 如果其包含子标题，则定位到其第一个子标题 */
                 if ($targetLevel.next()[0].tagName.toLowerCase() == "div") {
                     $targetLevel.next().find("a").first().click();
