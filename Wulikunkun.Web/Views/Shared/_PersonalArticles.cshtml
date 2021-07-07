@@ -7,108 +7,111 @@
 
 @if (Model.Count == 0)
 {
-<span>
-    尚未发表任何文章。
-</span>
+    <span>
+        尚未发表任何文章。
+    </span>
 }
 else
 {
-<table class="table table-striped mt-3 mb-4 border-top border-light">
+    <table class="table table-striped mt-3 mb-4 border-top border-light">
 
-    <thead>
-        <tr>
-            @*<th scope="col"
+        <thead>
+            <tr>
+                @*<th scope="col"
                     class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">
                     编号
-                </th>*@
-            <th scope="col"
-                class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
-                文章名称
-            </th>
-            <th scope="col"
-                class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">
-                浏览量
-            </th>
-            <th scope="col"
-                class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
-                发布时间
-            </th>
-            <th scope="col"
-                class="border-top-0 text-secondary text-center font-weight-normal custom-tab-font-size">
-                状态
-            </th>
-            <th scope="col"
-                class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
-                操作
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var article in Model)
+                    </th>*@
+                <th scope="col" class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
+                    文章名称
+                </th>
+                <th scope="col" class="border-top-0 text-secondary font-weight-normal text-center custom-tab-font-size">
+                    浏览量
+                </th>
+                <th scope="col" class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
+                    发布时间
+                </th>
+                <th scope="col" class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
+                    更新时间
+                </th>
+                <th scope="col" class="border-top-0 text-secondary text-center font-weight-normal custom-tab-font-size">
+                    状态
+                </th>
+                <th scope="col" class="border-top-0 text-secondary font-weight-normal custom-tab-font-size">
+                    操作
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var article in Model)
             {
-        <tr>
-            @*<th scope="row"
-                    class="text-secondary font-weight-light text-center custom-table-font-size">
-                    1
-                </th>*@
-            <td class="align-middle font-weight-lighter custom-table-font-size">
-                <a class="text-secondary" asp-controller="Article" asp-action="Detail" asp-route-articleId="@article.Id">
-                    @article.Title
-                </a>
-
-            </td>
-            <td class="text-secondary align-middle font-weight-light text-center custom-table-font-size">
-                @article.ViewTimes
-            </td>
-            <td class="text-secondary align-middle font-weight-light custom-table-font-size">@article.PublishTime</td>
-            <td class="text-center">
-                @if (article.Status == ArticleStatus.Allowed)
+                <tr>
+                    @*<th scope="row"
+                        class="text-secondary font-weight-light text-center custom-table-font-size">
+                        1
+                        </th>*@
+                    <td class="align-middle font-weight-lighter custom-table-font-size">
+                        <a class="text-secondary" asp-controller="Article" asp-action="Detail"
+                    asp-route-articleId="@article.Id">
+                            @article.Title
+                        </a>
+                    </td>
+                    <td class="text-secondary align-middle font-weight-light text-center custom-table-font-size">
+                        @article.ViewTimes
+                    </td>
+                    <td class="text-secondary align-middle font-weight-light custom-table-font-size">@article.PublishTime</td>
+                    <td class="text-secondary align-middle font-weight-light custom-table-font-size">@article.UpdateTime</td>
+                    <td class="text-center">
+                        @if (article.Status == ArticleStatus.Allowed)
                         {
-                <span class="bg-success px-1 rounded-lg custom-fixed-w-sm custom-fixed-h-sm d-inline-block" title="已通过"></span>
+                            <span class="bg-success px-1 rounded-lg custom-fixed-w-sm custom-fixed-h-sm d-inline-block"
+                    title="已通过"></span>
                         }
-                @if (article.Status == ArticleStatus.NotAllowed)
+                        @if (article.Status == ArticleStatus.NotAllowed)
                         {
-                <span class="bg-danger px-1 rounded-lg custom-fixed-w-sm custom-fixed-h-sm d-inline-block" title="未通过"></span>
+                            <span class="bg-danger px-1 rounded-lg custom-fixed-w-sm custom-fixed-h-sm d-inline-block"
+                    title="未通过"></span>
                         }
-                @if (article.Status != ArticleStatus.NotAllowed && article.Status != ArticleStatus.Allowed)
+                        @if (article.Status != ArticleStatus.NotAllowed && article.Status != ArticleStatus.Allowed)
                         {
-                <span class="bg-warning px-1 rounded-lg custom-fixed-w-sm custom-fixed-h-sm d-inline-block" title="审核中"></span>
+                            <span class="bg-warning px-1 rounded-lg custom-fixed-w-sm custom-fixed-h-sm d-inline-block"
+                    title="审核中"></span>
                         }
-            </td>
-            <td>
-                <a class="mr-1 text-primary" asp-controller="Article" asp-action="Editor" asp-route-articleId="@article.Id" title="编辑"><i class="fas fa-pen-nib"></i></a>
-                <a class="text-primary" href="#" title="删除" data-articleid="@article.Id" data-deletebutton><i class="far fa-trash-alt"></i></a>
-            </td>
-        </tr>
+                    </td>
+                    <td>
+                        <a class="mr-1 text-primary" asp-controller="Article" asp-action="Editor"
+                    asp-route-articleId="@article.Id" title="编辑"><i class="fas fa-pen-nib"></i></a>
+                        <a class="text-primary" href="#" title="删除" data-articleid="@article.Id" data-deletebutton><i
+                        class="far fa-trash-alt"></i></a>
+                    </td>
+                </tr>
             }
-    </tbody>
-</table>
+        </tbody>
+    </table>
 
-<ul class="pagination pagination-sm justify-content-left">
-    <li class="page-item @prevDisabled">
-        <a class="page-link custom-cursor" data-pagenum="@(Model.PageIndex - 1)">上一页</a>
-    </li>
-    @{
+    <ul class="pagination pagination-sm justify-content-left">
+        <li class="page-item @prevDisabled">
+            <a class="page-link custom-cursor" data-pagenum="@(Model.PageIndex - 1)">上一页</a>
+        </li>
+        @{
             for (int j = 1; j <= Model.TotalPages; j++)
             {
-        @if (@Model.PageIndex == j)
+                @if (@Model.PageIndex == j)
                 {
-        <li class="page-item disabled">
-            <a class="page-link custom-cursor " data-pagenum="@j">@j</a>
-        </li>
+                    <li class="page-item disabled">
+                        <a class="page-link custom-cursor " data-pagenum="@j">@j</a>
+                    </li>
                 }
                 else
                 {
-        <li class="page-item">
-            <a class="page-link custom-cursor" data-pagenum="@j">@j</a>
-        </li>
+                    <li class="page-item">
+                        <a class="page-link custom-cursor" data-pagenum="@j">@j</a>
+                    </li>
                 }
             }
-    }
-    <li class="page-item  @nextDisabled">
-        <a class="page-link custom-cursor" data-pagenum="@(Model.PageIndex + 1)">下一页</a>
-    </li>
-</ul>
+        }
+        <li class="page-item  @nextDisabled">
+            <a class="page-link custom-cursor" data-pagenum="@(Model.PageIndex + 1)">下一页</a>
+        </li>
+    </ul>
 
 }
-
