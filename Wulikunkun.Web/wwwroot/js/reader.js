@@ -110,6 +110,11 @@
             this.$ele.append(this.components.$container);
         },
         initEvents: function () {
+
+            this.components.$leftPanel
+                .find("a")
+                .on("click", $.proxy(this.ChangeNavBg, this));
+
             this.components.$leftPanelNavContainer
                 .children()
                 .on("click", $.proxy(this.showOrHideChildLevel, this));
@@ -117,10 +122,6 @@
             this.components.$leftPanelNavContainer
                 .find("a")
                 .on("click", $.proxy(this.ShowLevelContent, this));
-
-            this.components.$leftPanel
-                .find("a")
-                .on("click", $.proxy(this.ChangeNavBg, this));
 
             /* 默认加载第一个标题及其下面的内容，不论这个标题是几级标题 */
             this.components.$leftPanelNavContainer.find("a").first().click();
@@ -232,7 +233,6 @@
             var selectedHTagTotalContent = selectedHTagHtml + selectedHTagContentString;
 
             this.components.$rightPanel.find("div.card").html(selectedHTagTotalContent);
-            debugger;
 
             /* 如果该标题下没有内容，则直接定位到下一个有内容的标题 */
             if (selectedHTagContentString == "") {
