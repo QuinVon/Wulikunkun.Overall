@@ -62,7 +62,7 @@
                         "</a>"
                     );
                     this.components.$leftPanelNavContainer.append($nextLevelItem);
-                } else this.GenerateChildLevel(currentItem);
+                } else this.generateChildLevel(currentItem);
             }
 
             /* 向左侧面板添加内容 */
@@ -113,7 +113,7 @@
 
             this.components.$leftPanel
                 .find("a")
-                .on("click", $.proxy(this.ChangeNavBg, this));
+                .on("click", $.proxy(this.changeNavBg, this));
 
             this.components.$leftPanelNavContainer
                 .children()
@@ -121,7 +121,7 @@
 
             this.components.$leftPanelNavContainer
                 .find("a")
-                .on("click", $.proxy(this.ShowLevelContent, this));
+                .on("click", $.proxy(this.showLevelContent, this));
 
             /* 默认加载第一个标题及其下面的内容，不论这个标题是几级标题 */
             this.components.$leftPanelNavContainer.find("a").first().click();
@@ -150,12 +150,12 @@
             $selectedLevel.attr("isshow", "false");
             $selectedLevel.next("div").slideUp();
         },
-        ChangeNavBg: function (e) {
+        changeNavBg: function (e) {
             var $targetItem = $(e.target);
             this.components.$leftPanel.find("a").removeAttr("style");
             $targetItem.css("background", "rgb(162, 201, 249)");
         },
-        GenerateChildLevel: function (tagItem) {
+        generateChildLevel: function (tagItem) {
             var nextLevelNum = tagItem.tagName[1],
                 parentLevelNum = nextLevelNum - 1;
 
@@ -205,7 +205,7 @@
             }
         },
         /* 在左侧导航栏点击不同的一级链接时在右侧只显示该一级标题下的内容 */
-        ShowLevelContent: function (e) {
+        showLevelContent: function (e) {
 
             var $targetLevel = $(e.target);
             var currHTagTitle = $targetLevel.text().trim();
@@ -259,6 +259,9 @@
                     );
             }
         },
+        generateCopyButton: function (htmlContent) {
+
+        }
     };
 
     $.fn.Reader = function (options) {

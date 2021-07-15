@@ -34,6 +34,12 @@ namespace Wulikunkun.Web.Controllers
             _signManager = signInManager;
         }
 
+        public async Task<IActionResult> SignOutAsync()
+        {
+            await _signManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
         public async Task<IActionResult> IndexAsync()
         {
             var categories = await _dbContext.Categories.ToListAsync();
