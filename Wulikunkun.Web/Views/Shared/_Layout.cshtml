@@ -23,82 +23,9 @@
 </head>
 
 <body class="mt-0">
-    <!-- 手机端顶部 -->
-    <div class="d-sm-none container-fluid text-primary bg-primary pt-5 border-bottom-0 position-relative mb-4 "
-        style="font-size: 1.5rem;height: 11rem; background: linear-gradient(to left, #00c6ff, #0072ff)">
-        <div class=" card rounded-lg mx-auto position-absolute border-bottom-0 border-left-0 border-right-0 border-top-0"
-            style="top: 3.4rem; width: 92%; left: 0; right: 0;">
-            <div class="card-body pb-2 bg-white">
-                <div class="row text-center">
-                    <div class="col-3 text-center">
-                        <div class="row">
-                            <i class="fas fa-book mx-auto"></i>
-                        </div>
-                        <div class="row">
-                            <small class="mx-auto" style="font-size: .8rem;"> Ebooks </small>
-                        </div>
-                    </div>
-                    <div class="col-3 text-center">
-                        <div class="row">
-                            <i class="fas fa-envelope mx-auto"></i>
-                        </div>
-                        <div class="row">
-                            <small class="mx-auto" style="font-size: .8rem;"> Messages </small>
-                        </div>
-                    </div>
-                    <div class="col-3 text-center">
-                        <div class="row">
-                            <i class="fas fa-map-marker mx-auto"></i>
-                        </div>
-                        <div class="row">
-                            <small class="mx-auto" style="font-size: .8rem;"> Location </small>
-                        </div>
-                    </div>
-                    <div class="col-3 text-center">
-                        <div class="row">
-                            <i class="fas fa-user-circle mx-auto"></i>
-                        </div>
-                        <div class="row">
-                            <small class="mx-auto" style="font-size: .8rem;"> Account </small>
-                        </div>
-                    </div>
-                </div>
-                <div class="row text-center mt-3">
-                    <div class="col-3 text-center">
-                        <div class="row">
-                            <i class="fas fa-images mx-auto"></i>
-                        </div>
-                        <div class="row">
-                            <small class="mx-auto" style="font-size: .8rem;"> Images </small>
-                        </div>
-                    </div>
-                    <div class="col-3 text-center">
-                        <div class="row">
-                            <i class="fas fa-bell mx-auto"></i>
-                        </div>
-                        <div class="row">
-                            <small class="mx-auto" style="font-size: .8rem;"> Notification </small>
-                        </div>
-                    </div>
-                    <div class="col-3 text-center">
-                        <div class="row">
-                            <i class="fas fa-stamp mx-auto mx-auto"></i>
-                        </div>
-                        <div class="row">
-                            <small class="mx-auto" style="font-size: .8rem;"> Identify </small>
-                        </div>
-                    </div>
-                    <div class="col-3 text-center">
-                        <div class="row">
-                            <i class="fas fa-wallet mx-auto"></i>
-                        </div>
-                        <div class="row">
-                            <small class="mx-auto" style="font-size: .8rem;"> Wallet </small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+    @* 手机端顶部 *@
+    <div class="d-sm-none container-fluid text-primary py-3 border-bottom-0 position-relative mb-4">
     </div>
 
     <!-- 大屏幕下的顶部 -->
@@ -155,6 +82,49 @@
     <!--中间主要内容-->
     <div class="container-fluid pt-3 px-sm-3 px-md-5 custom-font-family">
         @RenderBody()
+    </div>
+
+    <!-- 手机端顶部 -->
+
+    <div class="d-sm-none fixed-bottom bg-transparent text-light card mx-auto border-bottom-0 border-left-0 border-right-0 border-top-0 px-3"
+        style="bottom:1.5rem">
+        <div class="card-body pb-2"
+            style="background: linear-gradient(to bottom, #00c6ff, #0072ff) !important;border-radius:1.2rem !important">
+            <div class="row text-center">
+                <div class="col-3 text-center">
+                    <div class="row">
+                        <i class="fas fa-book mx-auto"></i>
+                    </div>
+                    <div class="row">
+                        <small class="mx-auto" style="font-size: .8rem;"> Ebooks </small>
+                    </div>
+                </div>
+                <div class="col-3 text-center">
+                    <div class="row">
+                        <i class="fas fa-envelope mx-auto"></i>
+                    </div>
+                    <div class="row">
+                        <small class="mx-auto" style="font-size: .8rem;"> Messages </small>
+                    </div>
+                </div>
+                <div class="col-3 text-center">
+                    <div class="row">
+                        <i class="fas fa-map-marker mx-auto"></i>
+                    </div>
+                    <div class="row">
+                        <small class="mx-auto" style="font-size: .8rem;"> Location </small>
+                    </div>
+                </div>
+                <div class="col-3 text-center">
+                    <div class="row">
+                        <i class="fas fa-user-circle mx-auto"></i>
+                    </div>
+                    <div class="row">
+                        <small class="mx-auto" style="font-size: .8rem;"> Account </small>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!--底部footer-->
