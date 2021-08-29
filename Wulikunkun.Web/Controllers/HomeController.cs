@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using HtmlAgilityPack;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -59,6 +61,13 @@ namespace Wulikunkun.Web.Controllers
         {
             IQueryable<Article> articlesIQ = _dbContext.Articles.Where(item => item.Status == ArticleStatus.Allowed && item.CategoryId == categoryId).OrderByDescending(article => article.UpdateTime);
             PaginatedList<Article> articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);
+            articles.Select(item =>
+            {
+                HtmlDocument doc = new HtmlDocument();
+                doc.LoadHtml(item.HtmlContent);
+                item.HtmlContent = doc.DocumentNode.FirstChild.InnerText;
+                return item;
+            }).ToList();
             return PartialView("_IndexTabContent", articles);
         }
 
