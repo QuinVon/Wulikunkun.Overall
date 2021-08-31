@@ -7,7 +7,7 @@
 @{
     ViewData["Title"] = "主页";
 }
-
+<link href="~/css/swiper-3.2.7.min.css" rel="stylesheet" />
 <link href="~/css/custom.css" rel="stylesheet" />
 <style>
     input::-webkit-input-placeholder {
@@ -18,19 +18,19 @@
         border-bottom: 1px solid #f3f3f3;
     }
 
-    .nav-tabs .nav-link.active {
-        border-top-color: #f3f3f3;
-        border-left-color: #f3f3f3;
-        border-right-color: #f3f3f3;
-    }
+        .nav-tabs .nav-link.active {
+            border-top-color: #f3f3f3;
+            border-left-color: #f3f3f3;
+            border-right-color: #f3f3f3;
+        }
 
     .col-sm-12.col-md-8 .nav-link {
         color: rgba(0, 0, 0, .5) !important;
     }
 
-    .col-sm-12.col-md-8 .nav-link.active {
-        color: #007bff !important;
-    }
+        .col-sm-12.col-md-8 .nav-link.active {
+            color: #007bff !important;
+        }
 
     .custom-fixed-height {
         max-height: 5rem !important;
@@ -50,9 +50,9 @@
         font-size: .8rem !important;
     }
 
-    .custom-index-card-content> :first-child {
-        margin-bottom: 1.5rem;
-    }
+        .custom-index-card-content > :first-child {
+            margin-bottom: 1.5rem;
+        }
 
     .custom-cursor {
         cursor: pointer;
@@ -111,7 +111,7 @@
                 <p class="card-text">
                     <!-- www.wulikunkun.com 首页左侧 -->
                     <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-9750824095604007"
-                        data-ad-slot="8918932037" data-ad-format="auto" data-full-width-responsive="true"></ins>
+                         data-ad-slot="8918932037" data-ad-format="auto" data-full-width-responsive="true"></ins>
                     <script>
                         (adsbygoogle = window.adsbygoogle || []).push({});
                     </script>
@@ -120,19 +120,31 @@
         </div>
     </div>
 
-    <!-- 中间tab区域 -->
     <div class="col-sm-12 col-md-8">
-        <div style="font-size: .9rem;" class="mb-2" id="category_tab">
+        <!-- 大屏幕中间tab区域 -->
+        <div style="font-size: .9rem;" class="mb-2 d-none d-sm-block" id="category_tab">
             <ul class="nav nav-tabs" data-tabs>
                 @foreach (var item in @ViewBag.Categories)
                 {
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" style="font-size: .8rem;" data-categoryid="@item.Id">@item.Name</a>
-                    </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" style="font-size: .8rem;" data-categoryid="@item.Id">@item.Name</a>
+                </li>
                 }
             </ul>
         </div>
 
+        <div class="d-sm-none container px-0">
+            <div class="swiper-container swiper1">
+                <div class="swiper-wrapper">
+                    @foreach (var item in @ViewBag.Categories)
+                    {
+                    <div class="rounded-sm bg-light d-inline-block text-center text-black-50 py-1 px-2 swiper-slide w-auto">
+                        @item.Name
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
         <div id="update_panel">
         </div>
 
@@ -144,45 +156,45 @@
             <div class="card-body">
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <div class="text-center mx-auto">
-                        <a asp-controller="Personal" asp-action="Index" class="custom-text-decoration-none">
-                            <i class="fa fa-user-circle d-block h1 custom-avatar-color"></i>
-                        </a>
-                        <span>Hi~ </span> <a asp-controller="Personal" asp-action="Index"
-                        class="custom-text-decoration-none">@User.Identity.Name</a>
-                        <a asp-controller="Home" asp-action="SignOut" type="button"
-                        class="btn btn-outline-secondary btn-sm py-0 px-1">登出</a>
-                    </div>
-                }
-                else
-                {
-                    <form class="text-muted" name="logInForm">
-                        <div class="form-group">
-                            <label for="email_input" style="font-size: .88rem;">用户名称:</label>
-                            <input type="text" name="username" class="form-control small" placeholder="用户名称"
-                            id="email_input" style="font-size: .88rem" />
-                        </div>
-                        <div class="form-group">
-                            <label for="password_input" style="font-size: .88rem">
-                                用户密码:
-                            </label>
-                            <input name="password" type="password" placeholder="密码" id="password_input" class="form-control"
-                            style="font-size: .88rem" />
-                        </div>
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="input_check" />
-                            <label class="form-check-label" for="input_check" style="font-size: .88rem;">记住我</label>
-                        </div>
-                        <button type="button" name="submitButton" class="btn btn-sm btn-primary float-left ml-1 rounded-sm"
-                        style="font-size: .88rem;">
-                            登&nbsp;录
-                        </button>
-                        <a class="btn btn-primary btn-sm float-right mr-1 rounded-sm"
-                        href="@Url.Action("Index", "Register")" style="font-size: .88rem;">
-                            注&nbsp;册
-                        </a>
-                    </form>
-                }
+                <div class="text-center mx-auto">
+                    <a asp-controller="Personal" asp-action="Index" class="custom-text-decoration-none">
+                        <i class="fa fa-user-circle d-block h1 custom-avatar-color"></i>
+                    </a>
+                    <span>Hi~ </span> <a asp-controller="Personal" asp-action="Index"
+                                         class="custom-text-decoration-none">@User.Identity.Name</a>
+                                        <a asp-controller="Home" asp-action="SignOut" type="button"
+                                           class="btn btn-outline-secondary btn-sm py-0 px-1">登出</a>
+                                    </div>
+                                    }
+                                    else
+                                    {
+                                    <form class="text-muted" name="logInForm">
+                                        <div class="form-group">
+                                            <label for="email_input" style="font-size: .88rem;">用户名称:</label>
+                                            <input type="text" name="username" class="form-control small" placeholder="用户名称"
+                                                   id="email_input" style="font-size: .88rem" />
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="password_input" style="font-size: .88rem">
+                                                用户密码:
+                                            </label>
+                                            <input name="password" type="password" placeholder="密码" id="password_input" class="form-control"
+                                                   style="font-size: .88rem" />
+                                        </div>
+                                        <div class="form-group form-check">
+                                            <input type="checkbox" class="form-check-input" id="input_check" />
+                                            <label class="form-check-label" for="input_check" style="font-size: .88rem;">记住我</label>
+                                        </div>
+                                        <button type="button" name="submitButton" class="btn btn-sm btn-primary float-left ml-1 rounded-sm"
+                                                style="font-size: .88rem;">
+                                            登&nbsp;录
+                                        </button>
+                                        <a class="btn btn-primary btn-sm float-right mr-1 rounded-sm"
+                                           href="@Url.Action("Index", "Register")" style="font-size: .88rem;">
+                                            注&nbsp;册
+                                        </a>
+                                    </form>
+                                    }
             </div>
         </div>
 
@@ -201,7 +213,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="alertModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content border-0 rounded-sm pb-3 pt-0">
             <div class="modal-header border-bottom border-light py-2">
@@ -219,6 +231,7 @@
 </div>
 
 <script src="~/js/jquery-3.3.1.min.js"></script>
+<script src="~/js/swiper-3.4.0.jquery.min.js"></script>
 
 <script>
 
@@ -301,8 +314,30 @@
         updateTabContent();
     })
 
-
     /* 默认选中第一个Tab */
     $("#category_tab a").first().addClass("active");
     $("#category_tab a").first().click();
+
+    function setCurrentSlide(ele, index) {
+        $(".swiper1 .swiper-slide").removeClass("selected");
+        ele.addClass("selected");
+    }
+
+    var swiper1 = new Swiper('.swiper1', {
+        slidesPerView: 4,
+        paginationClickable: true,
+        spaceBetween: 10,
+        freeMode: true,
+        loop: false,
+        onTab: function (swiper) {
+            var n = swiper1.clickedIndex;
+        }
+    });
+    swiper1.slides.each(function (index, val) {
+        var ele = $(this);
+        ele.on("click", function () {
+            setCurrentSlide(ele, index);
+            swiper2.slideTo(index, 500, false);
+        });
+    });
 </script>
