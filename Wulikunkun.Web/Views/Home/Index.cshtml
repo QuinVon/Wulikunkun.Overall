@@ -133,18 +133,20 @@
             </ul>
         </div>
 
+        @*移动端滑动tab*@
         <div class="d-sm-none container px-0">
             <div class="swiper-container swiper1">
                 <div class="swiper-wrapper">
                     @foreach (var item in @ViewBag.Categories)
                     {
-                    <div class="rounded-sm bg-light d-inline-block text-center text-black-50 py-1 px-2 swiper-slide w-auto">
+                    <div class="rounded-sm bg-light d-inline-block text-center text-black-50 py-1 px-2 swiper-slide w-auto" data-categoryid="@item.Id">
                         @item.Name
                     </div>
                     }
                 </div>
             </div>
         </div>
+
         <div id="update_panel">
         </div>
 
@@ -296,7 +298,7 @@
         });
     }
 
-    $("#category_tab a").on("click", function () {
+    $("#category_tab a,div.swiper-wrapper>div").on("click", function () {
         pageNum = 1;
         categoryId = $(this).data("categoryid");
         updateTabContent();
@@ -318,11 +320,11 @@
     $("#category_tab a").first().addClass("active");
     $("#category_tab a").first().click();
 
+    /* 关于移动端滑动tab组件的设置 */
     function setCurrentSlide(ele, index) {
         $(".swiper1 .swiper-slide").removeClass("selected");
         ele.addClass("selected");
     }
-
     var swiper1 = new Swiper('.swiper1', {
         slidesPerView: 4,
         paginationClickable: true,
