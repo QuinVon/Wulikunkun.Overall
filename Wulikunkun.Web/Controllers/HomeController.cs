@@ -57,7 +57,7 @@ namespace Wulikunkun.Web.Controllers
             return View();
         }
 
-        public async Task<PartialViewResult> GetPartialView(int categoryId, string searchContent = "", int pageNumber = 1, int pageSize = 10)
+        public async Task<PartialViewResult> GetPartialView(int categoryId, string searchContent = "", int pageNumber = 1, int pageSize = 20)
         {
             IQueryable<Article> articlesIQ = _dbContext.Articles.Where(item => item.Status == ArticleStatus.Allowed && item.CategoryId == categoryId).OrderByDescending(article => article.UpdateTime);
             PaginatedList<Article> articles = await PaginatedList<Article>.CreateAsync(articlesIQ.AsNoTracking(), pageNumber, pageSize);

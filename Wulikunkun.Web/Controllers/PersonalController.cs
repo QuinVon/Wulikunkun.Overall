@@ -33,7 +33,7 @@ namespace Wulikunkun.Web.Controllers
             return View();
         }
 
-        public async Task<PartialViewResult> GetPartialView(int pageNumber = 1, int pageSize = 10)
+        public async Task<PartialViewResult> GetPartialView(int pageNumber = 1, int pageSize = 15)
         {
             ClaimsPrincipal claimsPrincipal = HttpContext.User as ClaimsPrincipal;
             string userId = _signManager.UserManager.GetUserId(claimsPrincipal);

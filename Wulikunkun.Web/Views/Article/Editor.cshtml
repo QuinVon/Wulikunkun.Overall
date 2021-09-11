@@ -20,9 +20,11 @@
 
 <body class="m-0 min-vh-100">
 
-    <div class="container-fluid p-2 min-vh-100" style="background-color:#f0f8ff">
+    @*为了便于动态计算出窗口减去上下padding之后editor的高度，这里将padding写死*@
+    <div class="container-fluid" style="background-color:#f0f8ff;padding:8px">
 
         <form name="articleForm">
+            @*我们对editormd对象设置的height属性最终就是作用于这个元素上*@
             <div class="editormd" id="editor">
                 <textarea class="editormd-markdown-textarea" name="markcontent"></textarea>
                 <textarea class="editormd-html-textarea" name="htmlcontent"></textarea>
@@ -49,12 +51,15 @@
                             <div class="form-group">
                                 <label for="category">选择您的文章分类：</label>
                                 <select class="form-control form-control" name="categoryid">
-                                    @foreach (var item in @ViewBag.Categories){
-                                        if(item.Id==ViewBag.ArticleCategoryId){
-                                    <option value="@item.Id" selected="selected">@item.Name</option>
+                                    @foreach (var item in @ViewBag.Categories)
+                                    {
+                                        if (item.Id == ViewBag.ArticleCategoryId)
+                                        {
+                                            <option value="@item.Id" selected="selected">@item.Name</option>
                                         }
-                                        else{
-                                    <option value="@item.Id">@item.Name</option>
+                                        else
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
                                         }
                                     }
                                 </select>
@@ -145,7 +150,8 @@
         };
 
         var editor = editormd("editor", {
-            height: "1000px",
+            //去掉页面上下的padding就是16
+            height: $(window).height() -16,
             path: "/article/editor.md/lib/",
             toolbarIcons: function () {
                 return editormd.toolbarModes.full.concat(['postbutton']);
@@ -168,6 +174,10 @@
                     this.setValue(articleMarkDownContent);
                 }
             }
+        });
+
+        $(window).resize(function () {
+            $("#editor").height($(window).height() - 16);
         });
 
         $("button[name='submitButton']").on("click", function () {
